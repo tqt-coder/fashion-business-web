@@ -1,0 +1,32 @@
+package com.project.fashionbusinesswebsite.service;
+
+import com.project.fashionbusinesswebsite.domain.ProductEntity;
+import com.project.fashionbusinesswebsite.model.product.ProductResponse;
+import com.project.fashionbusinesswebsite.repository.ProductRepo;
+import org.apache.commons.collections4.CollectionUtils;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class ProductService {
+    @Autowired
+    private ProductRepo productRepo;
+    @Autowired
+    private ModelMapper mapper;
+
+    public List<ProductResponse> getAllProduct() {
+        List<ProductEntity> listProudcts = productRepo.findAll();
+        List<ProductResponse> responses = new ArrayList<>();
+
+        if (CollectionUtils.isNotEmpty(listProudcts)) {
+            listProudcts.forEach(x -> {
+                responses.add(mapper.map(x, ProductResponse.class));
+            });
+        }
+        return responses;
+    }
+}
