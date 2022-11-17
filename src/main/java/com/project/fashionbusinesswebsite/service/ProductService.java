@@ -4,6 +4,7 @@ import com.project.fashionbusinesswebsite.domain.ProductEntity;
 import com.project.fashionbusinesswebsite.model.page.PageModel;
 import com.project.fashionbusinesswebsite.model.product.ProductRequest;
 import com.project.fashionbusinesswebsite.model.product.ProductResponse;
+import com.project.fashionbusinesswebsite.model.product.ProductViewResponse;
 import com.project.fashionbusinesswebsite.repository.ProductRepo;
 import com.project.fashionbusinesswebsite.utils.FinderUtil;
 import org.apache.commons.collections4.CollectionUtils;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -55,6 +57,19 @@ public class ProductService {
             });
         }
         return responses;
+    }
+
+    public ProductViewResponse getProductById(int id){
+        Optional<ProductEntity> OproductEntity = productRepo.findById(id);
+        if(Boolean.FALSE.equals(OproductEntity.isPresent())){
+            throw new ServiceException("Can not find product with id = " + id);
+        }
+        ProductEntity productEntity = OproductEntity.get();
+        ProductViewResponse response = mapper.map(productEntity,ProductViewResponse.class);
+        List<Double> listDiscounts = finderUtil.getAllDiscountsByProductId(response.getProductsId());
+        response.setProductPriceAfterDiscount(calculatePriceAfterDiscount(response.getProductPrice(),listDiscounts));
+
+        return response;
     }
 
     private double calculatePriceAfterDiscount(double productPrice, List<Double> listDiscounts) {

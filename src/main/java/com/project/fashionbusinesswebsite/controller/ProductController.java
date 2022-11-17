@@ -16,4 +16,9 @@ public class ProductController {
     public ResponseEntity<?> getAllProducts(@RequestBody ProductRequest request) {
         return ResponseEntity.ok(productService.getAllProduct(request));
     }
+
+    @GetMapping("/get-product-by-id/{id}")
+    public ResponseEntity<?> getProductById(@PathVariable("id") int id) {
+        return ResponseEntity.ok(productService.getProductById(id));
+    }
 }
