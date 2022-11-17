@@ -3,6 +3,7 @@ package com.project.fashionbusinesswebsite.service;
 import com.project.fashionbusinesswebsite.domain.ProductEntity;
 import com.project.fashionbusinesswebsite.model.product.ProductResponse;
 import com.project.fashionbusinesswebsite.repository.ProductRepo;
+import com.project.fashionbusinesswebsite.utils.FinderUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class ProductService {
     private ProductRepo productRepo;
     @Autowired
     private ModelMapper mapper;
+    @Autowired
+    private FinderUtil finderUtil;
 
     public List<ProductResponse> getAllProduct() {
         List<ProductEntity> listProudcts = productRepo.findAll();
@@ -24,9 +27,19 @@ public class ProductService {
 
         if (CollectionUtils.isNotEmpty(listProudcts)) {
             listProudcts.forEach(x -> {
-                responses.add(mapper.map(x, ProductResponse.class));
+                ProductResponse product = mapper.map(x, ProductResponse.class);
+                List<Double> listDiscounts = finderUtil.getAllDiscountsByProductId(product.getProductsId());
+                product.setProductPriceAfterDiscount(calculatePriceAfterDiscount(product.getProductPrice(),listDiscounts));
+                responses.add(product);
             });
         }
         return responses;
     }
+
+    private double calculatePriceAfterDiscount(double productPrice, List<Double> listDiscounts) {
+        if (CollectionUtils.isEmpty(listDiscounts)) return productPrice;
+        double maxDiscount = listDiscounts.stream().max(Double::compare).orElseGet(() -> 1.0);
+        return productPrice - (productPrice * maxDiscount / 100);
+    }
+
 }
