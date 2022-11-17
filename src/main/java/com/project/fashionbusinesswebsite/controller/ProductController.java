@@ -1,6 +1,7 @@
 package com.project.fashionbusinesswebsite.controller;
 
 import com.project.fashionbusinesswebsite.model.product.ProductRequest;
+import com.project.fashionbusinesswebsite.model.product.SearchProductRequest;
 import com.project.fashionbusinesswebsite.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,5 +21,10 @@ public class ProductController {
     @GetMapping("/get-product-by-id/{id}")
     public ResponseEntity<?> getProductById(@PathVariable("id") int id) {
         return ResponseEntity.ok(productService.getProductById(id));
+    }
+
+    @PostMapping("/get-product-by-product-name")
+    public ResponseEntity<?> findProductByProductName(@RequestBody SearchProductRequest request) {
+        return ResponseEntity.ok(productService.findProductsByProductName(request));
     }
 }

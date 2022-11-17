@@ -5,6 +5,7 @@ import com.project.fashionbusinesswebsite.model.page.PageModel;
 import com.project.fashionbusinesswebsite.model.product.ProductRequest;
 import com.project.fashionbusinesswebsite.model.product.ProductResponse;
 import com.project.fashionbusinesswebsite.model.product.ProductViewResponse;
+import com.project.fashionbusinesswebsite.model.product.SearchProductRequest;
 import com.project.fashionbusinesswebsite.repository.ProductRepo;
 import com.project.fashionbusinesswebsite.utils.FinderUtil;
 import org.apache.commons.collections4.CollectionUtils;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +31,7 @@ public class ProductService {
     private FinderUtil finderUtil;
 
     public List<ProductResponse> getAllProduct(ProductRequest request) {
-        PageModel page = mapper.map(request,PageModel.class);
+        PageModel page = mapper.map(request, PageModel.class);
         Sort sortable = null;
         if ("ASC".equals(page.getSort())) {
             sortable = Sort.by(request.getKey()).ascending();
@@ -52,24 +54,54 @@ public class ProductService {
             listProudcts.forEach(x -> {
                 ProductResponse product = mapper.map(x, ProductResponse.class);
                 List<Double> listDiscounts = finderUtil.getAllDiscountsByProductId(product.getProductsId());
-                product.setProductPriceAfterDiscount(calculatePriceAfterDiscount(product.getProductPrice(),listDiscounts));
+                product.setProductPriceAfterDiscount(calculatePriceAfterDiscount(product.getProductPrice(), listDiscounts));
                 responses.add(product);
             });
         }
         return responses;
     }
 
-    public ProductViewResponse getProductById(int id){
+    public ProductViewResponse getProductById(int id) {
         Optional<ProductEntity> OproductEntity = productRepo.findById(id);
-        if(Boolean.FALSE.equals(OproductEntity.isPresent())){
+        if (Boolean.FALSE.equals(OproductEntity.isPresent())) {
             throw new ServiceException("Can not find product with id = " + id);
         }
         ProductEntity productEntity = OproductEntity.get();
-        ProductViewResponse response = mapper.map(productEntity,ProductViewResponse.class);
+        ProductViewResponse response = mapper.map(productEntity, ProductViewResponse.class);
         List<Double> listDiscounts = finderUtil.getAllDiscountsByProductId(response.getProductsId());
-        response.setProductPriceAfterDiscount(calculatePriceAfterDiscount(response.getProductPrice(),listDiscounts));
+        response.setProductPriceAfterDiscount(calculatePriceAfterDiscount(response.getProductPrice(), listDiscounts));
 
         return response;
+    }
+
+    public List<ProductResponse> findProductsByProductName(SearchProductRequest request) {
+        Sort sortable = null;
+        if ("ASC".equals(request.getSort())) {
+            sortable = Sort.by(request.getKey()).ascending();
+        }
+        if ("DESC".equals(request.getSort())) {
+            sortable = Sort.by(request.getKey()).descending();
+        }
+        List<ProductEntity> listProudcts = new ArrayList<>();
+        if (ObjectUtils.isNotEmpty(sortable)) {
+            Pageable pageable = PageRequest.of(request.getPage(), request.getSize(), sortable);
+            listProudcts = productRepo.getAllByProductTitleContains(request.getKeySearch(), pageable).toList();
+
+        } else {
+            listProudcts = productRepo.getAllByProductTitleContains(request.getKeySearch());
+        }
+
+        List<ProductResponse> responses = new ArrayList<>();
+
+        if (CollectionUtils.isNotEmpty(listProudcts)) {
+            listProudcts.forEach(x -> {
+                ProductResponse product = mapper.map(x, ProductResponse.class);
+                List<Double> listDiscounts = finderUtil.getAllDiscountsByProductId(product.getProductsId());
+                product.setProductPriceAfterDiscount(calculatePriceAfterDiscount(product.getProductPrice(), listDiscounts));
+                responses.add(product);
+            });
+        }
+        return responses;
     }
 
     private double calculatePriceAfterDiscount(double productPrice, List<Double> listDiscounts) {
