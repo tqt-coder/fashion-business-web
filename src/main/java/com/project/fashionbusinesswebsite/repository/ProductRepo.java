@@ -9,5 +9,10 @@ import java.util.List;
 
 public interface ProductRepo extends JpaRepository<ProductEntity, Integer> {
     Page<ProductEntity> getAllByProductTitleContains(String title, Pageable pageable);
+
     List<ProductEntity> getAllByProductTitleContains(String title);
+
+    Page<ProductEntity> getAllByCategoryId(int categoryId, Pageable pageable);
+
+    List<ProductEntity> getAllByCategoryId(int categoryId);
 }

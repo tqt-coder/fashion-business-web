@@ -1,5 +1,6 @@
 package com.project.fashionbusinesswebsite.controller;
 
+import com.project.fashionbusinesswebsite.model.product.ProductCategoryRequest;
 import com.project.fashionbusinesswebsite.model.product.ProductRequest;
 import com.project.fashionbusinesswebsite.model.product.SearchProductRequest;
 import com.project.fashionbusinesswebsite.service.ProductService;
@@ -26,5 +27,10 @@ public class ProductController {
     @PostMapping("/get-product-by-product-name")
     public ResponseEntity<?> findProductByProductName(@RequestBody SearchProductRequest request) {
         return ResponseEntity.ok(productService.findProductsByProductName(request));
+    }
+
+    @PostMapping("/get-product-by-category-id")
+    public ResponseEntity<?> findAllProductByCategoryId(@RequestBody ProductCategoryRequest request) {
+        return ResponseEntity.ok(productService.findAllProductsByCategory(request));
     }
 }

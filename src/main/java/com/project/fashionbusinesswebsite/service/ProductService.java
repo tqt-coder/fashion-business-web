@@ -2,10 +2,7 @@ package com.project.fashionbusinesswebsite.service;
 
 import com.project.fashionbusinesswebsite.domain.ProductEntity;
 import com.project.fashionbusinesswebsite.model.page.PageModel;
-import com.project.fashionbusinesswebsite.model.product.ProductRequest;
-import com.project.fashionbusinesswebsite.model.product.ProductResponse;
-import com.project.fashionbusinesswebsite.model.product.ProductViewResponse;
-import com.project.fashionbusinesswebsite.model.product.SearchProductRequest;
+import com.project.fashionbusinesswebsite.model.product.*;
 import com.project.fashionbusinesswebsite.repository.ProductRepo;
 import com.project.fashionbusinesswebsite.utils.FinderUtil;
 import org.apache.commons.collections4.CollectionUtils;
@@ -104,10 +101,39 @@ public class ProductService {
         return responses;
     }
 
+    public List<ProductResponse> findAllProductsByCategory(ProductCategoryRequest request) {
+        Sort sortable = null;
+        if ("ASC".equals(request.getSort())) {
+            sortable = Sort.by(request.getKey()).ascending();
+        }
+        if ("DESC".equals(request.getSort())) {
+            sortable = Sort.by(request.getKey()).descending();
+        }
+        List<ProductEntity> listProudcts = new ArrayList<>();
+        if (ObjectUtils.isNotEmpty(sortable)) {
+            Pageable pageable = PageRequest.of(request.getPage(), request.getSize(), sortable);
+            listProudcts = productRepo.getAllByCategoryId(request.getCategoryId(), pageable).toList();
+
+        } else {
+            listProudcts = productRepo.getAllByCategoryId(request.getCategoryId());
+        }
+
+        List<ProductResponse> responses = new ArrayList<>();
+
+        if (CollectionUtils.isNotEmpty(listProudcts)) {
+            listProudcts.forEach(x -> {
+                ProductResponse product = mapper.map(x, ProductResponse.class);
+                List<Double> listDiscounts = finderUtil.getAllDiscountsByProductId(product.getProductsId());
+                product.setProductPriceAfterDiscount(calculatePriceAfterDiscount(product.getProductPrice(), listDiscounts));
+                responses.add(product);
+            });
+        }
+        return responses;
+    }
+
     private double calculatePriceAfterDiscount(double productPrice, List<Double> listDiscounts) {
         if (CollectionUtils.isEmpty(listDiscounts)) return productPrice;
         double maxDiscount = listDiscounts.stream().max(Double::compare).orElseGet(() -> 1.0);
         return productPrice - (productPrice * maxDiscount / 100);
     }
-
 }
