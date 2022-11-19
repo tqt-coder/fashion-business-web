@@ -3255,7 +3255,7 @@ textarea:-ms-input-placeholder {
 }
 
 .price_box span {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 500;
     line-height: 16px;
     color: #1e1e1f;
@@ -6123,17 +6123,17 @@ textarea:-ms-input-placeholder {
 
 @media only screen and (max-width: 767px) {
     .product_d_right .price_box span.current_price {
-        font-size: 17px;
+        font-size: 14px;
     }
 }
 
 .product_d_right .price_box span.old_price {
-    font-size: 17px;
+    font-size: 14px;
 }
 
 @media only screen and (max-width: 767px) {
     .product_d_right .price_box span.old_price {
-        font-size: 15px;
+        font-size: 14px;
     }
 }
 
