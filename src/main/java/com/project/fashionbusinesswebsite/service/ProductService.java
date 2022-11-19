@@ -42,7 +42,9 @@ public class ProductService {
             listProudcts = productRepo.findAll(pageable).toList();
 
         } else {
-            listProudcts = productRepo.findAll();
+            sortable = Sort.by("productsId").ascending();
+            Pageable pageable = PageRequest.of(page.getPage(), page.getSize(), sortable);
+            listProudcts = productRepo.findAll(pageable).toList();
         }
 
         List<ProductResponse> responses = new ArrayList<>();
