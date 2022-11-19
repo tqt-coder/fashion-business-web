@@ -15,7 +15,7 @@ public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int productsId;
-    private int pCategoryId;
+    private int productCategoryId;
     private int categoryId;
     private Date date;
     private String productTitle;

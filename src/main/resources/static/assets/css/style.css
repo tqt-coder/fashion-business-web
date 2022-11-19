@@ -3417,6 +3417,8 @@ textarea:-ms-input-placeholder {
 
 .product_carousel .product_thumb a img {
     width: 100%;
+    object-fit: cover;
+    height: 156px;
     margin: 0 auto;
 }
 

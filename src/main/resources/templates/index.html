@@ -410,7 +410,9 @@
                         <div class="home_banner_style1 three">
                             <h3>Trang sức</h3>
                             <div class="banner_text_img">
-                                <p>Hàng mới về</p>
+                                <p>Hàng mới
+                                    <về></về>
+                                </p>
                                 <img src="assets/img/bg/banner_static3.png" alt="">
                             </div>
                         </div>
@@ -497,14 +499,16 @@
                                                                            aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
-                                                <div class="price_box" th:if="${product.productPriceAfterDiscount - product.productPrice < 0}">
+                                                <div class="price_box"
+                                                     th:if="${product.productPriceAfterDiscount - product.productPrice < 0}">
                                                     <span class="old_price"
                                                           th:text="${product.productPrice} + VNĐ"></span>
                                                     <span th:text="${product.productPriceAfterDiscount} + VNĐ"
                                                           class="current_price"
-                                                          >$82.00</span>
+                                                    >$82.00</span>
                                                 </div>
-                                                <div class="price_box" th:unless="${product.productPriceAfterDiscount - product.productPrice < 0}">
+                                                <div class="price_box"
+                                                     th:unless="${product.productPriceAfterDiscount - product.productPrice < 0}">
                                                     <span class="old_price"></span>
                                                     <span th:text="${product.productPrice} + VNĐ"
                                                           class="current_price"
@@ -519,252 +523,6 @@
                                         </figure>
                                     </article>
                                 </div>
-                                <!--                <div class="col-lg-3">-->
-                                <!--                  <article class="single_product">-->
-                                <!--                    <figure>-->
-                                <!--                      <div class="product_thumb">-->
-                                <!--                        <a class="primary_img" href="product-details.html"><img-->
-                                <!--                                src="assets/img/product/product2.jpg" alt=""></a>-->
-                                <!--                        <div class="action_links">-->
-                                <!--                          <ul>-->
-                                <!--                            <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-                                <!--                                                        data-bs-target="#modal_box" title="quick view"> <i-->
-                                <!--                                    class="fa fa-eye" aria-hidden="true"></i></a>-->
-                                <!--                            </li>-->
-                                <!--                            <li class="wishlist"><a href="wishlist.html"-->
-                                <!--                                                    title="Add to Wishlist"><i class="fa fa-heart-o"-->
-                                <!--                                                                               aria-hidden="true"></i></a></li>-->
-                                <!--                          </ul>-->
-                                <!--                        </div>-->
-                                <!--                      </div>-->
-                                <!--                      <figcaption class="product_content">-->
-                                <!--                        <h4 class="product_name"><a href="product-details.html">Occaecati-->
-                                <!--                          Cupiditate</a></h4>-->
-                                <!--                        <div class="product_rating">-->
-                                <!--                          <ul>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                          </ul>-->
-                                <!--                        </div>-->
-                                <!--                        <div class="price_box">-->
-                                <!--                          <span class="old_price">$78.00</span>-->
-                                <!--                          <span class="current_price">$72.00</span>-->
-                                <!--                        </div>-->
-                                <!--                        <div class="add_to_cart">-->
-                                <!--                          <a href="cart.html" title="Add to cart"><i-->
-                                <!--                                  class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-                                <!--                            to cart</a>-->
-                                <!--                        </div>-->
-                                <!--                      </figcaption>-->
-                                <!--                    </figure>-->
-                                <!--                  </article>-->
-                                <!--                </div>-->
-                                <!--                <div class="col-lg-3">-->
-                                <!--                  <article class="single_product">-->
-                                <!--                    <figure>-->
-                                <!--                      <div class="product_thumb">-->
-                                <!--                        <a class="primary_img" href="product-details.html"><img-->
-                                <!--                                src="assets/img/product/product3.jpg" alt=""></a>-->
-                                <!--                        <div class="label_product">-->
-                                <!--                          <span class="label_sale">Sale</span>-->
-                                <!--                        </div>-->
-                                <!--                        <div class="action_links">-->
-                                <!--                          <ul>-->
-                                <!--                            <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-                                <!--                                                        data-bs-target="#modal_box" title="quick view"> <i-->
-                                <!--                                    class="fa fa-eye" aria-hidden="true"></i></a>-->
-                                <!--                            </li>-->
-                                <!--                            <li class="wishlist"><a href="wishlist.html"-->
-                                <!--                                                    title="Add to Wishlist"><i class="fa fa-heart-o"-->
-                                <!--                                                                               aria-hidden="true"></i></a></li>-->
-                                <!--                          </ul>-->
-                                <!--                        </div>-->
-                                <!--                      </div>-->
-                                <!--                      <figcaption class="product_content">-->
-                                <!--                        <h4 class="product_name"><a href="product-details.html">Consequences-->
-                                <!--                          are</a></h4>-->
-                                <!--                        <div class="product_rating">-->
-                                <!--                          <ul>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                          </ul>-->
-                                <!--                        </div>-->
-                                <!--                        <div class="price_box">-->
-                                <!--                          <span class="old_price">$92.00</span>-->
-                                <!--                          <span class="current_price">$88.00</span>-->
-                                <!--                        </div>-->
-                                <!--                        <div class="add_to_cart">-->
-                                <!--                          <a href="cart.html" title="Add to cart"><i-->
-                                <!--                                  class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-                                <!--                            to cart</a>-->
-                                <!--                        </div>-->
-                                <!--                      </figcaption>-->
-                                <!--                    </figure>-->
-                                <!--                  </article>-->
-                                <!--                </div>-->
-                                <!--                <div class="col-lg-3">-->
-                                <!--                  <article class="single_product">-->
-                                <!--                    <figure>-->
-                                <!--                      <div class="product_thumb">-->
-                                <!--                        <a class="primary_img" href="product-details.html"><img-->
-                                <!--                                src="assets/img/product/product4.jpg" alt=""></a>-->
-                                <!--                        <div class="action_links">-->
-                                <!--                          <ul>-->
-                                <!--                            <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-                                <!--                                                        data-bs-target="#modal_box" title="quick view"> <i-->
-                                <!--                                    class="fa fa-eye" aria-hidden="true"></i></a>-->
-                                <!--                            </li>-->
-                                <!--                            <li class="wishlist"><a href="wishlist.html"-->
-                                <!--                                                    title="Add to Wishlist"><i class="fa fa-heart-o"-->
-                                <!--                                                                               aria-hidden="true"></i></a></li>-->
-                                <!--                          </ul>-->
-                                <!--                        </div>-->
-                                <!--                      </div>-->
-                                <!--                      <figcaption class="product_content">-->
-                                <!--                        <h4 class="product_name"><a href="product-details.html">Voluptas-->
-                                <!--                          Nulla</a></h4>-->
-                                <!--                        <div class="product_rating">-->
-                                <!--                          <ul>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                          </ul>-->
-                                <!--                        </div>-->
-                                <!--                        <div class="price_box">-->
-                                <!--                          <span class="old_price">$68.00</span>-->
-                                <!--                          <span class="current_price">$62.00</span>-->
-                                <!--                        </div>-->
-                                <!--                        <div class="add_to_cart">-->
-                                <!--                          <a href="cart.html" title="Add to cart"><i-->
-                                <!--                                  class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-                                <!--                            to cart</a>-->
-                                <!--                        </div>-->
-                                <!--                      </figcaption>-->
-                                <!--                    </figure>-->
-                                <!--                  </article>-->
-                                <!--                </div>-->
-                                <!--                <div class="col-lg-3">-->
-                                <!--                  <article class="single_product">-->
-                                <!--                    <figure>-->
-                                <!--                      <div class="product_thumb">-->
-                                <!--                        <a class="primary_img" href="product-details.html"><img-->
-                                <!--                                src="assets/img/product/product5.jpg" alt=""></a>-->
-                                <!--                        <div class="label_product">-->
-                                <!--                          <span class="label_sale">Sale</span>-->
-                                <!--                        </div>-->
-                                <!--                        <div class="action_links">-->
-                                <!--                          <ul>-->
-                                <!--                            <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-                                <!--                                                        data-bs-target="#modal_box" title="quick view"> <i-->
-                                <!--                                    class="fa fa-eye" aria-hidden="true"></i></a>-->
-                                <!--                            </li>-->
-                                <!--                            <li class="wishlist"><a href="wishlist.html"-->
-                                <!--                                                    title="Add to Wishlist"><i class="fa fa-heart-o"-->
-                                <!--                                                                               aria-hidden="true"></i></a></li>-->
-                                <!--                          </ul>-->
-                                <!--                        </div>-->
-                                <!--                      </div>-->
-                                <!--                      <figcaption class="product_content">-->
-                                <!--                        <h4 class="product_name"><a href="product-details.html">Primis In-->
-                                <!--                          Faucibus</a></h4>-->
-                                <!--                        <div class="product_rating">-->
-                                <!--                          <ul>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                          </ul>-->
-                                <!--                        </div>-->
-                                <!--                        <div class="price_box">-->
-                                <!--                          <span class="old_price">$73.00</span>-->
-                                <!--                          <span class="current_price">$67.00</span>-->
-                                <!--                        </div>-->
-                                <!--                        <div class="add_to_cart">-->
-                                <!--                          <a href="cart.html" title="Add to cart"><i-->
-                                <!--                                  class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-                                <!--                            to cart</a>-->
-                                <!--                        </div>-->
-                                <!--                      </figcaption>-->
-                                <!--                    </figure>-->
-                                <!--                  </article>-->
-                                <!--                </div>-->
-                                <!--                <div class="col-lg-3">-->
-                                <!--                  <article class="single_product">-->
-                                <!--                    <figure>-->
-                                <!--                      <div class="product_thumb">-->
-                                <!--                        <a class="primary_img" href="product-details.html"><img-->
-                                <!--                                src="assets/img/product/product6.jpg" alt=""></a>-->
-                                <!--                        <div class="action_links">-->
-                                <!--                          <ul>-->
-                                <!--                            <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-                                <!--                                                        data-bs-target="#modal_box" title="quick view"> <i-->
-                                <!--                                    class="fa fa-eye" aria-hidden="true"></i></a>-->
-                                <!--                            </li>-->
-                                <!--                            <li class="wishlist"><a href="wishlist.html"-->
-                                <!--                                                    title="Add to Wishlist"><i class="fa fa-heart-o"-->
-                                <!--                                                                               aria-hidden="true"></i></a></li>-->
-                                <!--                          </ul>-->
-                                <!--                        </div>-->
-                                <!--                      </div>-->
-                                <!--                      <figcaption class="product_content">-->
-                                <!--                        <h4 class="product_name"><a href="product-details.html">Fusce-->
-                                <!--                          Aliquam</a></h4>-->
-                                <!--                        <div class="product_rating">-->
-                                <!--                          <ul>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                            <li><a href="#"><i class="fa fa-star"-->
-                                <!--                                               aria-hidden="true"></i></a></li>-->
-                                <!--                          </ul>-->
-                                <!--                        </div>-->
-                                <!--                        <div class="price_box">-->
-                                <!--                          <span class="old_price">$88.00</span>-->
-                                <!--                          <span class="current_price">$78.00</span>-->
-                                <!--                        </div>-->
-                                <!--                        <div class="add_to_cart">-->
-                                <!--                          <a href="cart.html" title="Add to cart"><i-->
-                                <!--                                  class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-                                <!--                            to cart</a>-->
-                                <!--                        </div>-->
-                                <!--                      </figcaption>-->
-                                <!--                    </figure>-->
-                                <!--                  </article>-->
-                                <!--                </div>-->
                             </div>
                         </div>
                     </div>
@@ -1412,18 +1170,19 @@
                 <div class="col-lg-6">
                     <div class="product_wrapper top">
                         <div class="section_title">
-                            <h2>T-Shirts & Top</h2>
+                            <h2>Áo sơ mi hot nhất 2022</h2>
                         </div>
                         <div class="row">
                             <div class="product_carousel product_column3 owl-carousel">
-                                <div class="col-lg-3">
+                                <div class="col-lg-3" th:each="productShirt : ${listShirts}">
                                     <article class="single_product">
                                         <figure>
                                             <div class="product_thumb">
-                                                <a class="primary_img" href="product-details.html"><img
-                                                        src="assets/img/product/product9.jpg" alt=""></a>
+                                                <a class="primary_img" href="product-details.html">
+                                                    <img th:src="@{${'assets/img/product/' + productShirt.productImg}}" alt=""></a>
                                                 <div class="label_product">
-                                                    <span class="label_sale">Sale</span>
+                    <span th:if="${productShirt.productPriceAfterDiscount - productShirt.productPrice < 0}"
+                          class="label_sale">Sale</span>
                                                 </div>
                                                 <div class="action_links">
                                                     <ul>
@@ -1440,8 +1199,9 @@
                                                 </div>
                                             </div>
                                             <figcaption class="product_content">
-                                                <h4 class="product_name"><a href="product-details.html">Proin Lectus
-                                                    Ipsum</a></h4>
+                                                <h4 class="product_name"><a href="product-details.html"
+                                                                            th:text="${productShirt.productTitle}"></a>
+                                                </h4>
                                                 <div class="product_rating">
                                                     <ul>
                                                         <li><a href="#"><i class="fa fa-star"
@@ -1456,162 +1216,18 @@
                                                                            aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
-                                                <div class="price_box">
-                                                    <span class="old_price">$86.00</span>
-                                                    <span class="current_price">$82.00</span>
+                                                <div class="price_box"
+                                                     th:if="${productShirt.productPriceAfterDiscount - productShirt.productPrice < 0}">
+                                                    <span class="old_price"
+                                                          th:text="${productShirt.productPrice} + VNĐ"></span>
+                                                    <span th:text="${productShirt.productPriceAfterDiscount} + VNĐ"
+                                                          class="current_price">$82.00</span>
                                                 </div>
-                                                <div class="add_to_cart">
-                                                    <a href="cart.html" title="Add to cart"><i
-                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add
-                                                        to cart</a>
-                                                </div>
-                                            </figcaption>
-                                        </figure>
-                                    </article>
-                                </div>
-                                <div class="col-lg-3">
-                                    <article class="single_product">
-                                        <figure>
-                                            <div class="product_thumb">
-                                                <a class="primary_img" href="product-details.html"><img
-                                                        src="assets/img/product/product8.jpg" alt=""></a>
-                                                <div class="action_links">
-                                                    <ul>
-                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box"
-                                                                                    title="quick view"> <i
-                                                                class="fa fa-eye" aria-hidden="true"></i></a>
-                                                        </li>
-                                                        <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i
-                                                                class="fa fa-heart-o"
-                                                                aria-hidden="true"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <figcaption class="product_content">
-                                                <h4 class="product_name"><a href="product-details.html">Occaecati
-                                                    is</a></h4>
-                                                <div class="product_rating">
-                                                    <ul>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="price_box">
-                                                    <span class="old_price">$78.00</span>
-                                                    <span class="current_price">$72.00</span>
-                                                </div>
-                                                <div class="add_to_cart">
-                                                    <a href="cart.html" title="Add to cart"><i
-                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add
-                                                        to cart</a>
-                                                </div>
-                                            </figcaption>
-                                        </figure>
-                                    </article>
-                                </div>
-                                <div class="col-lg-3">
-                                    <article class="single_product">
-                                        <figure>
-                                            <div class="product_thumb">
-                                                <a class="primary_img" href="product-details.html"><img
-                                                        src="assets/img/product/product7.jpg" alt=""></a>
-                                                <div class="label_product">
-                                                    <span class="label_sale">Sale</span>
-                                                </div>
-                                                <div class="action_links">
-                                                    <ul>
-                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box"
-                                                                                    title="quick view"> <i
-                                                                class="fa fa-eye" aria-hidden="true"></i></a>
-                                                        </li>
-                                                        <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i
-                                                                class="fa fa-heart-o"
-                                                                aria-hidden="true"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <figcaption class="product_content">
-                                                <h4 class="product_name"><a href="product-details.html">Consequences
-                                                    are</a></h4>
-                                                <div class="product_rating">
-                                                    <ul>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="price_box">
-                                                    <span class="old_price">$92.00</span>
-                                                    <span class="current_price">$88.00</span>
-                                                </div>
-                                                <div class="add_to_cart">
-                                                    <a href="cart.html" title="Add to cart"><i
-                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add
-                                                        to cart</a>
-                                                </div>
-                                            </figcaption>
-                                        </figure>
-                                    </article>
-                                </div>
-                                <div class="col-lg-3">
-                                    <article class="single_product">
-                                        <figure>
-                                            <div class="product_thumb">
-                                                <a class="primary_img" href="product-details.html"><img
-                                                        src="assets/img/product/product6.jpg" alt=""></a>
-                                                <div class="action_links">
-                                                    <ul>
-                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box"
-                                                                                    title="quick view"> <i
-                                                                class="fa fa-eye" aria-hidden="true"></i></a>
-                                                        </li>
-                                                        <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i
-                                                                class="fa fa-heart-o"
-                                                                aria-hidden="true"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <figcaption class="product_content">
-                                                <h4 class="product_name"><a href="product-details.html">Voluptas
-                                                    Nulla</a></h4>
-                                                <div class="product_rating">
-                                                    <ul>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-star"
-                                                                           aria-hidden="true"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="price_box">
-                                                    <span class="old_price">$68.00</span>
-                                                    <span class="current_price">$62.00</span>
+                                                <div class="price_box"
+                                                     th:unless="${productShirt.productPriceAfterDiscount - productShirt.productPrice < 0}">
+                                                    <span class="old_price"></span>
+                                                    <span th:text="${productShirt.productPrice} + VNĐ"
+                                                          class="current_price">$82.00</span>
                                                 </div>
                                                 <div class="add_to_cart">
                                                     <a href="cart.html" title="Add to cart"><i

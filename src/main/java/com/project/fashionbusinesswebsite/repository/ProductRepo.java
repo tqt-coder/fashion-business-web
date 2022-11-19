@@ -12,7 +12,6 @@ public interface ProductRepo extends JpaRepository<ProductEntity, Integer> {
 
     List<ProductEntity> getAllByProductTitleContains(String title);
 
-    Page<ProductEntity> getAllByCategoryId(int categoryId, Pageable pageable);
+    Page<ProductEntity> getAllByProductCategoryId(int pCategoryId, Pageable pageable);
 
-    List<ProductEntity> getAllByCategoryId(int categoryId);
 }

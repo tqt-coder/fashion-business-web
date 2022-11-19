@@ -1,7 +1,9 @@
 package com.project.fashionbusinesswebsite.controller;
 
+import com.project.fashionbusinesswebsite.model.product.ProductCategoryRequest;
 import com.project.fashionbusinesswebsite.model.product.ProductRequest;
 import com.project.fashionbusinesswebsite.service.ProductService;
+import com.project.fashionbusinesswebsite.utils.ProductConstantUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -19,6 +21,11 @@ public class MainController {
 
     @GetMapping("/")
     public String homePage(ProductRequest request, Model model) {
+        // category with shirt
+        int categoryId = ProductConstantUtil.SHIRT;
+        ProductCategoryRequest productCategoryRequest = new ProductCategoryRequest();
+        productCategoryRequest.setCategoryId(categoryId);
+        model.addAttribute("listShirts", productService.findAllProductsByProductCategory(productCategoryRequest));
         model.addAttribute("listProducts",productService.getAllProduct(request));
         return "index";
     }

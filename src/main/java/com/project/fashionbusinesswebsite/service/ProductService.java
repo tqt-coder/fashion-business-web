@@ -103,7 +103,7 @@ public class ProductService {
         return responses;
     }
 
-    public List<ProductResponse> findAllProductsByCategory(ProductCategoryRequest request) {
+    public List<ProductResponse> findAllProductsByProductCategory(ProductCategoryRequest request) {
         Sort sortable = null;
         if ("ASC".equals(request.getSort())) {
             sortable = Sort.by(request.getKey()).ascending();
@@ -114,12 +114,12 @@ public class ProductService {
         List<ProductEntity> listProudcts = new ArrayList<>();
         if (ObjectUtils.isNotEmpty(sortable)) {
             Pageable pageable = PageRequest.of(request.getPage(), request.getSize(), sortable);
-            listProudcts = productRepo.getAllByCategoryId(request.getCategoryId(), pageable).toList();
+            listProudcts = productRepo.getAllByProductCategoryId(request.getCategoryId(), pageable).toList();
 
         } else {
             sortable = Sort.by("productsId").ascending();
             Pageable pageable = PageRequest.of(request.getPage(), request.getSize(), sortable);
-            listProudcts = productRepo.getAllByCategoryId(request.getCategoryId(), pageable).toList();
+            listProudcts = productRepo.getAllByProductCategoryId(request.getCategoryId(), pageable).toList();
         }
 
         List<ProductResponse> responses = new ArrayList<>();
