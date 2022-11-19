@@ -164,8 +164,9 @@
                     </div>
                     <div class="col-lg-4 col_search">
                         <div class="header_search_box">
-                            <form action="#">
-                                <input placeholder="Tìm kiếm sản phẩm yêu thích" type="text">
+                            <form th:action="@{/search}" method="get">
+                                <input name="keySearch" placeholder="Tìm kiếm sản phẩm yêu thích" type="text">
+                                <input name="page" value="0" hidden type="text">
                                 <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 
                             </form>
@@ -473,12 +474,14 @@
                                                 <div class="action_links">
                                                     <ul>
                                                         <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box" title="quick view"> <i
+                                                                                    data-bs-target="#modal_box"
+                                                                                    title="quick view"> <i
                                                                 class="fa fa-eye" aria-hidden="true"></i></a>
                                                         </li>
                                                         <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"
-                                                                                                           aria-hidden="true"></i></a></li>
+                                                                                title="Add to Wishlist"><i
+                                                                class="fa fa-heart-o"
+                                                                aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -541,12 +544,14 @@
                                                 <div class="action_links">
                                                     <ul>
                                                         <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box" title="quick view"> <i
+                                                                                    data-bs-target="#modal_box"
+                                                                                    title="quick view"> <i
                                                                 class="fa fa-eye" aria-hidden="true"></i></a>
                                                         </li>
                                                         <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"
-                                                                                                           aria-hidden="true"></i></a></li>
+                                                                                title="Add to Wishlist"><i
+                                                                class="fa fa-heart-o"
+                                                                aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -589,12 +594,14 @@
                                                 <div class="action_links">
                                                     <ul>
                                                         <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box" title="quick view"> <i
+                                                                                    data-bs-target="#modal_box"
+                                                                                    title="quick view"> <i
                                                                 class="fa fa-eye" aria-hidden="true"></i></a>
                                                         </li>
                                                         <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"
-                                                                                                           aria-hidden="true"></i></a></li>
+                                                                                title="Add to Wishlist"><i
+                                                                class="fa fa-heart-o"
+                                                                aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -640,12 +647,14 @@
                                                 <div class="action_links">
                                                     <ul>
                                                         <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box" title="quick view"> <i
+                                                                                    data-bs-target="#modal_box"
+                                                                                    title="quick view"> <i
                                                                 class="fa fa-eye" aria-hidden="true"></i></a>
                                                         </li>
                                                         <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"
-                                                                                                           aria-hidden="true"></i></a></li>
+                                                                                title="Add to Wishlist"><i
+                                                                class="fa fa-heart-o"
+                                                                aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -688,12 +697,14 @@
                                                 <div class="action_links">
                                                     <ul>
                                                         <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box" title="quick view"> <i
+                                                                                    data-bs-target="#modal_box"
+                                                                                    title="quick view"> <i
                                                                 class="fa fa-eye" aria-hidden="true"></i></a>
                                                         </li>
                                                         <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"
-                                                                                                           aria-hidden="true"></i></a></li>
+                                                                                title="Add to Wishlist"><i
+                                                                class="fa fa-heart-o"
+                                                                aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -739,12 +750,14 @@
                                                 <div class="action_links">
                                                     <ul>
                                                         <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box" title="quick view"> <i
+                                                                                    data-bs-target="#modal_box"
+                                                                                    title="quick view"> <i
                                                                 class="fa fa-eye" aria-hidden="true"></i></a>
                                                         </li>
                                                         <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"
-                                                                                                           aria-hidden="true"></i></a></li>
+                                                                                title="Add to Wishlist"><i
+                                                                class="fa fa-heart-o"
+                                                                aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -787,12 +800,14 @@
                                                 <div class="action_links">
                                                     <ul>
                                                         <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box" title="quick view"> <i
+                                                                                    data-bs-target="#modal_box"
+                                                                                    title="quick view"> <i
                                                                 class="fa fa-eye" aria-hidden="true"></i></a>
                                                         </li>
                                                         <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"
-                                                                                                           aria-hidden="true"></i></a></li>
+                                                                                title="Add to Wishlist"><i
+                                                                class="fa fa-heart-o"
+                                                                aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -845,12 +860,14 @@
                                                 <div class="action_links">
                                                     <ul>
                                                         <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box" title="quick view"> <i
+                                                                                    data-bs-target="#modal_box"
+                                                                                    title="quick view"> <i
                                                                 class="fa fa-eye" aria-hidden="true"></i></a>
                                                         </li>
                                                         <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"
-                                                                                                           aria-hidden="true"></i></a></li>
+                                                                                title="Add to Wishlist"><i
+                                                                class="fa fa-heart-o"
+                                                                aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -893,12 +910,14 @@
                                                 <div class="action_links">
                                                     <ul>
                                                         <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box" title="quick view"> <i
+                                                                                    data-bs-target="#modal_box"
+                                                                                    title="quick view"> <i
                                                                 class="fa fa-eye" aria-hidden="true"></i></a>
                                                         </li>
                                                         <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"
-                                                                                                           aria-hidden="true"></i></a></li>
+                                                                                title="Add to Wishlist"><i
+                                                                class="fa fa-heart-o"
+                                                                aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -944,12 +963,14 @@
                                                 <div class="action_links">
                                                     <ul>
                                                         <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box" title="quick view"> <i
+                                                                                    data-bs-target="#modal_box"
+                                                                                    title="quick view"> <i
                                                                 class="fa fa-eye" aria-hidden="true"></i></a>
                                                         </li>
                                                         <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"
-                                                                                                           aria-hidden="true"></i></a></li>
+                                                                                title="Add to Wishlist"><i
+                                                                class="fa fa-heart-o"
+                                                                aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -992,12 +1013,14 @@
                                                 <div class="action_links">
                                                     <ul>
                                                         <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box" title="quick view"> <i
+                                                                                    data-bs-target="#modal_box"
+                                                                                    title="quick view"> <i
                                                                 class="fa fa-eye" aria-hidden="true"></i></a>
                                                         </li>
                                                         <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"
-                                                                                                           aria-hidden="true"></i></a></li>
+                                                                                title="Add to Wishlist"><i
+                                                                class="fa fa-heart-o"
+                                                                aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -1043,12 +1066,14 @@
                                                 <div class="action_links">
                                                     <ul>
                                                         <li class="quick_button"><a href="#" data-bs-toggle="modal"
-                                                                                    data-bs-target="#modal_box" title="quick view"> <i
+                                                                                    data-bs-target="#modal_box"
+                                                                                    title="quick view"> <i
                                                                 class="fa fa-eye" aria-hidden="true"></i></a>
                                                         </li>
                                                         <li class="wishlist"><a href="wishlist.html"
-                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"
-                                                                                                           aria-hidden="true"></i></a></li>
+                                                                                title="Add to Wishlist"><i
+                                                                class="fa fa-heart-o"
+                                                                aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -1221,7 +1246,8 @@
                                             </div>
                                             <figcaption class="product_content">
                                                 <h4 class="product_name"><a href="product-details.html"
-                                                                            th:text="${productHat.productTitle}"></a></h4>
+                                                                            th:text="${productHat.productTitle}"></a>
+                                                </h4>
                                                 <div class="product_rating">
                                                     <ul>
                                                         <li><a href="#"><i class="fa fa-star"
@@ -1565,7 +1591,7 @@
                         <div class="subscribe_form">
                             <form id="mc-form" class="mc-form footer-newsletter">
                                 <input id="mc-email" type="email" autocomplete="off"
-                                       placeholder="Enter your e-mail" />
+                                       placeholder="Enter your e-mail"/>
                                 <button id="mc-submit">Subscribe</button>
                             </form>
                             <!-- mailchimp-alerts Start -->

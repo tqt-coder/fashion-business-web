@@ -3253,6 +3253,12 @@ textarea:-ms-input-placeholder {
     transition: .3s;
     margin-top: 12px;
 }
+.primary_img img{
+    width: 100%;
+    object-fit: cover;
+    height: 156px;
+    margin: 0 auto;
+}
 
 .price_box span {
     font-size: 13px;

@@ -87,7 +87,9 @@ public class ProductService {
             listProudcts = productRepo.getAllByProductTitleContains(request.getKeySearch(), pageable).toList();
 
         } else {
-            listProudcts = productRepo.getAllByProductTitleContains(request.getKeySearch());
+            sortable = Sort.by("productsId").ascending();
+            Pageable pageable = PageRequest.of(request.getPage(), request.getSize(), sortable);
+            listProudcts = productRepo.getAllByProductTitleContains(request.getKeySearch(), pageable).toList();
         }
 
         List<ProductResponse> responses = new ArrayList<>();
@@ -101,6 +103,10 @@ public class ProductService {
             });
         }
         return responses;
+    }
+
+    public int getSizePageByProductTitle(String title) {
+        return productRepo.getSizePageByProductTitle(title);
     }
 
     public List<ProductResponse> findAllProductsByProductCategory(ProductCategoryRequest request) {
