@@ -26,9 +26,15 @@ public class MainController {
         ProductCategoryRequest productCategoryRequest = new ProductCategoryRequest();
         productCategoryRequest.setCategoryId(categoryIdShirt);
         model.addAttribute("listShirts", productService.findAllProductsByProductCategory(productCategoryRequest));
+        // category with hat
         int categoryIdHat = ProductConstantUtil.HAT;
         productCategoryRequest.setCategoryId(categoryIdHat);
         model.addAttribute("listHats", productService.findAllProductsByProductCategory(productCategoryRequest));
+        // category with hat
+        int categoryIdJacket = ProductConstantUtil.JACKET;
+        productCategoryRequest.setCategoryId(categoryIdJacket);
+        model.addAttribute("listJackets", productService.findAllProductsByProductCategory(productCategoryRequest));
+
         model.addAttribute("listProducts",productService.getAllProduct(request));
         return "index";
     }
