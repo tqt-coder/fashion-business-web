@@ -1,6 +1,7 @@
 package com.project.fashionbusinesswebsite.utils;
 
 import com.project.fashionbusinesswebsite.domain.CustomerEntity;
+import com.project.fashionbusinesswebsite.model.user.LoginRequest;
 import com.project.fashionbusinesswebsite.repository.AccountRepo;
 import com.project.fashionbusinesswebsite.repository.DiscountRepo;
 import com.project.fashionbusinesswebsite.repository.ProductRepo;
@@ -36,8 +37,8 @@ public class FinderUtil {
         return null;
     }
 
-    public boolean login(String userName, String pass) {
-        Optional<CustomerEntity> customerEntity = accountRepo.findCustomerEntityByUserNameAndCustomerPass(userName, pass);
+    public boolean login(LoginRequest request) {
+        Optional<CustomerEntity> customerEntity = accountRepo.findCustomerEntityByCustomerEmailAndCustomerPass(request.getCustomerEmail(), request.getCustomerPass());
         if (customerEntity.isPresent()) return true;
         return false;
     }

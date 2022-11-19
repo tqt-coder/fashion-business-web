@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Login</title>
     <meta charset="UTF-8">
@@ -64,7 +63,7 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form" action="/user/login" method="Post">
+            <form class="login100-form validate-form" name='f' th:action="@{/userLogin}" method="POST">
                     <span class="login100-form-title p-b-26">
                         Welcome
                     </span>

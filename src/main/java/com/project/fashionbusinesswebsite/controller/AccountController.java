@@ -1,5 +1,6 @@
 package com.project.fashionbusinesswebsite.controller;
 
+import com.project.fashionbusinesswebsite.model.user.LoginRequest;
 import com.project.fashionbusinesswebsite.model.user.RegisterRequest;
 import com.project.fashionbusinesswebsite.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,10 @@ public class AccountController {
     @PostMapping("/create")
     public ResponseEntity<?> register(@RequestBody @Valid RegisterRequest request) {
         return ResponseEntity.ok(accountService.register(request));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody @Valid LoginRequest request) {
+        return ResponseEntity.ok(accountService.login(request));
     }
 }

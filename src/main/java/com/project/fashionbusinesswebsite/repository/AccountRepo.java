@@ -11,6 +11,6 @@ public interface AccountRepo extends JpaRepository<CustomerEntity, Integer> {
 
     Optional<CustomerEntity> findCustomerEntityByUserName(String userName);
 
-    Optional<CustomerEntity> findCustomerEntityByUserNameAndCustomerPass(String userName, String pass);
+    Optional<CustomerEntity> findCustomerEntityByCustomerEmailAndCustomerPass(String userName, String pass);
 
 }
