@@ -10,6 +10,10 @@ import java.security.Principal;
 
 @Controller
 public class MainController {
+    @GetMapping("/")
+    public String homePage() {
+        return "index";
+    }
 
     @GetMapping("/login")
     public String loginPage() {
