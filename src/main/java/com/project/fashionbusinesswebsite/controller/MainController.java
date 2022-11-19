@@ -22,10 +22,13 @@ public class MainController {
     @GetMapping("/")
     public String homePage(ProductRequest request, Model model) {
         // category with shirt
-        int categoryId = ProductConstantUtil.SHIRT;
+        int categoryIdShirt = ProductConstantUtil.SHIRT;
         ProductCategoryRequest productCategoryRequest = new ProductCategoryRequest();
-        productCategoryRequest.setCategoryId(categoryId);
+        productCategoryRequest.setCategoryId(categoryIdShirt);
         model.addAttribute("listShirts", productService.findAllProductsByProductCategory(productCategoryRequest));
+        int categoryIdHat = ProductConstantUtil.HAT;
+        productCategoryRequest.setCategoryId(categoryIdHat);
+        model.addAttribute("listHats", productService.findAllProductsByProductCategory(productCategoryRequest));
         model.addAttribute("listProducts",productService.getAllProduct(request));
         return "index";
     }
