@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Login</title>
+    <title>Register</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/font.awesome.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/assets/fonts/fontawesome-webfont.woff2}">
     <link rel="stylesheet" type="text/css" th:href="@{/assets/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/assets/css/util.css}">
@@ -63,34 +64,51 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form" name='f' th:action="@{/userLogin}" method="POST">
+            <form class="login100-form validate-form" action="/user/create" method="Post">
                     <span class="login100-form-title p-b-26">
-                        Welcome
+                        Register
                     </span>
                 <span class="login100-form-title p-b-48">
+                        <i class="fa fa-user"></i>
                     </span>
                 <div class="wrap-input100 validate-input">
-                    <input class="input100" type="email" name="customerEmail" required>
+                    <input class="input100" type="text" required name="customerName">
+                    <span class="focus-input100" data-placeholder="Full name"></span>
+                </div>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" required name="userName">
+                    <span class="focus-input100" data-placeholder="User name"></span>
+                </div>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="email" required name="customerEmail">
                     <span class="focus-input100" data-placeholder="Email"></span>
                 </div>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" required name="customerContact">
+                    <span class="focus-input100" data-placeholder="Phone"></span>
+                </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" type="password" required name="customerPass">
+                    <input class="input100" required type="password" name="customerPass">
                     <span class="focus-input100" data-placeholder="Password"></span>
+                </div>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" required name="customerAddress">
+                    <span class="focus-input100" data-placeholder="Address"></span>
                 </div>
                 <div class="container-login100-form-btn">
                     <div class="wrap-login100-form-btn">
                         <div class="login100-form-bgbtn"></div>
                         <button class="login100-form-btn">
-                            Login
+                            Register
                         </button>
                     </div>
                 </div>
                 <div class="text-center p-t-115">
                         <span class="txt1">
-                            Don’t have an account?
+                            Do you have an account?
                         </span>
-                    <a class="txt2" th:href="@{/register}">
-                        Sign Up
+                    <a class="txt2" th:href="@{/login}">
+                        Login
                     </a>
                 </div>
             </form>
