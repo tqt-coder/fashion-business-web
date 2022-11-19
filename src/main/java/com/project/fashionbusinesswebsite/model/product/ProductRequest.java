@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ProductRequest {
     private int page = 0;
-    private int size = 14;
+    private int size = 13;
     private String sort;
     private String key;
 }
