@@ -115,7 +115,9 @@ public class ProductService {
             listProudcts = productRepo.getAllByCategoryId(request.getCategoryId(), pageable).toList();
 
         } else {
-            listProudcts = productRepo.getAllByCategoryId(request.getCategoryId());
+            sortable = Sort.by("productsId").ascending();
+            Pageable pageable = PageRequest.of(request.getPage(), request.getSize(), sortable);
+            listProudcts = productRepo.getAllByCategoryId(request.getCategoryId(), pageable).toList();
         }
 
         List<ProductResponse> responses = new ArrayList<>();
