@@ -21,7 +21,6 @@ public class ProductEntity {
     private String productTitle;
     private String productImg;
     private double productPrice;
-    private String productKeywords;
     private String productDescription;
     private int productQuantity;
 }
