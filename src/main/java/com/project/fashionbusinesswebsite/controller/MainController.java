@@ -57,7 +57,7 @@ public class MainController {
         model.addAttribute("numberPage", numberPage);
         model.addAttribute("totalResult", totalPag);
         model.addAttribute("keySearch", keySearch);
-        model.addAttribute("currentPage", request.getPage() + 1);
+        model.addAttribute("currentPage", request.getPage());
         model.addAttribute("listProducts", productService.findProductsByProductName(request));
         return "category";
     }

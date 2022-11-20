@@ -13,7 +13,7 @@ public interface ProductRepo extends JpaRepository<ProductEntity, Integer> {
 
     List<ProductEntity> getAllByProductTitleContains(String title);
 
-    @Query("select count(p.categoryId) from ProductEntity p where p.productTitle like '%:title%'")
+    @Query("select count(p.categoryId) from ProductEntity p where p.productTitle like %:title%")
     int getSizePageByProductTitle(String title);
 
     Page<ProductEntity> getAllByProductCategoryId(int pCategoryId, Pageable pageable);
