@@ -1,11 +1,12 @@
 package com.project.fashionbusinesswebsite.controller;
 
-import com.project.fashionbusinesswebsite.model.product.ProductCategoryRequest;
-import com.project.fashionbusinesswebsite.model.product.ProductRequest;
-import com.project.fashionbusinesswebsite.model.product.ProductResponse;
-import com.project.fashionbusinesswebsite.model.product.SearchProductRequest;
+import com.project.fashionbusinesswebsite.domain.ProductCategoryEntity;
+import com.project.fashionbusinesswebsite.model.product.*;
 import com.project.fashionbusinesswebsite.service.ProductService;
+import com.project.fashionbusinesswebsite.service.ServiceException;
+import com.project.fashionbusinesswebsite.utils.FinderUtil;
 import com.project.fashionbusinesswebsite.utils.ProductConstantUtil;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -22,6 +23,8 @@ import java.util.List;
 public class MainController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private FinderUtil finderUtil;
 
     @GetMapping("/")
     public String homePage(ProductRequest request, Model model) {
@@ -49,9 +52,9 @@ public class MainController {
         SearchProductRequest request = new SearchProductRequest();
         request.setKeySearch(keySearch);
         request.setPage(currentPage);
-        request.setSize(12);
+        request.setSize(24);
         int totalPag = productService.getSizePageByProductTitle(keySearch);
-        int numberPage = Integer.valueOf(totalPag / 12) + 1;
+        int numberPage = Integer.valueOf(totalPag / 24) + 1;
         List<ProductResponse> result = productService.findProductsByProductName(request);
         model.addAttribute("sizeResult", result.size());
         model.addAttribute("numberPage", numberPage);
@@ -60,6 +63,21 @@ public class MainController {
         model.addAttribute("currentPage", request.getPage());
         model.addAttribute("listProducts", productService.findProductsByProductName(request));
         return "category";
+    }
+
+    @GetMapping("/detail")
+    public String detailPage(@RequestParam(name = "productId") int productId, Model model) {
+        ProductViewResponse product = productService.getProductById(productId);
+        ProductCategoryRequest productCategoryRequest = new ProductCategoryRequest();
+        productCategoryRequest.setCategoryId(product.getProductCategoryId());
+        model.addAttribute("listProducts", productService.findAllProductsByProductCategory(productCategoryRequest));
+        ProductCategoryEntity productCategoryEntity = finderUtil.findProductCategoryById(product.getProductCategoryId());
+        if(ObjectUtils.isEmpty(productCategoryEntity)){
+            throw new ServiceException("Dang mục sản phẩm không tồn tại");
+        }
+        product.setProductCategoryName(productCategoryEntity.getPCategoryTitle());
+        model.addAttribute("product",product);
+        return "productDetail";
     }
 
 

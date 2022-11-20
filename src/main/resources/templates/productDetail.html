@@ -1,12 +1,12 @@
 <!Doctype html>
 <html class="no-js" xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Category</title>
+    <title>Detail</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" th:href="@{assets/img/favicon.ico}">
     <link rel="stylesheet" th:href="@{assets/css/bootstrap.min.css}">
     <!--owl carousel min css-->
@@ -33,7 +33,14 @@
 
     <!--modernizr min js here-->
     <script th:src="@{assets/js/vendor/modernizr-3.7.1.min.js}"></script>
-
+    <style>
+        .custom-price{
+            font-size: 16px !important;
+        }
+        .priduct_social {
+            padding-top: 180px;
+        }
+    </style>
 </head>
 
 <body>
@@ -53,15 +60,12 @@
                     <div class="canvas_close">
                         <a href="javascript:void(0)"><i class="ion-android-close"></i></a>
                     </div>
-                    <div class="col-lg-4 col_search">
-                        <div class="header_search_box">
-                            <form th:action="@{/search}" method="get">
-                                <input name="keySearch" placeholder="Tìm kiếm sản phẩm yêu thích" type="text">
-                                <input name="page" value="0" hidden type="text">
-                                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    <div class="header_search_box">
+                        <form action="#">
+                            <input placeholder="Search" type="text">
+                            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 
-                            </form>
-                        </div>
+                        </form>
                     </div>
                     <div id="menu" class="text-left ">
                         <ul class="offcanvas_main_menu">
@@ -165,7 +169,7 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-5">
                         <div class="logo">
-                            <a th:href="@{/}"><img src="assets/img/logo/logo.png" alt=""></a>
+                            <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-4 col_search">
@@ -349,7 +353,6 @@
 </header>
 <!--header area end-->
 
-<!--section bg area-->
 <div class="section_bg">
     <div class="container">
         <!--breadcrumbs area start-->
@@ -357,128 +360,164 @@
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
-                        <h3>shop</h3>
                         <ul>
                             <li><a th:href="@{/}">home</a></li>
-                            <li>shop</li>
+                            <li>product details</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <!--breadcrumbs area end-->
-
-        <!--shop  area start-->
-        <div class="shop_area shop_reverse">
+        <div class="product_details mb-60">
             <div class="row">
-
-                <div class="col-lg-12 col-md-12">
-                    <!--shop wrapper start-->
-
-                    <!--shop toolbar start-->
-                    <div class="shop_toolbar_wrapper">
-                        <div class="shop_toolbar_btn">
-                            <button data-role="grid_4" type="button" class="  btn-grid-4" data-bs-toggle="tooltip"
-                                    title="4"></button>
-                            <button data-role="grid_3" type="button" class="active btn-grid-3"
-                                    data-bs-toggle="tooltip" title="3"></button>
-                            <button data-role="grid_list" type="button" class="btn-list" data-bs-toggle="tooltip"
-                                    title="List"></button>
-                        </div>
-                        <div class=" niceselect_option">
-                            <form class="select_option" action="#">
-                                <select name="orderby" id="short">
-                                    <option selected value="nameAZ">Sắp xếp theo tên: A -> Z</option>
-                                    <option selected value="nameZA">Sắp xếp theo tên: Z -> A</option>
-                                    <option value="date">Hàng mới nhất</option>
-                                    <option value="priceIncrease">Sắp xếp theo giá: thấp đến cao</option>
-                                    <option value="priceDescrease">Sắp xếp theo giá: cao đến thấp</option>
-                                </select>
-                            </form>
-                        </div>
-                        <div class="page_amount">
-                            <p>Đang xem <span th:text="${sizeResult}"></span> của <span
-                                    th:text="${totalResult}"></span>
-                                kết quả</p>
+                <div class="col-lg-5 col-md-5">
+                    <div class="product-details-tab">
+                        <div id="img-1" class="zoomWrapper single-zoom">
+                            <a href="#">
+                                <img id="zoom1" src="assets/img/product/productbig4.jpg"
+                                     data-zoom-image="assets/img/product/productbig1.jpg" alt="big-1">
+                            </a>
                         </div>
                     </div>
-                    <!--shop toolbar end-->
-                    <div class="row shop_wrapper">
-                        <div class="col-lg-2 col-md-3 col-sm-4 col-12 " th:each="product : ${listProducts}">
-                            <article class="single_product">
-                                <figure>
-                                    <div class="product_thumb">
-                                        <a class="primary_img" th:href="@{'detail?productId=' + ${product.productsId}}"><img
-                                                th:src="@{${'assets/img/product/' + product.productImg}}"
-                                                alt=""></a>
-                                        <div class="label_product">
-                                                <span
-                                                        th:if="${product.productPriceAfterDiscount - product.productPrice < 0}"
-                                                        class="label_sale">Sale</span>
-                                        </div>
-                                    </div>
-                                    <figcaption class="product_content">
-                                        <h4 class="product_name"><a th:href="@{'detail?productId=' + ${product.productsId}}"
-                                                                    th:text="${product.productTitle}"></a></h4>
-                                        <div class="product_rating">
-                                            <ul>
-                                                <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                                </li>
-                                                <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                                </li>
-                                                <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                                </li>
-                                                <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                                </li>
-                                                <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="price_box"
-                                             th:if="${product.productPriceAfterDiscount - product.productPrice < 0}">
+                </div>
+                <div class="col-lg-7 col-md-7">
+                    <div class="product_d_right">
+                        <form action="#">
+                            <div class="productd_title_nav">
+                                <h1><a th:text="${product.productTitle}">Lorem ipsum dolor sit amet elit</a></h1>
+                                <div class="product_nav">
+                                    <ul>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class=" product_ratting">
+                                <ul>
+                                    <li><a><i class="fa fa-star"></i></a></li>
+                                    <li><a><i class="fa fa-star"></i></a></li>
+                                    <li><a><i class="fa fa-star"></i></a></li>
+                                    <li><a><i class="fa fa-star"></i></a></li>
+                                    <li><a><i class="fa fa-star"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="price_box"
+                                 th:if="${product.productPriceAfterDiscount - product.productPrice < 0}">
                                                 <span class="old_price"><span class="custom-price"
                                                                               th:text="${product.productPrice}"></span>đ</span>
-                                            <span class="current_price"><span
-                                                    th:text="${product.productPriceAfterDiscount}"
-                                                    class="custom-price"></span>đ</span>
-                                        </div>
-                                        <div class="price_box"
-                                             th:unless="${product.productPriceAfterDiscount - product.productPrice < 0}">
-                                            <!--                                                    <span class="old_price"><span class="custom-price"></span></span>-->
-                                            <span class="current_price"><span
-                                                    th:text="${product.productPriceAfterDiscount}"
-                                                    class="custom-price"></span>đ</span>
-                                        </div>
-                                        <div class="add_to_cart">
-                                            <a href="cart.html" title="Add to cart"><i class="fa fa-shopping-cart"
-                                                                                       aria-hidden="true"></i> Add
-                                                to cart</a>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                            </article>
-                        </div>
-                    </div>
-                    <div class="shop_toolbar t_bottom">
-                        <div class="pagination" th:with="unit= 1">
+                                <span class="current_price" style="font-size: 13px"><span
+                                        th:text="${product.productPriceAfterDiscount}"
+                                        class="custom-price"></span>đ</span>
+                            </div>
+                            <div class="price_box"
+                                 th:unless="${product.productPriceAfterDiscount - product.productPrice < 0}">
+                                <!--                                                    <span class="old_price"><span class="custom-price"></span></span>-->
+                                <span class="current_price" style="font-size: 13px"><span
+                                        th:text="${product.productPriceAfterDiscount}"
+                                        class="custom-price"></span>đ</span>
+                            </div>
+                            <div class="product_desc">
+                                <p th:text="${product.productDescription}">eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam,
+                                    purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue
+                                    nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                                    tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in </p>
+                            </div>
+
+                            <div class="product_variant quantity">
+                                <label>Số lượng</label>
+                                <input min="1" th:max="${product.productQuantity}" value="1" type="number">
+                                <button class="button" type="submit">add to cart</button>
+
+                            </div>
+                            <div class=" product_d_action">
+                                <ul>
+                                    <li><a href="#" title="Add to wishlist"></a></li>
+                                    <li><a href="#" title="Add to wishlist"></a></li>
+                                </ul>
+                            </div>
+                            <div class="product_meta">
+                                <span>Category: <a th:text="${product.productCategoryName}">Clothing</a></span>
+                            </div>
+
+                        </form>
+                        <div class="priduct_social">
                             <ul>
-                                <li class="next" th:if="${currentPage >= 1}"><a
-                                        th:href="@{'search?keySearch=' + ${keySearch} + '&page='+${currentPage - unit}}">pre</a>
-                                </li>
-                                <li class="current" th:text="${currentPage + 1}"></li>
-                                <li class="next" th:if="${currentPage + 1 < numberPage}"><a
-                                        th:href="@{'search?keySearch=' + ${keySearch} + '&page='+${currentPage + unit}}">next</a>
-                                </li>
+                                <li><a class="facebook" href="#" title="facebook"><i class="fa fa-facebook"></i>
+                                    Like</a></li>
+                                <li><a class="twitter" href="#" title="twitter"><i class="fa fa-twitter"></i>
+                                    tweet</a></li>
+                                <li><a class="pinterest" href="#" title="pinterest"><i class="fa fa-pinterest"></i>
+                                    save</a></li>
+                                <li><a class="google-plus" href="#" title="google +"><i
+                                        class="fa fa-google-plus"></i> share</a></li>
+                                <li><a class="linkedin" href="#" title="linkedin"><i class="fa fa-linkedin"></i>
+                                    linked</a></li>
                             </ul>
                         </div>
+
                     </div>
-                    <!--shop toolbar end-->
-                    <!--shop wrapper end-->
                 </div>
             </div>
         </div>
-        <!--shop  area end-->
+        <div class="row">
 
+            <div class="col-lg-12 col-md-12">
+                <div class="row shop_wrapper">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-12 " th:each="product : ${listProducts}">
+                        <article class="single_product">
+                            <figure>
+                                <div class="product_thumb">
+                                    <a class="primary_img" th:href="@{'detail?productId=' + ${product.productsId}}"><img
+                                            th:src="@{${'assets/img/product/' + product.productImg}}"
+                                            alt=""></a>
+                                    <div class="label_product">
+                                                <span
+                                                        th:if="${product.productPriceAfterDiscount - product.productPrice < 0}"
+                                                        class="label_sale">Sale</span>
+                                    </div>
+                                </div>
+                                <figcaption class="product_content">
+                                    <h4 class="product_name"><a th:href="@{'detail?productId=' + ${product.productsId}}"
+                                                                th:text="${product.productTitle}"></a></h4>
+                                    <div class="product_rating">
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                            </li>
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                            </li>
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                            </li>
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                            </li>
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="price_box"
+                                         th:if="${product.productPriceAfterDiscount - product.productPrice < 0}">
+                                                <span class="old_price"><span class="custom-price"
+                                                                              th:text="${product.productPrice}"></span>đ</span>
+                                        <span class="current_price" style="font-size: 13px"><span
+                                                th:text="${product.productPriceAfterDiscount}"
+                                                class="custom-price"></span>đ</span>
+                                    </div>
+                                    <div class="price_box"
+                                         th:unless="${product.productPriceAfterDiscount - product.productPrice < 0}">
+                                        <!--                                                    <span class="old_price"><span class="custom-price"></span></span>-->
+                                        <span class="current_price" style="font-size: 13px"><span
+                                                th:text="${product.productPriceAfterDiscount}"
+                                                class="custom-price"></span>đ</span>
+                                    </div>
+                                    <div class="add_to_cart">
+                                        <a href="cart.html" title="Add to cart"><i class="fa fa-shopping-cart"
+                                                                                   aria-hidden="true"></i> Add
+                                            to cart</a>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--brand area start-->
         <div class="brand_area">
             <div class="row">
@@ -519,7 +558,6 @@
         <!--brand area end-->
     </div>
 </div>
-<!--section bg area end-->
 
 
 <!--footer area start-->
@@ -660,7 +698,7 @@
                         <div class="subscribe_form">
                             <form id="mc-form" class="mc-form footer-newsletter">
                                 <input id="mc-email" type="email" autocomplete="off"
-                                       placeholder="Enter your e-mail" />
+                                       placeholder="Enter your e-mail"/>
                                 <button id="mc-submit">Subscribe</button>
                             </form>
                             <!-- mailchimp-alerts Start -->
@@ -765,6 +803,130 @@
 </footer>
 <!--footer area end-->
 
+<!-- modal area start-->
+<div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><i class="ion-android-close"></i></span>
+            </button>
+            <div class="modal_body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 col-sm-12">
+                            <div class="modal_tab">
+                                <div class="tab-content product-details-large">
+                                    <div class="tab-pane fade show active" id="tab1" role="tabpanel">
+                                        <div class="modal_tab_img">
+                                            <a href="#"><img src="assets/img/product/productbig1.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab2" role="tabpanel">
+                                        <div class="modal_tab_img">
+                                            <a href="#"><img src="assets/img/product/productbig2.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab3" role="tabpanel">
+                                        <div class="modal_tab_img">
+                                            <a href="#"><img src="assets/img/product/productbig3.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab4" role="tabpanel">
+                                        <div class="modal_tab_img">
+                                            <a href="#"><img src="assets/img/product/productbig4.jpg" alt=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal_tab_button">
+                                    <ul class="nav product_navactive owl-carousel" role="tablist">
+                                        <li>
+                                            <a class="nav-link active" data-bs-toggle="tab" href="#tab1" role="tab"
+                                               aria-controls="tab1" aria-selected="false"><img
+                                                    src="assets/img/product/product3.jpg" alt=""></a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link" data-bs-toggle="tab" href="#tab2" role="tab"
+                                               aria-controls="tab2" aria-selected="false"><img
+                                                    src="assets/img/product/product8.jpg" alt=""></a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link button_three" data-bs-toggle="tab" href="#tab3"
+                                               role="tab" aria-controls="tab3" aria-selected="false"><img
+                                                    src="assets/img/product/product1.jpg" alt=""></a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link" data-bs-toggle="tab" href="#tab4" role="tab"
+                                               aria-controls="tab4" aria-selected="false"><img
+                                                    src="assets/img/product/product6.jpg" alt=""></a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-12">
+                            <div class="modal_right">
+                                <div class="modal_title mb-10">
+                                    <h2>Donec Ac Tempus</h2>
+                                </div>
+                                <div class="modal_price mb-10">
+                                    <span class="new_price">$64.99</span>
+                                    <span class="old_price">$78.99</span>
+                                </div>
+                                <div class="modal_description mb-15">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste
+                                        laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam
+                                        in quos qui nemo ipsum numquam, reiciendis maiores quidem aperiam, rerum vel
+                                        recusandae </p>
+                                </div>
+                                <div class="variants_selects">
+                                    <div class="variants_size">
+                                        <h2>size</h2>
+                                        <select class="select_option">
+                                            <option selected value="1">s</option>
+                                            <option value="1">m</option>
+                                            <option value="1">l</option>
+                                            <option value="1">xl</option>
+                                            <option value="1">xxl</option>
+                                        </select>
+                                    </div>
+                                    <div class="variants_color">
+                                        <h2>color</h2>
+                                        <select class="select_option">
+                                            <option selected value="1">purple</option>
+                                            <option value="1">violet</option>
+                                            <option value="1">black</option>
+                                            <option value="1">pink</option>
+                                            <option value="1">orange</option>
+                                        </select>
+                                    </div>
+                                    <div class="modal_add_to_cart">
+                                        <form action="#">
+                                            <input min="1" max="100" step="2" value="1" type="number">
+                                            <button type="submit">add to cart</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="modal_social">
+                                    <h2>Share this product</h2>
+                                    <ul>
+                                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                        <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a>
+                                        </li>
+                                        <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script th:src="@{assets/js/vendor/jquery-3.5.0.min.js}"></script>
 <!--popper min js-->
 <script th:src="@{assets/js/popper.js}"></script>
@@ -795,8 +957,10 @@
         let num = Number(x[i].innerHTML)
             .toLocaleString('vi');
         x[i].innerHTML = num;
+
     }
 </script>
+
 </body>
 
 </html>

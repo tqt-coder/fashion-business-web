@@ -17,4 +17,6 @@ public class ProductViewResponse {
     private double productPriceAfterDiscount;
     private int productQuantity;
     private String productDescription;
+    private int productCategoryId;
+    private String productCategoryName;
 }

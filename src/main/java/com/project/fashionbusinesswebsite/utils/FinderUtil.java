@@ -1,9 +1,11 @@
 package com.project.fashionbusinesswebsite.utils;
 
 import com.project.fashionbusinesswebsite.domain.CustomerEntity;
+import com.project.fashionbusinesswebsite.domain.ProductCategoryEntity;
 import com.project.fashionbusinesswebsite.model.user.LoginRequest;
 import com.project.fashionbusinesswebsite.repository.AccountRepo;
 import com.project.fashionbusinesswebsite.repository.DiscountRepo;
+import com.project.fashionbusinesswebsite.repository.ProductCategoryRepo;
 import com.project.fashionbusinesswebsite.repository.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ public class FinderUtil {
     private DiscountRepo discountRepo;
     @Autowired
     private AccountRepo accountRepo;
+    @Autowired
+    private ProductCategoryRepo productCategoryRepo;
 
     public List<Double> getAllDiscountsByProductId(int id) {
         List<Double> listPercentDiscounts = discountRepo.getAllDiscountPercentByProductId(id);
@@ -41,5 +45,11 @@ public class FinderUtil {
         Optional<CustomerEntity> customerEntity = accountRepo.findCustomerEntityByCustomerEmailAndCustomerPass(request.getCustomerEmail(), request.getCustomerPass());
         if (customerEntity.isPresent()) return true;
         return false;
+    }
+
+    public ProductCategoryEntity findProductCategoryById(int id) {
+        Optional<ProductCategoryEntity> productCategoryEntity = productCategoryRepo.findById(id);
+        if (productCategoryEntity.isPresent()) return productCategoryEntity.get();
+        return null;
     }
 }
