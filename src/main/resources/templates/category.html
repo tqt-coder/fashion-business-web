@@ -54,12 +54,15 @@
                     <div class="canvas_close">
                         <a href="javascript:void(0)"><i class="ion-android-close"></i></a>
                     </div>
-                    <div class="header_search_box">
-                        <form action="#">
-                            <input placeholder="Search" type="text">
-                            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    <div class="col-lg-4 col_search">
+                        <div class="header_search_box">
+                            <form th:action="@{/search}" method="get">
+                                <input name="keySearch" placeholder="Tìm kiếm sản phẩm yêu thích" type="text">
+                                <input name="page" value="0" hidden type="text">
+                                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 
-                        </form>
+                            </form>
+                        </div>
                     </div>
                     <div id="menu" class="text-left ">
                         <ul class="offcanvas_main_menu">
