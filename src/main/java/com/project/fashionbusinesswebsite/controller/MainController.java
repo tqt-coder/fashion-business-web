@@ -1,7 +1,9 @@
 package com.project.fashionbusinesswebsite.controller;
 
 import com.project.fashionbusinesswebsite.domain.ProductCategoryEntity;
+import com.project.fashionbusinesswebsite.model.cart.CartRequest;
 import com.project.fashionbusinesswebsite.model.product.*;
+import com.project.fashionbusinesswebsite.service.CartService;
 import com.project.fashionbusinesswebsite.service.ProductService;
 import com.project.fashionbusinesswebsite.service.ServiceException;
 import com.project.fashionbusinesswebsite.utils.FinderUtil;
@@ -12,9 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -25,6 +25,8 @@ public class MainController {
     private ProductService productService;
     @Autowired
     private FinderUtil finderUtil;
+    @Autowired
+    private CartService cartService;
 
     @GetMapping("/")
     public String homePage(ProductRequest request, Model model) {
@@ -72,12 +74,20 @@ public class MainController {
         productCategoryRequest.setCategoryId(product.getProductCategoryId());
         model.addAttribute("listProducts", productService.findAllProductsByProductCategory(productCategoryRequest));
         ProductCategoryEntity productCategoryEntity = finderUtil.findProductCategoryById(product.getProductCategoryId());
-        if(ObjectUtils.isEmpty(productCategoryEntity)){
+        if (ObjectUtils.isEmpty(productCategoryEntity)) {
             throw new ServiceException("Dang mục sản phẩm không tồn tại");
         }
         product.setProductCategoryName(productCategoryEntity.getPCategoryTitle());
-        model.addAttribute("product",product);
+        model.addAttribute("product", product);
         return "productDetail";
+    }
+
+    @PostMapping("/create-cart")
+    public String createCart(CartRequest request, Principal principal) {
+        if (ObjectUtils.isEmpty(principal)) {
+            return "login";
+        }
+        return String.valueOf(cartService.createCart(request, principal));
     }
 
 
