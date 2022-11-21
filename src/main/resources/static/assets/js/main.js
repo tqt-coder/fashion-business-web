@@ -378,16 +378,7 @@
     $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
        " - $" + $( "#slider-range" ).slider( "values", 1 ) );
     
-    /*---elevateZoom---*/
-    $("#zoom1").elevateZoom({
-        gallery:'gallery_01', 
-        responsive : true,
-        cursor: 'crosshair',
-        zoomType : 'inner'
-    
-    });  
-    
-    
+
     /*---addClass/removeClass categories---*/
    $("#cat_toggle.has-sub > a").on("click", function() {
             $(this).removeAttr('href');
@@ -534,20 +525,7 @@
         $(this).toggleClass('active');
         $('.dropdown_account').slideToggle('medium');
     }); 
-    
-    
 
-	
-	/*---mini cart activation---*/
-    $('.mini_cart_wrapper > a').on('click', function(){
-        $('.mini_cart,.off_canvars_overlay').addClass('active')
-    });
-    
-    $('.mini_cart_close > a,.off_canvars_overlay').on('click', function(){
-        $('.mini_cart,.off_canvars_overlay').removeClass('active')
-    });
-    
-	
     
     /*---canvas menu activation---*/
     $('.canvas_open').on('click', function(){

@@ -3259,6 +3259,11 @@ textarea:-ms-input-placeholder {
     height: 156px;
     margin: 0 auto;
 }
+.img-detail{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
 
 .price_box span {
     font-size: 13px;
