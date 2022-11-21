@@ -14,8 +14,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -45,6 +48,8 @@ public class MainController {
         model.addAttribute("listJackets", productService.findAllProductsByProductCategory(productCategoryRequest));
 
         model.addAttribute("listProducts", productService.getAllProduct(request));
+        CartRequest cartRequest = new CartRequest();
+        model.addAttribute("cartForm", cartRequest);
         return "index";
     }
 
@@ -83,11 +88,23 @@ public class MainController {
     }
 
     @PostMapping("/create-cart")
-    public String createCart(CartRequest request, Principal principal) {
+    public Object createCart(@ModelAttribute("cartForm") CartRequest request, Principal principal) {
         if (ObjectUtils.isEmpty(principal)) {
             return "login";
         }
-        return String.valueOf(cartService.createCart(request, principal));
+        cartService.createCart(request, principal);
+        return new ModelAndView("redirect:/cart");
+    }
+
+    @GetMapping("/create-cart")
+    public Object createCartPage(@RequestParam(name = "productId") int productId, Principal principal) {
+        if (ObjectUtils.isEmpty(principal)) {
+            return "login";
+        }
+        ProductViewResponse product = productService.getProductById(productId);
+        CartRequest request = new CartRequest().builder().productsId(productId).money(product.getProductPrice()).quantity(product.getProductQuantity()).build();
+        cartService.createCart(request, principal);
+        return new ModelAndView("redirect:/cart");
     }
 
     @GetMapping("/cart")
