@@ -20,4 +20,7 @@ public class CartResponse {
     private String productTitle;
     private double productPriceAfterDiscount;
     private int status;
+    private int maxQuantity;
+    private double productPrice;
+    private int productsId;
 }

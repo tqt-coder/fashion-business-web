@@ -51,8 +51,9 @@
                         <a href="javascript:void(0)"><i class="ion-android-close"></i></a>
                     </div>
                     <div class="header_search_box">
-                        <form action="#">
-                            <input placeholder="Search" type="text">
+                        <form th:action="@{/search}" method="get">
+                            <input name="keySearch" placeholder="Tìm kiếm sản phẩm yêu thích" type="text">
+                            <input name="page" value="0" hidden type="text">
                             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 
                         </form>

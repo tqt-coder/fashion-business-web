@@ -90,6 +90,15 @@ public class MainController {
         return String.valueOf(cartService.createCart(request, principal));
     }
 
+    @GetMapping("/cart")
+    public String cartPage(Principal principal, Model model) {
+        if (ObjectUtils.isEmpty(principal)) {
+            return "login";
+        }
+        model.addAttribute("listCarts", cartService.getAllCartByCustomerName(principal));
+        return "cart";
+    }
+
 
     @GetMapping("/login")
     public String loginPage() {
