@@ -9,7 +9,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
- import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -63,7 +63,7 @@ public class ProductService {
     public ProductViewResponse getProductById(int id) {
         Optional<ProductEntity> OproductEntity = productRepo.findById(id);
         if (Boolean.FALSE.equals(OproductEntity.isPresent())) {
-            throw new ServiceException("Can not find product with id = " + id);
+            throw new ServiceException("Không thể tìm thấy sản phẩm với id = " + id);
         }
         ProductEntity productEntity = OproductEntity.get();
         ProductViewResponse response = mapper.map(productEntity, ProductViewResponse.class);
@@ -141,7 +141,7 @@ public class ProductService {
         return responses;
     }
 
-    private double calculatePriceAfterDiscount(double productPrice, List<Double> listDiscounts) {
+    public static double calculatePriceAfterDiscount(double productPrice, List<Double> listDiscounts) {
         if (CollectionUtils.isEmpty(listDiscounts)) return productPrice;
         double maxDiscount = listDiscounts.stream().max(Double::compare).orElseGet(() -> 1.0);
         return productPrice - (productPrice * maxDiscount / 100);

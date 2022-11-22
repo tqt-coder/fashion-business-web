@@ -19,4 +19,5 @@ public class ProductViewResponse {
     private String productDescription;
     private int productCategoryId;
     private String productCategoryName;
+    private int currentProductQuantity;
 }

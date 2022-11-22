@@ -69,7 +69,9 @@ public class CartService {
                 cartResponse.setProductTitle(product.getProductTitle());
                 cartResponse.setProductImg(product.getProductImg());
                 cartResponse.setMaxQuantity(product.getProductQuantity());
-                cartResponse.setProductPrice(product.getProductPrice());
+
+                List<Double> listDiscounts = finderUtil.getAllDiscountsByProductId(product.getProductsId());
+                cartResponse.setProductPrice(ProductService.calculatePriceAfterDiscount(product.getProductPrice(), listDiscounts));
                 cartResponse.setProductsId(product.getProductsId());
                 responses.add(cartResponse);
             });

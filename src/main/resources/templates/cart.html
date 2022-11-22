@@ -325,22 +325,27 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="cart : ${listCarts}">
-                                    <td class="product_remove"><a th:href="@{'/delete-cart?cartId=' + ${cart.cartId}}"><i
-                                            class="fa fa-trash-o"></i></a>
-                                    </td>
-                                    <td class="product_thumb"><a
-                                            th:href="@{'detail?productId=' + ${cart.productsId}}"><img
-                                            th:src="@{${'assets/img/product/' + cart.productImg}}" alt=""></a></td>
-                                    <td class="product_name"><a th:href="@{'detail?productId=' + ${cart.productsId}}"
-                                                                th:text="${cart.productTitle}">Handbag fringilla</a>
-                                    </td>
-                                    <td class="product-price" th:text="${cart.productPrice}">£65.00</td>
-                                    <td class="product_quantity"><label>Số lượng</label>
-                                        <input min="1" th:value="${cart.quantity}" th:max="${cart.maxQuantity}"
-                                               value="1" type="number"></td>
-                                    <td class="product_total" th:text="${cart.money}">£130.00</td>
-                                </tr>
+                                <form action="">
+                                    <tr th:each="cart : ${listCarts}">
+                                        <td class="product_remove"><a
+                                                th:href="@{'/delete-cart?cartId=' + ${cart.cartId}}"><i
+                                                class="fa fa-trash-o"></i></a>
+                                        </td>
+                                        <td class="product_thumb"><a
+                                                th:href="@{'detail?productId=' + ${cart.productsId}}"><img
+                                                th:src="@{${'assets/img/product/' + cart.productImg}}" alt=""></a></td>
+                                        <td class="product_name"><a
+                                                th:href="@{'detail?productId=' + ${cart.productsId}}"
+                                                th:text="${cart.productTitle}">Handbag fringilla</a>
+                                        </td>
+                                        <td class="product-price" th:text="${cart.productPrice}">£65.00</td>
+                                        <td class="product_quantity"><label>Số lượng</label>
+                                            <input min="1" th:value="${cart.quantity}" th:max="${cart.maxQuantity}"
+                                                   value="1" type="number"></td>
+                                        <td class="product_total" th:text="${cart.money}">£130.00</td>
+                                    </tr>
+                                </form>
+
                                 </tbody>
                             </table>
                         </div>

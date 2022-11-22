@@ -2,6 +2,7 @@ package com.project.fashionbusinesswebsite.controller;
 
 import com.project.fashionbusinesswebsite.domain.ProductCategoryEntity;
 import com.project.fashionbusinesswebsite.model.cart.CartRequest;
+import com.project.fashionbusinesswebsite.model.cart.CartResponse;
 import com.project.fashionbusinesswebsite.model.product.*;
 import com.project.fashionbusinesswebsite.service.CartService;
 import com.project.fashionbusinesswebsite.service.ProductService;
@@ -9,6 +10,7 @@ import com.project.fashionbusinesswebsite.service.ServiceException;
 import com.project.fashionbusinesswebsite.utils.FinderUtil;
 import com.project.fashionbusinesswebsite.utils.ProductConstantUtil;
 import org.apache.commons.lang3.ObjectUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -30,6 +32,8 @@ public class MainController {
     private FinderUtil finderUtil;
     @Autowired
     private CartService cartService;
+    @Autowired
+    private ModelMapper mapper;
 
     @GetMapping("/")
     public String homePage(ProductRequest request, Model model) {
@@ -83,15 +87,20 @@ public class MainController {
             throw new ServiceException("Dang mục sản phẩm không tồn tại");
         }
         product.setProductCategoryName(productCategoryEntity.getPCategoryTitle());
+        product.setCurrentProductQuantity(1);
         model.addAttribute("product", product);
         return "productDetail";
     }
 
     @PostMapping("/create-cart")
-    public Object createCart(@ModelAttribute("cartForm") CartRequest request, Principal principal) {
+    public Object createCart(@ModelAttribute("product") ProductViewResponse productRequest, Principal principal) {
         if (ObjectUtils.isEmpty(principal)) {
             return "login";
         }
+        CartRequest request = new CartRequest();
+        request.setProductsId(productRequest.getProductsId());
+        request.setQuantity(productRequest.getCurrentProductQuantity());
+        request.setMoney(productRequest.getProductPriceAfterDiscount() * productRequest.getCurrentProductQuantity());
         cartService.createCart(request, principal);
         return new ModelAndView("redirect:/cart");
     }
@@ -102,7 +111,7 @@ public class MainController {
             return "login";
         }
         ProductViewResponse product = productService.getProductById(productId);
-        CartRequest request = new CartRequest().builder().productsId(productId).money(product.getProductPrice()).quantity(product.getProductQuantity()).build();
+        CartRequest request = new CartRequest().builder().productsId(productId).money(product.getProductPrice()).quantity(1).build();
         cartService.createCart(request, principal);
         return new ModelAndView("redirect:/cart");
     }
@@ -127,6 +136,12 @@ public class MainController {
         }
         throw new ServiceException("Có lỗi hệ thống");
 
+    }
+
+    @PostMapping("/update-cart")
+    public Object updateCart(@ModelAttribute("listCarts") List<CartResponse> listCarts) {
+        List<CartResponse> newCart = listCarts;
+        return "success";
     }
 
     @GetMapping("/login")

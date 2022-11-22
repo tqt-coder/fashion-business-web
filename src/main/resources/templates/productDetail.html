@@ -34,9 +34,10 @@
     <!--modernizr min js here-->
     <script th:src="@{assets/js/vendor/modernizr-3.7.1.min.js}"></script>
     <style>
-        .custom-price{
+        .custom-price {
             font-size: 16px !important;
         }
+
         .priduct_social {
             padding-top: 180px;
         }
@@ -310,93 +311,99 @@
             </div>
         </div>
         <div class="product_details mb-60">
-            <div class="row">
-                <div class="col-lg-5 col-md-5">
-                    <div class="product-details-tab">
-                        <div id="img-1" class="zoomWrapper single-zoom">
-                            <a href="#">
-                                <img class="img-detail" id="zoom1" th:src="@{${'assets/img/product/' + product.productImg}}"
-                                    alt="big-1">
-                            </a>
+            <form th:action="@{/create-cart}" method="post" th:object="${product}">
+                <input hidden type="text" th:field="${product.productsId}">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5">
+                        <div class="product-details-tab">
+                            <div id="img-1" class="zoomWrapper single-zoom">
+                                <a href="#">
+                                    <img class="img-detail" id="zoom1"
+                                         th:src="@{${'assets/img/product/' + product.productImg}}"
+                                         alt="big-1">
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-7 col-md-7">
-                    <div class="product_d_right">
-                        <form action="#">
-                            <div class="productd_title_nav">
-                                <h1><a th:text="${product.productTitle}">Lorem ipsum dolor sit amet elit</a></h1>
-                                <div class="product_nav">
+                    <div class="col-lg-7 col-md-7">
+                        <div class="product_d_right">
+                            <form action="#">
+                                <div class="productd_title_nav">
+                                    <h1><a th:text="${product.productTitle}">Lorem ipsum dolor sit amet elit</a></h1>
+                                    <div class="product_nav">
+                                        <ul>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class=" product_ratting">
                                     <ul>
+                                        <li><a><i class="fa fa-star"></i></a></li>
+                                        <li><a><i class="fa fa-star"></i></a></li>
+                                        <li><a><i class="fa fa-star"></i></a></li>
+                                        <li><a><i class="fa fa-star"></i></a></li>
+                                        <li><a><i class="fa fa-star"></i></a></li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class=" product_ratting">
-                                <ul>
-                                    <li><a><i class="fa fa-star"></i></a></li>
-                                    <li><a><i class="fa fa-star"></i></a></li>
-                                    <li><a><i class="fa fa-star"></i></a></li>
-                                    <li><a><i class="fa fa-star"></i></a></li>
-                                    <li><a><i class="fa fa-star"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="price_box"
-                                 th:if="${product.productPriceAfterDiscount - product.productPrice < 0}">
+                                <div class="price_box"
+                                     th:if="${product.productPriceAfterDiscount - product.productPrice < 0}">
                                                 <span class="old_price"><span class="custom-price"
                                                                               th:text="${product.productPrice}"></span>đ</span>
-                                <span class="current_price" style="font-size: 13px"><span
-                                        th:text="${product.productPriceAfterDiscount}"
-                                        class="custom-price"></span>đ</span>
-                            </div>
-                            <div class="price_box"
-                                 th:unless="${product.productPriceAfterDiscount - product.productPrice < 0}">
-                                <!--                                                    <span class="old_price"><span class="custom-price"></span></span>-->
-                                <span class="current_price" style="font-size: 13px"><span
-                                        th:text="${product.productPriceAfterDiscount}"
-                                        class="custom-price"></span>đ</span>
-                            </div>
-                            <div class="product_desc">
-                                <p th:text="${product.productDescription}">eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam,
-                                    purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue
-                                    nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                                    tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in </p>
-                            </div>
+                                    <span class="current_price" style="font-size: 13px"><span
+                                            th:text="${product.productPriceAfterDiscount}"
+                                            class="custom-price"></span>đ</span>
+                                </div>
+                                <div class="price_box"
+                                     th:unless="${product.productPriceAfterDiscount - product.productPrice < 0}">
+                                    <!--                                                    <span class="old_price"><span class="custom-price"></span></span>-->
+                                    <span class="current_price" style="font-size: 13px"><span
+                                            th:text="${product.productPriceAfterDiscount}"
+                                            class="custom-price"></span>đ</span>
+                                </div>
+                                <input type="text" hidden th:field="${product.productPriceAfterDiscount}">
+                                <div class="product_desc">
+                                    <p th:text="${product.productDescription}">eget velit. Donec ac tempus ante. Fusce
+                                        ultricies massa massa. Fusce aliquam,
+                                        purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue
+                                        nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                                        tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in </p>
+                                </div>
 
-                            <div class="product_variant quantity">
-                                <label>Số lượng</label>
-                                <input min="1" th:max="${product.productQuantity}" value="1" type="number">
-                                <button class="button" type="submit">add to cart</button>
+                                <div class="product_variant quantity">
+                                    <label>Số lượng</label>
+                                    <input min="1" th:max="${product.productQuantity}" value="1" type="number" th:field="${product.currentProductQuantity}">
+                                    <button class="button" type="submit">Thêm giỏ hàng</button>
 
-                            </div>
-                            <div class=" product_d_action">
+                                </div>
+                                <div class=" product_d_action">
+                                    <ul>
+                                        <li><a href="#" title="Add to wishlist"></a></li>
+                                        <li><a href="#" title="Add to wishlist"></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product_meta">
+                                    <span>Category: <a th:text="${product.productCategoryName}">Clothing</a></span>
+                                </div>
+
+                            </form>
+                            <div class="priduct_social">
                                 <ul>
-                                    <li><a href="#" title="Add to wishlist"></a></li>
-                                    <li><a href="#" title="Add to wishlist"></a></li>
+                                    <li><a class="facebook" href="#" title="facebook"><i class="fa fa-facebook"></i>
+                                        Like</a></li>
+                                    <li><a class="twitter" href="#" title="twitter"><i class="fa fa-twitter"></i>
+                                        tweet</a></li>
+                                    <li><a class="pinterest" href="#" title="pinterest"><i class="fa fa-pinterest"></i>
+                                        save</a></li>
+                                    <li><a class="google-plus" href="#" title="google +"><i
+                                            class="fa fa-google-plus"></i> share</a></li>
+                                    <li><a class="linkedin" href="#" title="linkedin"><i class="fa fa-linkedin"></i>
+                                        linked</a></li>
                                 </ul>
                             </div>
-                            <div class="product_meta">
-                                <span>Category: <a th:text="${product.productCategoryName}">Clothing</a></span>
-                            </div>
 
-                        </form>
-                        <div class="priduct_social">
-                            <ul>
-                                <li><a class="facebook" href="#" title="facebook"><i class="fa fa-facebook"></i>
-                                    Like</a></li>
-                                <li><a class="twitter" href="#" title="twitter"><i class="fa fa-twitter"></i>
-                                    tweet</a></li>
-                                <li><a class="pinterest" href="#" title="pinterest"><i class="fa fa-pinterest"></i>
-                                    save</a></li>
-                                <li><a class="google-plus" href="#" title="google +"><i
-                                        class="fa fa-google-plus"></i> share</a></li>
-                                <li><a class="linkedin" href="#" title="linkedin"><i class="fa fa-linkedin"></i>
-                                    linked</a></li>
-                            </ul>
                         </div>
-
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="row">
 
@@ -448,7 +455,9 @@
                                                 class="custom-price"></span>đ</span>
                                     </div>
                                     <div class="add_to_cart">
-                                        <a th:href="@{'/create-cart?productId=' + ${product.productsId}}" title="Add to cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Thêm giỏ hàng</a>
+                                        <a th:href="@{'/create-cart?productId=' + ${product.productsId}}"
+                                           title="Add to cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            Thêm giỏ hàng</a>
                                     </div>
                                 </figcaption>
                             </figure>
@@ -727,7 +736,7 @@
                 <div class="col-lg-6 col-md-7">
                     <div class="copyright_area">
                         <p>Copyright © 2022 <a th:href="@{/}">Clothing shop</a>. <a href="https://hasthemes.com/"
-                                                                                  target="_blank">All rights
+                                                                                    target="_blank">All rights
                             reserved.</a></p>
                     </div>
                 </div>
