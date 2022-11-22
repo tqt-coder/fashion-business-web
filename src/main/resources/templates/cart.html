@@ -326,7 +326,8 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="cart : ${listCarts}">
-                                    <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a>
+                                    <td class="product_remove"><a th:href="@{'/delete-cart?cartId=' + ${cart.cartId}}"><i
+                                            class="fa fa-trash-o"></i></a>
                                     </td>
                                     <td class="product_thumb"><a
                                             th:href="@{'detail?productId=' + ${cart.productsId}}"><img

@@ -116,6 +116,18 @@ public class MainController {
         return "cart";
     }
 
+    @GetMapping("/delete-cart")
+    public Object removeCartByCartId(@RequestParam(name = "cartId") int cartId, Principal principal) {
+        boolean isRemoved = cartService.removeCart(cartId, principal);
+        if (ObjectUtils.isEmpty(principal)) {
+            return "login";
+        }
+        if (Boolean.TRUE.equals(isRemoved)) {
+            return new ModelAndView("redirect:/cart");
+        }
+        throw new ServiceException("Có lỗi hệ thống");
+
+    }
 
     @GetMapping("/login")
     public String loginPage() {

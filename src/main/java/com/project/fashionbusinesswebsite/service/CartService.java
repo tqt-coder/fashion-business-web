@@ -20,6 +20,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -74,5 +75,22 @@ public class CartService {
             });
         }
         return responses;
+    }
+
+    public CartEntity findCartById(int id) {
+        Optional<CartEntity> optionalCartEntity = cartRepo.findById(id);
+        if (optionalCartEntity.isPresent()) {
+            return optionalCartEntity.get();
+        }
+        throw new ServiceException("Không thể tìm thấy giỏ hàng với id = " + id);
+    }
+
+    public boolean removeCart(int id, Principal principal) {
+        if (ObjectUtils.isEmpty(principal)) {
+            throw new ServiceException("Vui lòng đăng nhập để tiếp tục");
+        }
+        CartEntity cartEntity = this.findCartById(id);
+        cartRepo.delete(cartEntity);
+        return true;
     }
 }
