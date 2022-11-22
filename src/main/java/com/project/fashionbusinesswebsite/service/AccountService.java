@@ -34,13 +34,13 @@ public class AccountService {
     @Autowired
     private RoleRepo roleRepo;
 
-    public boolean register(RegisterRequest request) {
+    public CustomerEntity register(RegisterRequest request) {
         checkAccount(request.getCustomerEmail(), request.getUserName());
         String encodedPassword = new BCryptPasswordEncoder().encode(request.getCustomerPass().trim());
         request.setCustomerPass(encodedPassword);
         CustomerEntity entity = mapper.map(request, CustomerEntity.class);
-        accountRepo.save(entity);
-        return true;
+//        accountRepo.save(entity);
+        return accountRepo.save(entity);
     }
 
     public boolean login(LoginRequest request) {
