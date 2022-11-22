@@ -7,6 +7,7 @@
     <title>Giỏ hàng</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" th:href="@{assets/img/favicon.ico}">
     <link rel="stylesheet" th:href="@{assets/css/bootstrap.min.css}">
     <!--owl carousel min css-->
@@ -36,14 +37,6 @@
 </head>
 
 <body>
-
-
-<!--header area start-->
-
-<!--offcanvas menu area start-->
-<div class="off_canvars_overlay">
-
-</div>
 <div class="offcanvas_menu">
     <div class="container">
         <div class="row">
@@ -285,18 +278,19 @@
             </div>
         </div>
     </div>
+
 </header>
 <!--header area end-->
 
 <!--breadcrumbs area start-->
-<div class="breadcrumbs_area  breadcrumbs_bg">
+<div class="breadcrumbs_area  breadcrumbs_bg" style="margin-bottom: 0;">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="breadcrumb_content">
                     <h3>Giỏ hàng</h3>
                     <ul>
-                        <li><a th:href="@{/}">Trang chủ</a></li>
+                        <li><a href="index.html">Trang chủ</a></li>
                         <li>Giỏ hàng</li>
                     </ul>
                 </div>
@@ -309,93 +303,10 @@
 <!--shopping cart area start -->
 <div class="shopping_cart_area">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="table_desc">
-                    <form th:action="@{/update-cart}" method="POST" th:object="${cartForm}">
-                        <div class="cart_page table-responsive">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th class="product_remove">Thao tác</th>
-                                    <th class="product_thumb">Ảnh</th>
-                                    <th class="product_name">Tên sản phẩm</th>
-                                    <th class="product-price">Giá</th>
-                                    <th class="product_quantity">Số lượng</th>
-                                    <th class="product_total">Thành tiền</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                <tr class="cart-container-js" th:each="cart, itemStat : ${cartForm.listCarts}">
-                                    <td class="product_remove"><a
-                                            th:href="@{'/delete-cart?cartId=' + ${cart.cartId}}"><i
-                                            class="fa fa-trash-o"></i></a>
-                                    </td>
-                                    <input hidden th:name="|listCarts[${itemStat.index}].cartId|"
-                                           th:value="${cart.getCartId()}"/>
-                                    <td class="product_thumb"><a
-                                            th:href="@{'detail?productId=' + ${cart.productsId}}"><img
-                                            th:src="@{${'assets/img/product/' + cart.productImg}}" alt=""></a></td>
-                                    <td class="product_name"><a
-                                            th:href="@{'detail?productId=' + ${cart.productsId}}"
-                                            th:text="${cart.productTitle}">Handbag fringilla</a>
-                                    </td>
-                                    <td class="product-price">
-                                        <input type="text" readonly th:name="|listCarts[${itemStat.index}].productPrice|"  class="product-root-price-js" th:value="${cart.productPrice}"/>
-                                    </td>
-                                    <td class="product_quantity"><label>Số lượng</label>
-                                        <input class="product-quantity-js" min="1" th:value="${cart.quantity}" th:max="${cart.maxQuantity}"
-                                               value="1" type="number" th:name="|listCarts[${itemStat.index}].quantity|"></td>
-                                    <td class="product_total total-form">
-                                        <input type="text" class="product-form-price-js" th:name="|listCarts[${itemStat.index}].money|"
-                                               th:value="${cart.getMoney()}"/>
-                                    </td>
-                                </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="cart_submit">
-                            <button type="submit">Cập nhật giỏ hàng</button>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-        <!--coupon code area start-->
-        <div class="coupon_area">
-            <div class="row">
-                <div class="col-lg-4 col-md-2">
-                    <div class="coupon_code left">
-                    </div>
-                </div>
-                <div class="col-lg-8 col-md-8">
-                    <div class="coupon_code right">
-                        <h3>Hóa đơn</h3>
-                        <div class="coupon_inner">
-                            <div class="cart_subtotal">
-                                <p>Tổng tiền</p>
-                                <p class="cart_amount"><span class="total-bill-form-js">25000</span>VNĐ</p>
-                            </div>
-                            <div class="cart_subtotal ">
-                                <p>Vận chuyển</p>
-                                <p class="cart_amount"><span class="total-ship-form-js">25000</span>VNĐ</p>
-                            </div>
-                            <div class="cart_subtotal">
-                                <p>Tổng cộng</p>
-                                <p class="cart_amount"><span class="total-expense-js">500000</span>VNĐ</p>
-                            </div>
-                            <div class="checkout_btn">
-                                <a href="#">Thanh toán</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--coupon code area end-->
+        <a th:href="@{/}" style="display: block;">
+            <img class="img-cart-empty" src="./assets/img/logo/empty-cart.png" alt=""
+                 style="width:100%; height:500px; object-fit: contain">
+        </a>
     </div>
 </div>
 <!--shopping cart area end -->
@@ -538,7 +449,7 @@
                         <div class="subscribe_form">
                             <form id="mc-form" class="mc-form footer-newsletter">
                                 <input id="mc-email" type="email" autocomplete="off"
-                                       placeholder="Enter your e-mail"/>
+                                       placeholder="Enter your e-mail" />
                                 <button id="mc-submit">Subscribe</button>
                             </form>
                             <!-- mailchimp-alerts Start -->
@@ -627,9 +538,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-7">
                     <div class="copyright_area">
-                        <p>Copyright © 2022 <a href="index.html">Clothing Shop</a>. <a href="https://hasthemes.com/"
-                                                                                       target="_blank">All rights
-                            reserved.</a></p>
+                        <p>Copyright © 2021 <a href="index.html">Classico</a>. <a href="https://hasthemes.com/"
+                                                                                  target="_blank">All rights reserved.</a></p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-5">
@@ -665,40 +575,8 @@
 
 <!-- Main JS -->
 <script th:src="@{assets/js/main.js}"></script>
-<script>
-    const totalBill = document.querySelector(".total-bill-form-js");
-    const expenditure = document.querySelector(".total-expense-js");
-    const getAllCarts = document.querySelectorAll(".product-quantity-js");
-    processBill();
-    Array.from(getAllCarts).forEach(function(item){
-        item.addEventListener('change',function(event){
-            const tdParent = event.target.parentNode;
-            const trParent = tdParent.parentNode;
-            const productPrice = trParent.querySelector(".product-root-price-js").value;
-            const bill = trParent.querySelector(".product-form-price-js");
-            const productQuantity = event.target.value;
-            console.log(productPrice)  ;
-            console.log(productQuantity);
-            bill.value = productPrice * productQuantity;
-            processBill();
-        })
-    });
-    function processBill(){
-        let price = totalPrice();
-        totalBill.textContent = price;
-        expenditure.textContent = price + 25000;
-    }
 
-    function totalPrice(){
-        let cost = 0
-        const getContainerJs = document.querySelectorAll(".cart-container-js");
-        Array.from(getContainerJs).forEach(function(item){
-            const bill = item.querySelector(".product-form-price-js").value;
-            cost = cost + Number(bill);
-        });
-        return cost
-    }
-</script>
+
 </body>
 
 </html>

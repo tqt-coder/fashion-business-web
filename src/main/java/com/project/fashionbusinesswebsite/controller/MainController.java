@@ -6,6 +6,8 @@ import com.project.fashionbusinesswebsite.model.cart.CartRequest;
 import com.project.fashionbusinesswebsite.model.cart.CartResponse;
 import com.project.fashionbusinesswebsite.model.cart.ListCartsRequest;
 import com.project.fashionbusinesswebsite.model.product.*;
+import com.project.fashionbusinesswebsite.model.user.RegisterRequest;
+import com.project.fashionbusinesswebsite.service.AccountService;
 import com.project.fashionbusinesswebsite.service.CartService;
 import com.project.fashionbusinesswebsite.service.ProductService;
 import com.project.fashionbusinesswebsite.service.ServiceException;
@@ -38,6 +40,8 @@ public class MainController {
     private CartService cartService;
     @Autowired
     private ModelMapper mapper;
+    @Autowired
+    private AccountService accountService;
 
     @GetMapping("/")
     public String homePage(ProductRequest request, Model model) {
@@ -131,9 +135,12 @@ public class MainController {
             for (CartResponse cart : listCartResponses) {
                 requests.addCart(cart);
             }
+            model.addAttribute("cartForm", requests);
+            return "cart";
+        } else {
+            return "cartEmpty";
+
         }
-        model.addAttribute("cartForm", requests);
-        return "cart";
     }
 
     @GetMapping("/delete-cart")
@@ -171,8 +178,16 @@ public class MainController {
     }
 
     @GetMapping("/register")
-    public String registerPage() {
+    public String registerPage(Model model) {
+        RegisterRequest registerRequest = new RegisterRequest();
+        model.addAttribute("registerForm", registerRequest);
         return "register";
+    }
+
+    @PostMapping("/user/register")
+    public Object register(@ModelAttribute("registerForm") RegisterRequest request) {
+        accountService.register(request);
+        return "/login";
     }
 
     @GetMapping("/userAccountInfo")

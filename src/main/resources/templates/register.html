@@ -64,7 +64,7 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form" action="/user/create" method="Post">
+            <form class="login100-form validate-form" th:action="@{/user/register}" method="post" th:object="${registerForm}">
                     <span class="login100-form-title p-b-26">
                         Register
                     </span>
@@ -72,27 +72,27 @@
                         <i class="fa fa-user"></i>
                     </span>
                 <div class="wrap-input100 validate-input">
-                    <input class="input100" type="text" required name="customerName">
+                    <input class="input100" type="text" required th:field="*{customerName}">
                     <span class="focus-input100" data-placeholder="Full name"></span>
                 </div>
                 <div class="wrap-input100 validate-input">
-                    <input class="input100" type="text" required name="userName">
+                    <input class="input100" type="text" required th:field="*{userName}">
                     <span class="focus-input100" data-placeholder="User name"></span>
                 </div>
                 <div class="wrap-input100 validate-input">
-                    <input class="input100" type="email" required name="customerEmail">
+                    <input class="input100" type="email" required th:field="*{customerEmail}">
                     <span class="focus-input100" data-placeholder="Email"></span>
                 </div>
                 <div class="wrap-input100 validate-input">
-                    <input class="input100" type="text" required name="customerContact">
+                    <input class="input100" type="text" required th:field="*{customerContact}">
                     <span class="focus-input100" data-placeholder="Phone"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" required type="password" name="customerPass">
+                    <input class="input100" required type="password" th:field="*{customerPass}">
                     <span class="focus-input100" data-placeholder="Password"></span>
                 </div>
                 <div class="wrap-input100 validate-input">
-                    <input class="input100" type="text" required name="customerAddress">
+                    <input class="input100" type="text" required th:field="*{customerAddress}">
                     <span class="focus-input100" data-placeholder="Address"></span>
                 </div>
                 <div class="container-login100-form-btn">
