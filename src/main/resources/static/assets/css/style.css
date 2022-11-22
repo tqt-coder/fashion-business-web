@@ -3261,7 +3261,7 @@ textarea:-ms-input-placeholder {
 }
 .img-detail{
     width: 100%;
-    height: auto;
+    height: 500px;
     object-fit: cover;
 }
 

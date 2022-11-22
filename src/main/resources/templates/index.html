@@ -447,8 +447,7 @@
                                                             class="custom-price"></span>đ</span>
                                                 </div>
                                                 <div class="add_to_cart">
-                                                    <a th:href="@{/}" title="Add to cart"><i
-                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Thêm giỏ hàng</a>
+                                                    <a th:href="@{'/create-cart?productId=' + ${product.productsId}}" title="Add to cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Thêm giỏ hàng</a>
                                                 </div>
                                             </figcaption>
                                         </figure>
@@ -1106,8 +1105,7 @@
                                                             class="custom-price"></span>đ</span>
                                                 </div>
                                                 <div class="add_to_cart">
-                                                    <a href="cart.html" title="Add to cart"><i
-                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Thêm giỏ hàng</a>
+                                                    <a th:href="@{'/create-cart?productId=' + ${productShirt.productsId}}" title="Add to cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Thêm giỏ hàng</a>
                                                 </div>
                                             </figcaption>
                                         </figure>
@@ -1240,8 +1238,7 @@
                                                 class="custom-price"></span>đ</span>
                                     </div>
                                     <div class="add_to_cart">
-                                        <a href="cart.html" title="Add to cart"><i class="fa fa-shopping-cart"
-                                                                                   aria-hidden="true"></i> Thêm giỏ hàng</a>
+                                        <a th:href="@{'/create-cart?productId=' + ${productJacket.productsId}}" title="Add to cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Thêm giỏ hàng</a>
                                     </div>
                                 </figcaption>
                             </figure>
