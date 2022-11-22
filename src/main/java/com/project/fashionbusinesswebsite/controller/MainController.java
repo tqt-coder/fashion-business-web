@@ -1,14 +1,17 @@
 package com.project.fashionbusinesswebsite.controller;
 
 import com.project.fashionbusinesswebsite.domain.ProductCategoryEntity;
+import com.project.fashionbusinesswebsite.model.cart.CartDTO;
 import com.project.fashionbusinesswebsite.model.cart.CartRequest;
 import com.project.fashionbusinesswebsite.model.cart.CartResponse;
+import com.project.fashionbusinesswebsite.model.cart.ListCartsRequest;
 import com.project.fashionbusinesswebsite.model.product.*;
 import com.project.fashionbusinesswebsite.service.CartService;
 import com.project.fashionbusinesswebsite.service.ProductService;
 import com.project.fashionbusinesswebsite.service.ServiceException;
 import com.project.fashionbusinesswebsite.utils.FinderUtil;
 import com.project.fashionbusinesswebsite.utils.ProductConstantUtil;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -121,7 +125,14 @@ public class MainController {
         if (ObjectUtils.isEmpty(principal)) {
             return "login";
         }
-        model.addAttribute("listCarts", cartService.getAllCartByCustomerName(principal));
+        ListCartsRequest requests = new ListCartsRequest();
+        List<CartResponse> listCartResponses = cartService.getAllCartByCustomerName(principal);
+        if (CollectionUtils.isNotEmpty(listCartResponses)) {
+            for (CartResponse cart : listCartResponses) {
+                requests.addCart(cart);
+            }
+        }
+        model.addAttribute("cartForm", requests);
         return "cart";
     }
 
@@ -139,9 +150,19 @@ public class MainController {
     }
 
     @PostMapping("/update-cart")
-    public Object updateCart(@ModelAttribute("listCarts") List<CartResponse> listCarts) {
-        List<CartResponse> newCart = listCarts;
-        return "success";
+    public Object updateCart(@ModelAttribute ListCartsRequest request) {
+        List<CartDTO> listCartDTO = new ArrayList<>();
+        if (ObjectUtils.isNotEmpty(request) && CollectionUtils.isNotEmpty(request.getListCarts())) {
+            for (CartResponse cart : request.getListCarts()) {
+                listCartDTO.add(mapper.map(cart, CartDTO.class));
+            }
+        }
+        boolean isSuccess = cartService.saveAllCarts(listCartDTO);
+        if (Boolean.TRUE.equals(isSuccess)) {
+            return new ModelAndView("redirect:/cart");
+        }
+        throw new ServiceException("Có lỗi khi lưu");
+
     }
 
     @GetMapping("/login")

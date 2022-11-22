@@ -308,10 +308,10 @@
 <!--shopping cart area start -->
 <div class="shopping_cart_area">
     <div class="container">
-        <form action="#">
-            <div class="row">
-                <div class="col-12">
-                    <div class="table_desc">
+        <div class="row">
+            <div class="col-12">
+                <div class="table_desc">
+                    <form th:action="@{/update-cart}" method="POST" th:object="${cartForm}">
                         <div class="cart_page table-responsive">
                             <table>
                                 <thead>
@@ -325,26 +325,32 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <form action="">
-                                    <tr th:each="cart : ${listCarts}">
-                                        <td class="product_remove"><a
-                                                th:href="@{'/delete-cart?cartId=' + ${cart.cartId}}"><i
-                                                class="fa fa-trash-o"></i></a>
-                                        </td>
-                                        <td class="product_thumb"><a
-                                                th:href="@{'detail?productId=' + ${cart.productsId}}"><img
-                                                th:src="@{${'assets/img/product/' + cart.productImg}}" alt=""></a></td>
-                                        <td class="product_name"><a
-                                                th:href="@{'detail?productId=' + ${cart.productsId}}"
-                                                th:text="${cart.productTitle}">Handbag fringilla</a>
-                                        </td>
-                                        <td class="product-price" th:text="${cart.productPrice}">£65.00</td>
-                                        <td class="product_quantity"><label>Số lượng</label>
-                                            <input min="1" th:value="${cart.quantity}" th:max="${cart.maxQuantity}"
-                                                   value="1" type="number"></td>
-                                        <td class="product_total" th:text="${cart.money}">£130.00</td>
-                                    </tr>
-                                </form>
+
+                                <tr class="cart-container-js" th:each="cart, itemStat : ${cartForm.listCarts}">
+                                    <td class="product_remove"><a
+                                            th:href="@{'/delete-cart?cartId=' + ${cart.cartId}}"><i
+                                            class="fa fa-trash-o"></i></a>
+                                    </td>
+                                    <input hidden th:name="|listCarts[${itemStat.index}].cartId|"
+                                           th:value="${cart.getCartId()}"/>
+                                    <td class="product_thumb"><a
+                                            th:href="@{'detail?productId=' + ${cart.productsId}}"><img
+                                            th:src="@{${'assets/img/product/' + cart.productImg}}" alt=""></a></td>
+                                    <td class="product_name"><a
+                                            th:href="@{'detail?productId=' + ${cart.productsId}}"
+                                            th:text="${cart.productTitle}">Handbag fringilla</a>
+                                    </td>
+                                    <td class="product-price">
+                                        <input type="text" readonly th:name="|listCarts[${itemStat.index}].productPrice|"  class="product-root-price-js" th:value="${cart.productPrice}"/>
+                                    </td>
+                                    <td class="product_quantity"><label>Số lượng</label>
+                                        <input class="product-quantity-js" min="1" th:value="${cart.quantity}" th:max="${cart.maxQuantity}"
+                                               value="1" type="number" th:name="|listCarts[${itemStat.index}].quantity|"></td>
+                                    <td class="product_total total-form">
+                                        <input type="text" class="product-form-price-js" th:name="|listCarts[${itemStat.index}].money|"
+                                               th:value="${cart.getMoney()}"/>
+                                    </td>
+                                </tr>
 
                                 </tbody>
                             </table>
@@ -352,42 +358,43 @@
                         <div class="cart_submit">
                             <button type="submit">Cập nhật giỏ hàng</button>
                         </div>
-                    </div>
+                    </form>
+
                 </div>
             </div>
-            <!--coupon code area start-->
-            <div class="coupon_area">
-                <div class="row">
-                    <div class="col-lg-4 col-md-2">
-                        <div class="coupon_code left">
-                        </div>
+        </div>
+        <!--coupon code area start-->
+        <div class="coupon_area">
+            <div class="row">
+                <div class="col-lg-4 col-md-2">
+                    <div class="coupon_code left">
                     </div>
-                    <div class="col-lg-8 col-md-8">
-                        <div class="coupon_code right">
-                            <h3>Hóa đơn</h3>
-                            <div class="coupon_inner">
-                                <div class="cart_subtotal">
-                                    <p>Tổng tiền</p>
-                                    <p class="cart_amount">£215.00</p>
-                                </div>
-                                <div class="cart_subtotal ">
-                                    <p>Vận chuyển</p>
-                                    <p class="cart_amount"><span></span> £255.00</p>
-                                </div>
-                                <div class="cart_subtotal">
-                                    <p>Tổng cộng</p>
-                                    <p class="cart_amount">£215.00</p>
-                                </div>
-                                <div class="checkout_btn">
-                                    <a href="#">Thanh toán</a>
-                                </div>
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    <div class="coupon_code right">
+                        <h3>Hóa đơn</h3>
+                        <div class="coupon_inner">
+                            <div class="cart_subtotal">
+                                <p>Tổng tiền</p>
+                                <p class="cart_amount"><span class="total-bill-form-js">25000</span>VNĐ</p>
+                            </div>
+                            <div class="cart_subtotal ">
+                                <p>Vận chuyển</p>
+                                <p class="cart_amount"><span class="total-ship-form-js">25000</span>VNĐ</p>
+                            </div>
+                            <div class="cart_subtotal">
+                                <p>Tổng cộng</p>
+                                <p class="cart_amount"><span class="total-expense-js">500000</span>VNĐ</p>
+                            </div>
+                            <div class="checkout_btn">
+                                <a href="#">Thanh toán</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--coupon code area end-->
-        </form>
+        </div>
+        <!--coupon code area end-->
     </div>
 </div>
 <!--shopping cart area end -->
@@ -657,8 +664,40 @@
 
 <!-- Main JS -->
 <script th:src="@{assets/js/main.js}"></script>
+<script>
+    const totalBill = document.querySelector(".total-bill-form-js");
+    const expenditure = document.querySelector(".total-expense-js");
+    const getAllCarts = document.querySelectorAll(".product-quantity-js");
+    processBill();
+    Array.from(getAllCarts).forEach(function(item){
+        item.addEventListener('change',function(event){
+            const tdParent = event.target.parentNode;
+            const trParent = tdParent.parentNode;
+            const productPrice = trParent.querySelector(".product-root-price-js").value;
+            const bill = trParent.querySelector(".product-form-price-js");
+            const productQuantity = event.target.value;
+            console.log(productPrice)  ;
+            console.log(productQuantity);
+            bill.value = productPrice * productQuantity;
+            processBill();
+        })
+    });
+    function processBill(){
+        let price = totalPrice();
+        totalBill.textContent = price;
+        expenditure.textContent = price + 25000;
+    }
 
-
+    function totalPrice(){
+        let cost = 0
+        const getContainerJs = document.querySelectorAll(".cart-container-js");
+        Array.from(getContainerJs).forEach(function(item){
+            const bill = item.querySelector(".product-form-price-js").value;
+            cost = cost + Number(bill);
+        });
+        return cost
+    }
+</script>
 </body>
 
 </html>

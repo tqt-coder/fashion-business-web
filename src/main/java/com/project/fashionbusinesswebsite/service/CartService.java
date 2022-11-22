@@ -2,6 +2,7 @@ package com.project.fashionbusinesswebsite.service;
 
 import com.project.fashionbusinesswebsite.domain.CartEntity;
 import com.project.fashionbusinesswebsite.domain.CustomerEntity;
+import com.project.fashionbusinesswebsite.model.cart.CartDTO;
 import com.project.fashionbusinesswebsite.model.cart.CartRequest;
 import com.project.fashionbusinesswebsite.model.cart.CartResponse;
 import com.project.fashionbusinesswebsite.model.product.ProductViewResponse;
@@ -93,6 +94,20 @@ public class CartService {
         }
         CartEntity cartEntity = this.findCartById(id);
         cartRepo.delete(cartEntity);
+        return true;
+    }
+
+    public boolean saveAllCarts(List<CartDTO> listCartDTOs) {
+        if (CollectionUtils.isNotEmpty(listCartDTOs)) {
+            for (CartDTO cart : listCartDTOs) {
+                CartEntity cartEntity = this.findCartById(cart.getCartId());
+                cartEntity.setMoney(cart.getMoney());
+                cartEntity.setQuantity(cart.getQuantity());
+                cartEntity.setStatus(CartConstantUtil.CART_EDIT);
+
+                cartRepo.save(cartEntity);
+            }
+        }
         return true;
     }
 }
