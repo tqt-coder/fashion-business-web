@@ -13,11 +13,6 @@ CREATE TABLE `cart` (
                         `status` int DEFAULT NULL,
                         PRIMARY KEY (`cart_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `cart`
---
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
@@ -96,8 +91,9 @@ UNLOCK TABLES;
 
 CREATE TABLE `payment` (
                           `payment_id` int AUTO_INCREMENT primary key,
-                           `price` int NOT NULL,
-                          `cart_id` int NOT NULL,
+                           `price` double NOT NULL,
+                            active int not null,
+                            customer_id varchar(255) not null ,
                           `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -218,5 +214,6 @@ CREATE TABLE `user_role` (
                              `role_id` int NOT NULL,
                              PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 

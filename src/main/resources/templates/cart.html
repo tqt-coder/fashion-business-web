@@ -365,7 +365,7 @@
             </div>
         </div>
         <!--coupon code area start-->
-        <div class="coupon_area">
+        <form class="coupon_area" th:action="@{/create-payment}" method="post">
             <div class="row">
                 <div class="col-lg-4 col-md-2">
                     <div class="coupon_code left">
@@ -387,14 +387,15 @@
                                 <p>Tổng cộng</p>
                                 <p class="cart_amount"><span class="total-expense-js">500000</span>VNĐ</p>
                             </div>
+                            <input type="text" hidden name="costForm" class="cost-form-js">
                             <div class="checkout_btn">
-                                <a href="#">Thanh toán</a>
+                                <button>Thanh toán</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
         <!--coupon code area end-->
     </div>
 </div>
@@ -668,6 +669,7 @@
 <script>
     const totalBill = document.querySelector(".total-bill-form-js");
     const expenditure = document.querySelector(".total-expense-js");
+    const inputCost = document.querySelector(".cost-form-js");
     const getAllCarts = document.querySelectorAll(".product-quantity-js");
     processBill();
     Array.from(getAllCarts).forEach(function(item){
@@ -687,6 +689,7 @@
         let price = totalPrice();
         totalBill.textContent = price;
         expenditure.textContent = price + 25000;
+        inputCost.value = price + 25000;
     }
 
     function totalPrice(){

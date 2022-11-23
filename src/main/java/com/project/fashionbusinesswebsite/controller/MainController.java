@@ -1,15 +1,19 @@
 package com.project.fashionbusinesswebsite.controller;
 
+import com.project.fashionbusinesswebsite.domain.CustomerEntity;
 import com.project.fashionbusinesswebsite.domain.ProductCategoryEntity;
 import com.project.fashionbusinesswebsite.model.ChargeRequest;
 import com.project.fashionbusinesswebsite.model.cart.CartDTO;
 import com.project.fashionbusinesswebsite.model.cart.CartRequest;
 import com.project.fashionbusinesswebsite.model.cart.CartResponse;
 import com.project.fashionbusinesswebsite.model.cart.ListCartsRequest;
+import com.project.fashionbusinesswebsite.model.payment.PaymentRequest;
+import com.project.fashionbusinesswebsite.model.payment.PaymentResponse;
 import com.project.fashionbusinesswebsite.model.product.*;
 import com.project.fashionbusinesswebsite.model.user.RegisterRequest;
 import com.project.fashionbusinesswebsite.service.*;
 import com.project.fashionbusinesswebsite.utils.FinderUtil;
+import com.project.fashionbusinesswebsite.utils.PaymentConstantUtil;
 import com.project.fashionbusinesswebsite.utils.ProductConstantUtil;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
@@ -51,6 +55,8 @@ public class MainController {
     private AccountService accountService;
     @Autowired
     private StripeService stripeService;
+    @Autowired
+    private PaymentService paymentService;
 
     @Value("${stripe.keys.public}")
     private String API_PUBLIC_KEY;
@@ -125,6 +131,20 @@ public class MainController {
         return new ModelAndView("redirect:/cart");
     }
 
+    @PostMapping("/create-payment")
+    public Object createPayment(@RequestParam(name = "costForm") double cost, Principal principal) {
+        if (ObjectUtils.isEmpty(principal)) {
+            return "login";
+        }
+        PaymentResponse response = paymentService.findPayment(principal);
+        if (!(ObjectUtils.isNotEmpty(response) && PaymentConstantUtil.PAYMENT_ACTIVE == response.getActive())) {
+            PaymentRequest paymentRequest = new PaymentRequest();
+            paymentRequest.setPrice(cost);
+            paymentService.createPayment(paymentRequest, principal);
+        }
+        return new ModelAndView("redirect:/checkout");
+    }
+
     @GetMapping("/create-cart")
     public Object createCartPage(@RequestParam(name = "productId") int productId, Principal principal) {
         if (ObjectUtils.isEmpty(principal)) {
@@ -184,11 +204,6 @@ public class MainController {
 
     }
 
-    @GetMapping("/payment")
-    public String paymentPage() {
-        return "checkout";
-    }
-
     @PostMapping("/create-checkout-session")
     public String createPayment(Principal principal) {
         if (ObjectUtils.isEmpty(principal)) {
@@ -236,31 +251,48 @@ public class MainController {
     public String errorPage() {
         return "<h1>Bug</h1>";
     }
+    @Value("${stripe.keys.public}")
+    private String stripePublicKey;
 
     @RequestMapping("/checkout")
-    public String checkout(Model model) {
-        double money = 100;
-        model.addAttribute("money", 50 * 100); // in cents
+    public String checkout(Model model, Principal principal) {
+//        ChargeRequest chargeRequest = new ChargeRequest();
+//        model.addAttribute("chargeForm", chargeRequest);
+//        PaymentResponse response = paymentService.findPayment(principal);
+//        model.addAttribute("money", response.getMoney());
+        PaymentResponse response = paymentService.findPayment(principal);
+        double cost = response.getMoney();
+        double dollar = 24848;
+        double money = cost/ dollar;
+
+        model.addAttribute("amount",  money * 100); // in cents
+        model.addAttribute("stripePublicKey", stripePublicKey);
+        model.addAttribute("currency", ChargeRequest.Currency.USD);
         return "charge";
     }
 
     @PostMapping("/charge-test")
-    public String charge(ChargeRequest chargeRequest, Model model)
+    public Object charge(ChargeRequest chargeRequest, Model model, Principal principal)
             throws StripeException {
-        chargeRequest.setDescription("Example charge");
+        PaymentResponse response = paymentService.findPayment(principal);
+        double cost = response.getMoney();
+        double dollar = 24848;
+        double money = cost/ dollar;
+
+        chargeRequest.setAmount(money * 100);
+        chargeRequest.setDescription("Thanh toán hóa đơn");
         chargeRequest.setCurrency(ChargeRequest.Currency.USD);
         Charge charge = stripeService.charge(chargeRequest);
         model.addAttribute("id", charge.getId());
         model.addAttribute("status", charge.getStatus());
         model.addAttribute("chargeId", charge.getId());
         model.addAttribute("balance_transaction", charge.getBalanceTransaction());
-        return "result";
+        return "paymentSuccess";
     }
 
     @ExceptionHandler(StripeException.class)
     public String handleError(Model model, StripeException ex) {
-        model.addAttribute("error", ex.getMessage());
-        return "result";
+        throw new ServiceException(ex.getMessage());
     }
 
 }

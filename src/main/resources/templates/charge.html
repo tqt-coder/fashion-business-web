@@ -1,128 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-  <link rel="stylesheet" href="./assets/css/check.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="./assets/css/check.css">
 
 </head>
 
 <body>
-<!--<section>-->
-<!--  <form action='/charge-test' method='POST' id='checkout-form'>-->
-<!--    <input type='hidden' th:value='${amount}' name='amount' />-->
-<!--    <label>Price:<span th:text='${amount/100}' /></label>-->
-<!--    &lt;!&ndash; NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf &ndash;&gt;-->
-<!--    <script-->
-<!--            src='https://checkout.stripe.com/checkout.js'-->
-<!--            class='stripe-button'-->
-<!--            th:attr='data-key=${stripePublicKey},-->
-<!--         data-amount=${amount},-->
-<!--         data-currency=${currency}'-->
-<!--            data-name='Baeldung'-->
-<!--            data-description='Spring course checkout'-->
-<!--            data-image-->
-<!--                    ='https://www.baeldung.com/wp-content/themes/baeldung/favicon/android-chrome-192x192.png'-->
-<!--            data-locale='auto'-->
-<!--            data-zip-code='false'>-->
-<!--    </script>-->
-<!--  </form>-->
-<!--</section>-->
-
-<div class="container py-5">
-  <!-- For demo purpose -->
-  <div class="row mb-4">
-    <div class="col-lg-8 mx-auto text-center">
-      <h1 class="display-6">THANH TOÁN</h1>
-    </div>
-  </div> <!-- End -->
-  <div class="row">
-    <div class="col-lg-6 mx-auto">
-      <form th:action='@{/charge-test}' method="post" class="card">
-        <div class="card-header">
-          <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
-            <!-- Credit card form tabs -->
-            <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
-              <li class="nav-item"> <a data-toggle="pill" href="#credit-card"
-                                       class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card
-              </a> </li>
-            </ul>
-          </div> <!-- End -->
-          <!-- Credit card form content -->
-          <div class="tab-content">
-            <!-- credit card info-->
-            <div id="credit-card" class="tab-pane fade show active pt-3">
-              <form role="form" onsubmit="event.preventDefault()">
-                <div class="form-group"> <label for="username">
-                  <h6>Gmail người sở hữu</h6>
-                </label> <input type="text" name="username" placeholder="Gmail" required
-                                class="form-control "> </div>
-                <div class="form-group"> <label for="cardNumber">
-                  <h6>Số thẻ</h6>
-                </label>
-                  <div class="input-group"> <input type="text" name="cardNumber"
-                                                   placeholder="Số thẻ tín dụng" class="form-control " required>
-                    <div class="input-group-append"> <span class="input-group-text text-muted">
-                                                    <i class="fab fa-cc-visa mx-1"></i> <i
-                            class="fab fa-cc-mastercard mx-1"></i> <i
-                            class="fab fa-cc-amex mx-1"></i> </span> </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-8">
-                    <div class="form-group"> <label><span class="hidden-xs">
-                                                        <h6>Ngày hết hạn</h6>
-                                                    </span></label>
-                      <div class="input-group"> <input type="number" placeholder="Tháng"
-                                                       name="" class="form-control" required> <input type="number"
-                                                                                                     placeholder="Năm" name="" class="form-control" required> </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="form-group mb-4"> <label data-toggle="tooltip"
-                                                         title="Three digit CV code on the back of your card">
-                      <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
-                    </label> <input type="text" required class="form-control"> </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-sm-8">
-                    <div class="form-group"> <label><span class="hidden-xs">
-                                                        <h6>Tổng chi phí: </h6>
-                                                    </span></label>
-                      <span style="font-size: 18px; margin-left: 30px"
-                            class="money-js">200000</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card-footer">
-                  <button type="submit" class="subscribe btn btn-danger btn-block shadow-sm">
-                    Thanh toán
-                  </button>
-                </div>
-              </form>
-            </div>
-
-          </div>
-        </div>
-    </div>
-  </div>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script>
+<form action='/charge-test' method='POST' id='checkout-form'>
+    <input type='hidden' th:value='${amount}' name='amount' />
+    <label>Price:<span th:text='${amount/100}' /></label>
+    <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+    <script
+            src='https://checkout.stripe.com/checkout.js'
+            class='stripe-button'
+            th:attr='data-key=${stripePublicKey},
+         data-amount=${amount},
+         data-currency=${currency}'
+            data-name='Thanh toán'
+            data-description='Thanh toán qua thẻ Visa'
+            data-image
+                    ='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpxWl6-m68cNYYnR1cnt0OZIhAwZvKsVlm_A&usqp=CAU'
+            data-locale='auto'
+            data-zip-code='false'>
+    </script>
+</form>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
     const moneyJs = document.querySelector(".money-js")
     var x = Number(moneyJs.textContent);
-    x = x.toLocaleString('vi', { style: 'currency', currency: 'VND' });
+    x = x.toLocaleString('vi', {style: 'currency', currency: 'VND'});
     moneyJs.textContent = x;
     console.log(x);
 
-  </script>
+</script>
 
 </body>
 </html>
