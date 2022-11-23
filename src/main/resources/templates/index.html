@@ -97,12 +97,12 @@
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#">Product Types</a>
-<!--                                        <ul class="sub-menu">-->
-<!--                                            <li><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">product details</a></li>-->
-<!--                                            <li><a href="product-sidebar.html">product sidebar</a></li>-->
-<!--                                            <li><a href="product-grouped.html">product grouped</a></li>-->
-<!--                                            <li><a href="variable-product.html">product variable</a></li>-->
-<!--                                        </ul>-->
+                                        <!--                                        <ul class="sub-menu">-->
+                                        <!--                                            <li><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">product details</a></li>-->
+                                        <!--                                            <li><a href="product-sidebar.html">product sidebar</a></li>-->
+                                        <!--                                            <li><a href="product-grouped.html">product grouped</a></li>-->
+                                        <!--                                            <li><a href="variable-product.html">product variable</a></li>-->
+                                        <!--                                        </ul>-->
                                     </li>
                                 </ul>
                             </li>
@@ -176,16 +176,15 @@
                     <div class="col-lg-4 col-md-4 col-sm-5 col-4">
                         <div class="cart_wishlist_area">
                             <div class="header_wishlist">
-                                <a th:href="@{/login}"><i class="fa fa-user"></i>
-                                    <span style="font-size:13px;text-transform: uppercase;" class="cartitems"> Đăng nhập</span>
-
-                                    <!--                                    <span class="item_count">Đăng nhập</span>-->
+                                <a th:if="${isLogined == false}" th:href="@{/login}">
+                                    <span style="font-size:13px !important; text-transform: uppercase">Đăng nhập</span>
+                                </a>
+                                <a th:if="${isLogined == true}" th:href="@{/get-customer-page}"><i class="fa fa-user"></i>
                                 </a>
                             </div>
                             <div class="mini_cart_wrapper">
                                 <a th:href="@{/cart}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     <span class="cartitems"> Giỏ hàng</span>
-<!--                                    <span class="item_count">2</span>-->
                                 </a>
                             </div>
                         </div>
@@ -229,14 +228,14 @@
                                                     </ul>
                                                 </li>
                                                 <li><a href="#">Product Types</a>
-<!--                                                    <ul>-->
-<!--                                                        <li><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">product details</a></li>-->
-<!--                                                        <li><a href="product-sidebar.html">product sidebar</a></li>-->
-<!--                                                        <li><a href="product-grouped.html">product grouped</a></li>-->
-<!--                                                        <li><a href="variable-product.html">product variable</a>-->
-<!--                                                        </li>-->
+                                                    <!--                                                    <ul>-->
+                                                    <!--                                                        <li><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">product details</a></li>-->
+                                                    <!--                                                        <li><a href="product-sidebar.html">product sidebar</a></li>-->
+                                                    <!--                                                        <li><a href="product-grouped.html">product grouped</a></li>-->
+                                                    <!--                                                        <li><a href="variable-product.html">product variable</a>-->
+                                                    <!--                                                        </li>-->
 
-<!--                                                    </ul>-->
+                                                    <!--                                                    </ul>-->
                                                 </li>
                                                 <li><a href="#">Clothing</a>
                                                     <ul>
@@ -407,7 +406,8 @@
                                     <article class="single_product">
                                         <figure>
                                             <div class="product_thumb">
-                                                <a class="primary_img" th:href="@{'detail?productId=' + ${product.productsId}}"><img
+                                                <a class="primary_img"
+                                                   th:href="@{'detail?productId=' + ${product.productsId}}"><img
                                                         th:src="@{${'assets/img/product/' + product.productImg}}"
                                                         alt=""></a>
                                                 <div class="label_product">
@@ -417,8 +417,9 @@
                                                 </div>
                                             </div>
                                             <figcaption class="product_content">
-                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${product.productsId}}"
-                                                                            th:text="${product.productTitle}"></a></h4>
+                                                <h4 class="product_name"><a
+                                                        th:href="@{'detail?productId=' + ${product.productsId}}"
+                                                        th:text="${product.productTitle}"></a></h4>
                                                 <div class="product_rating">
                                                     <ul>
                                                         <li><a href="#"><i class="fa fa-star"
@@ -449,7 +450,9 @@
                                                             class="custom-price"></span>đ</span>
                                                 </div>
                                                 <div class="add_to_cart">
-                                                    <a th:href="@{'/create-cart?productId=' + ${product.productsId}}" title="Add to cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Thêm giỏ hàng</a>
+                                                    <a th:href="@{'/create-cart?productId=' + ${product.productsId}}"
+                                                       title="Add to cart"><i class="fa fa-shopping-cart"
+                                                                              aria-hidden="true"></i> Thêm giỏ hàng</a>
                                                 </div>
                                             </figcaption>
                                         </figure>
@@ -460,586 +463,586 @@
                     </div>
                     <div class="tab-pane fade" id="bestseller" role="tabpanel">
                         <div class="row">
-<!--                            <div class="product_carousel product_column5 owl-carousel">-->
-<!--                                <div class="col-lg-3">-->
-<!--                                    <article class="single_product">-->
-<!--                                        <figure>-->
-<!--                                            <div class="product_thumb">-->
-<!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
-<!--                                                        src="assets/img/product/product5.jpg" alt=""></a>-->
-<!--                                                <div class="label_product">-->
-<!--                                                    <span class="label_sale">Sale</span>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <figcaption class="product_content">-->
-<!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Primis In-->
-<!--                                                    Faucibus</a></h4>-->
-<!--                                                <div class="product_rating">-->
-<!--                                                    <ul>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                                <div class="price_box">-->
-<!--                                                    <span class="old_price">$73.00</span>-->
-<!--                                                    <span class="current_price">$67.00</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="add_to_cart">-->
-<!--                                                    <a href="cart.html" title="Add to cart"><i-->
-<!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-<!--                                                        to cart</a>-->
-<!--                                                </div>-->
-<!--                                            </figcaption>-->
-<!--                                        </figure>-->
-<!--                                    </article>-->
-<!--                                </div>-->
-<!--                                <div class="col-lg-3">-->
-<!--                                    <article class="single_product">-->
-<!--                                        <figure>-->
-<!--                                            <div class="product_thumb">-->
-<!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
-<!--                                                        src="assets/img/product/product6.jpg" alt=""></a>-->
-<!--                                                <div class="action_links">-->
-<!--                                                    <ul>-->
-<!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-<!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
-<!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
-<!--                                                        </li>-->
-<!--                                                        <li class="wishlist"><a href="wishlist.html"-->
-<!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
-<!--                                                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <figcaption class="product_content">-->
-<!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Fusce-->
-<!--                                                    Aliquam</a></h4>-->
-<!--                                                <div class="product_rating">-->
-<!--                                                    <ul>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                                <div class="price_box">-->
-<!--                                                    <span class="old_price">$88.00</span>-->
-<!--                                                    <span class="current_price">$78.00</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="add_to_cart">-->
-<!--                                                    <a href="cart.html" title="Add to cart"><i-->
-<!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-<!--                                                        to cart</a>-->
-<!--                                                </div>-->
-<!--                                            </figcaption>-->
-<!--                                        </figure>-->
-<!--                                    </article>-->
-<!--                                </div>-->
-<!--                                <div class="col-lg-3">-->
-<!--                                    <article class="single_product">-->
-<!--                                        <figure>-->
-<!--                                            <div class="product_thumb">-->
-<!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
-<!--                                                        src="assets/img/product/product1.jpg" alt=""></a>-->
-<!--                                                <div class="label_product">-->
-<!--                                                    <span class="label_sale">Sale</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="action_links">-->
-<!--                                                    <ul>-->
-<!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-<!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
-<!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
-<!--                                                        </li>-->
-<!--                                                        <li class="wishlist"><a href="wishlist.html"-->
-<!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
-<!--                                                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <figcaption class="product_content">-->
-<!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Proin Lectus-->
-<!--                                                    Ipsum</a></h4>-->
-<!--                                                <div class="product_rating">-->
-<!--                                                    <ul>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                                <div class="price_box">-->
-<!--                                                    <span class="old_price">$86.00</span>-->
-<!--                                                    <span class="current_price">$82.00</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="add_to_cart">-->
-<!--                                                    <a href="cart.html" title="Add to cart"><i-->
-<!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-<!--                                                        to cart</a>-->
-<!--                                                </div>-->
-<!--                                            </figcaption>-->
-<!--                                        </figure>-->
-<!--                                    </article>-->
-<!--                                </div>-->
-<!--                                <div class="col-lg-3">-->
-<!--                                    <article class="single_product">-->
-<!--                                        <figure>-->
-<!--                                            <div class="product_thumb">-->
-<!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
-<!--                                                        src="assets/img/product/product2.jpg" alt=""></a>-->
-<!--                                                <div class="action_links">-->
-<!--                                                    <ul>-->
-<!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-<!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
-<!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
-<!--                                                        </li>-->
-<!--                                                        <li class="wishlist"><a href="wishlist.html"-->
-<!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
-<!--                                                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <figcaption class="product_content">-->
-<!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Occaecati-->
-<!--                                                    Cupiditate</a></h4>-->
-<!--                                                <div class="product_rating">-->
-<!--                                                    <ul>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                                <div class="price_box">-->
-<!--                                                    <span class="old_price">$78.00</span>-->
-<!--                                                    <span class="current_price">$72.00</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="add_to_cart">-->
-<!--                                                    <a href="cart.html" title="Add to cart"><i-->
-<!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-<!--                                                        to cart</a>-->
-<!--                                                </div>-->
-<!--                                            </figcaption>-->
-<!--                                        </figure>-->
-<!--                                    </article>-->
-<!--                                </div>-->
-<!--                                <div class="col-lg-3">-->
-<!--                                    <article class="single_product">-->
-<!--                                        <figure>-->
-<!--                                            <div class="product_thumb">-->
-<!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
-<!--                                                        src="assets/img/product/product3.jpg" alt=""></a>-->
-<!--                                                <div class="label_product">-->
-<!--                                                    <span class="label_sale">Sale</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="action_links">-->
-<!--                                                    <ul>-->
-<!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-<!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
-<!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
-<!--                                                        </li>-->
-<!--                                                        <li class="wishlist"><a href="wishlist.html"-->
-<!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
-<!--                                                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <figcaption class="product_content">-->
-<!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Consequences-->
-<!--                                                    are</a></h4>-->
-<!--                                                <div class="product_rating">-->
-<!--                                                    <ul>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                                <div class="price_box">-->
-<!--                                                    <span class="old_price">$92.00</span>-->
-<!--                                                    <span class="current_price">$88.00</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="add_to_cart">-->
-<!--                                                    <a href="cart.html" title="Add to cart"><i-->
-<!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-<!--                                                        to cart</a>-->
-<!--                                                </div>-->
-<!--                                            </figcaption>-->
-<!--                                        </figure>-->
-<!--                                    </article>-->
-<!--                                </div>-->
-<!--                                <div class="col-lg-3">-->
-<!--                                    <article class="single_product">-->
-<!--                                        <figure>-->
-<!--                                            <div class="product_thumb">-->
-<!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
-<!--                                                        src="assets/img/product/product4.jpg" alt=""></a>-->
-<!--                                                <div class="action_links">-->
-<!--                                                    <ul>-->
-<!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-<!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
-<!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
-<!--                                                        </li>-->
-<!--                                                        <li class="wishlist"><a href="wishlist.html"-->
-<!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
-<!--                                                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <figcaption class="product_content">-->
-<!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Voluptas-->
-<!--                                                    Nulla</a></h4>-->
-<!--                                                <div class="product_rating">-->
-<!--                                                    <ul>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                                <div class="price_box">-->
-<!--                                                    <span class="old_price">$68.00</span>-->
-<!--                                                    <span class="current_price">$62.00</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="add_to_cart">-->
-<!--                                                    <a href="cart.html" title="Add to cart"><i-->
-<!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-<!--                                                        to cart</a>-->
-<!--                                                </div>-->
-<!--                                            </figcaption>-->
-<!--                                        </figure>-->
-<!--                                    </article>-->
-<!--                                </div>-->
+                            <!--                            <div class="product_carousel product_column5 owl-carousel">-->
+                            <!--                                <div class="col-lg-3">-->
+                            <!--                                    <article class="single_product">-->
+                            <!--                                        <figure>-->
+                            <!--                                            <div class="product_thumb">-->
+                            <!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
+                            <!--                                                        src="assets/img/product/product5.jpg" alt=""></a>-->
+                            <!--                                                <div class="label_product">-->
+                            <!--                                                    <span class="label_sale">Sale</span>-->
+                            <!--                                                </div>-->
+                            <!--                                            </div>-->
+                            <!--                                            <figcaption class="product_content">-->
+                            <!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Primis In-->
+                            <!--                                                    Faucibus</a></h4>-->
+                            <!--                                                <div class="product_rating">-->
+                            <!--                                                    <ul>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                    </ul>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="price_box">-->
+                            <!--                                                    <span class="old_price">$73.00</span>-->
+                            <!--                                                    <span class="current_price">$67.00</span>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="add_to_cart">-->
+                            <!--                                                    <a href="cart.html" title="Add to cart"><i-->
+                            <!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
+                            <!--                                                        to cart</a>-->
+                            <!--                                                </div>-->
+                            <!--                                            </figcaption>-->
+                            <!--                                        </figure>-->
+                            <!--                                    </article>-->
+                            <!--                                </div>-->
+                            <!--                                <div class="col-lg-3">-->
+                            <!--                                    <article class="single_product">-->
+                            <!--                                        <figure>-->
+                            <!--                                            <div class="product_thumb">-->
+                            <!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
+                            <!--                                                        src="assets/img/product/product6.jpg" alt=""></a>-->
+                            <!--                                                <div class="action_links">-->
+                            <!--                                                    <ul>-->
+                            <!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
+                            <!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
+                            <!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
+                            <!--                                                        </li>-->
+                            <!--                                                        <li class="wishlist"><a href="wishlist.html"-->
+                            <!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
+                            <!--                                                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                    </ul>-->
+                            <!--                                                </div>-->
+                            <!--                                            </div>-->
+                            <!--                                            <figcaption class="product_content">-->
+                            <!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Fusce-->
+                            <!--                                                    Aliquam</a></h4>-->
+                            <!--                                                <div class="product_rating">-->
+                            <!--                                                    <ul>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                    </ul>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="price_box">-->
+                            <!--                                                    <span class="old_price">$88.00</span>-->
+                            <!--                                                    <span class="current_price">$78.00</span>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="add_to_cart">-->
+                            <!--                                                    <a href="cart.html" title="Add to cart"><i-->
+                            <!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
+                            <!--                                                        to cart</a>-->
+                            <!--                                                </div>-->
+                            <!--                                            </figcaption>-->
+                            <!--                                        </figure>-->
+                            <!--                                    </article>-->
+                            <!--                                </div>-->
+                            <!--                                <div class="col-lg-3">-->
+                            <!--                                    <article class="single_product">-->
+                            <!--                                        <figure>-->
+                            <!--                                            <div class="product_thumb">-->
+                            <!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
+                            <!--                                                        src="assets/img/product/product1.jpg" alt=""></a>-->
+                            <!--                                                <div class="label_product">-->
+                            <!--                                                    <span class="label_sale">Sale</span>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="action_links">-->
+                            <!--                                                    <ul>-->
+                            <!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
+                            <!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
+                            <!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
+                            <!--                                                        </li>-->
+                            <!--                                                        <li class="wishlist"><a href="wishlist.html"-->
+                            <!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
+                            <!--                                                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                    </ul>-->
+                            <!--                                                </div>-->
+                            <!--                                            </div>-->
+                            <!--                                            <figcaption class="product_content">-->
+                            <!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Proin Lectus-->
+                            <!--                                                    Ipsum</a></h4>-->
+                            <!--                                                <div class="product_rating">-->
+                            <!--                                                    <ul>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                    </ul>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="price_box">-->
+                            <!--                                                    <span class="old_price">$86.00</span>-->
+                            <!--                                                    <span class="current_price">$82.00</span>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="add_to_cart">-->
+                            <!--                                                    <a href="cart.html" title="Add to cart"><i-->
+                            <!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
+                            <!--                                                        to cart</a>-->
+                            <!--                                                </div>-->
+                            <!--                                            </figcaption>-->
+                            <!--                                        </figure>-->
+                            <!--                                    </article>-->
+                            <!--                                </div>-->
+                            <!--                                <div class="col-lg-3">-->
+                            <!--                                    <article class="single_product">-->
+                            <!--                                        <figure>-->
+                            <!--                                            <div class="product_thumb">-->
+                            <!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
+                            <!--                                                        src="assets/img/product/product2.jpg" alt=""></a>-->
+                            <!--                                                <div class="action_links">-->
+                            <!--                                                    <ul>-->
+                            <!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
+                            <!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
+                            <!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
+                            <!--                                                        </li>-->
+                            <!--                                                        <li class="wishlist"><a href="wishlist.html"-->
+                            <!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
+                            <!--                                                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                    </ul>-->
+                            <!--                                                </div>-->
+                            <!--                                            </div>-->
+                            <!--                                            <figcaption class="product_content">-->
+                            <!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Occaecati-->
+                            <!--                                                    Cupiditate</a></h4>-->
+                            <!--                                                <div class="product_rating">-->
+                            <!--                                                    <ul>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                    </ul>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="price_box">-->
+                            <!--                                                    <span class="old_price">$78.00</span>-->
+                            <!--                                                    <span class="current_price">$72.00</span>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="add_to_cart">-->
+                            <!--                                                    <a href="cart.html" title="Add to cart"><i-->
+                            <!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
+                            <!--                                                        to cart</a>-->
+                            <!--                                                </div>-->
+                            <!--                                            </figcaption>-->
+                            <!--                                        </figure>-->
+                            <!--                                    </article>-->
+                            <!--                                </div>-->
+                            <!--                                <div class="col-lg-3">-->
+                            <!--                                    <article class="single_product">-->
+                            <!--                                        <figure>-->
+                            <!--                                            <div class="product_thumb">-->
+                            <!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
+                            <!--                                                        src="assets/img/product/product3.jpg" alt=""></a>-->
+                            <!--                                                <div class="label_product">-->
+                            <!--                                                    <span class="label_sale">Sale</span>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="action_links">-->
+                            <!--                                                    <ul>-->
+                            <!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
+                            <!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
+                            <!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
+                            <!--                                                        </li>-->
+                            <!--                                                        <li class="wishlist"><a href="wishlist.html"-->
+                            <!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
+                            <!--                                                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                    </ul>-->
+                            <!--                                                </div>-->
+                            <!--                                            </div>-->
+                            <!--                                            <figcaption class="product_content">-->
+                            <!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Consequences-->
+                            <!--                                                    are</a></h4>-->
+                            <!--                                                <div class="product_rating">-->
+                            <!--                                                    <ul>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                    </ul>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="price_box">-->
+                            <!--                                                    <span class="old_price">$92.00</span>-->
+                            <!--                                                    <span class="current_price">$88.00</span>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="add_to_cart">-->
+                            <!--                                                    <a href="cart.html" title="Add to cart"><i-->
+                            <!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
+                            <!--                                                        to cart</a>-->
+                            <!--                                                </div>-->
+                            <!--                                            </figcaption>-->
+                            <!--                                        </figure>-->
+                            <!--                                    </article>-->
+                            <!--                                </div>-->
+                            <!--                                <div class="col-lg-3">-->
+                            <!--                                    <article class="single_product">-->
+                            <!--                                        <figure>-->
+                            <!--                                            <div class="product_thumb">-->
+                            <!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
+                            <!--                                                        src="assets/img/product/product4.jpg" alt=""></a>-->
+                            <!--                                                <div class="action_links">-->
+                            <!--                                                    <ul>-->
+                            <!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
+                            <!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
+                            <!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
+                            <!--                                                        </li>-->
+                            <!--                                                        <li class="wishlist"><a href="wishlist.html"-->
+                            <!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
+                            <!--                                                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                    </ul>-->
+                            <!--                                                </div>-->
+                            <!--                                            </div>-->
+                            <!--                                            <figcaption class="product_content">-->
+                            <!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Voluptas-->
+                            <!--                                                    Nulla</a></h4>-->
+                            <!--                                                <div class="product_rating">-->
+                            <!--                                                    <ul>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                            <!--                                                                           aria-hidden="true"></i></a></li>-->
+                            <!--                                                    </ul>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="price_box">-->
+                            <!--                                                    <span class="old_price">$68.00</span>-->
+                            <!--                                                    <span class="current_price">$62.00</span>-->
+                            <!--                                                </div>-->
+                            <!--                                                <div class="add_to_cart">-->
+                            <!--                                                    <a href="cart.html" title="Add to cart"><i-->
+                            <!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
+                            <!--                                                        to cart</a>-->
+                            <!--                                                </div>-->
+                            <!--                                            </figcaption>-->
+                            <!--                                        </figure>-->
+                            <!--                                    </article>-->
+                            <!--                                </div>-->
 
-<!--                            </div>-->
+                            <!--                            </div>-->
                         </div>
                     </div>
                     <div class="tab-pane fade" id="featured" role="tabpanel">
                         <div class="row">
                             <div class="product_carousel product_column5 owl-carousel">
-<!--                                <div class="col-lg-3">-->
-<!--                                    <article class="single_product">-->
-<!--                                        <figure>-->
-<!--                                            <div class="product_thumb">-->
-<!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
-<!--                                                        src="assets/img/product/product3.jpg" alt=""></a>-->
-<!--                                                <div class="label_product">-->
-<!--                                                    <span class="label_sale">Sale</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="action_links">-->
-<!--                                                    <ul>-->
-<!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-<!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
-<!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
-<!--                                                        </li>-->
-<!--                                                        <li class="wishlist"><a href="wishlist.html"-->
-<!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
-<!--                                                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <figcaption class="product_content">-->
-<!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Consequences-->
-<!--                                                    are</a></h4>-->
-<!--                                                <div class="product_rating">-->
-<!--                                                    <ul>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                                <div class="price_box">-->
-<!--                                                    <span class="old_price">$92.00</span>-->
-<!--                                                    <span class="current_price">$88.00</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="add_to_cart">-->
-<!--                                                    <a href="cart.html" title="Add to cart"><i-->
-<!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-<!--                                                        to cart</a>-->
-<!--                                                </div>-->
-<!--                                            </figcaption>-->
-<!--                                        </figure>-->
-<!--                                    </article>-->
-<!--                                </div>-->
-<!--                                <div class="col-lg-3">-->
-<!--                                    <article class="single_product">-->
-<!--                                        <figure>-->
-<!--                                            <div class="product_thumb">-->
-<!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
-<!--                                                        src="assets/img/product/product4.jpg" alt=""></a>-->
-<!--                                                <div class="action_links">-->
-<!--                                                    <ul>-->
-<!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-<!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
-<!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
-<!--                                                        </li>-->
-<!--                                                        <li class="wishlist"><a href="wishlist.html"-->
-<!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
-<!--                                                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <figcaption class="product_content">-->
-<!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Voluptas-->
-<!--                                                    Nulla</a></h4>-->
-<!--                                                <div class="product_rating">-->
-<!--                                                    <ul>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                                <div class="price_box">-->
-<!--                                                    <span class="old_price">$68.00</span>-->
-<!--                                                    <span class="current_price">$62.00</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="add_to_cart">-->
-<!--                                                    <a href="cart.html" title="Add to cart"><i-->
-<!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-<!--                                                        to cart</a>-->
-<!--                                                </div>-->
-<!--                                            </figcaption>-->
-<!--                                        </figure>-->
-<!--                                    </article>-->
-<!--                                </div>-->
-<!--                                <div class="col-lg-3">-->
-<!--                                    <article class="single_product">-->
-<!--                                        <figure>-->
-<!--                                            <div class="product_thumb">-->
-<!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
-<!--                                                        src="assets/img/product/product1.jpg" alt=""></a>-->
-<!--                                                <div class="label_product">-->
-<!--                                                    <span class="label_sale">Sale</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="action_links">-->
-<!--                                                    <ul>-->
-<!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-<!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
-<!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
-<!--                                                        </li>-->
-<!--                                                        <li class="wishlist"><a href="wishlist.html"-->
-<!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
-<!--                                                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <figcaption class="product_content">-->
-<!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Proin Lectus-->
-<!--                                                    Ipsum</a></h4>-->
-<!--                                                <div class="product_rating">-->
-<!--                                                    <ul>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                                <div class="price_box">-->
-<!--                                                    <span class="old_price">$86.00</span>-->
-<!--                                                    <span class="current_price">$82.00</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="add_to_cart">-->
-<!--                                                    <a href="cart.html" title="Add to cart"><i-->
-<!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-<!--                                                        to cart</a>-->
-<!--                                                </div>-->
-<!--                                            </figcaption>-->
-<!--                                        </figure>-->
-<!--                                    </article>-->
-<!--                                </div>-->
-<!--                                <div class="col-lg-3">-->
-<!--                                    <article class="single_product">-->
-<!--                                        <figure>-->
-<!--                                            <div class="product_thumb">-->
-<!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
-<!--                                                        src="assets/img/product/product2.jpg" alt=""></a>-->
-<!--                                                <div class="action_links">-->
-<!--                                                    <ul>-->
-<!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-<!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
-<!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
-<!--                                                        </li>-->
-<!--                                                        <li class="wishlist"><a href="wishlist.html"-->
-<!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
-<!--                                                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <figcaption class="product_content">-->
-<!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Occaecati-->
-<!--                                                    Cupiditate</a></h4>-->
-<!--                                                <div class="product_rating">-->
-<!--                                                    <ul>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                                <div class="price_box">-->
-<!--                                                    <span class="old_price">$78.00</span>-->
-<!--                                                    <span class="current_price">$72.00</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="add_to_cart">-->
-<!--                                                    <a href="cart.html" title="Add to cart"><i-->
-<!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-<!--                                                        to cart</a>-->
-<!--                                                </div>-->
-<!--                                            </figcaption>-->
-<!--                                        </figure>-->
-<!--                                    </article>-->
-<!--                                </div>-->
-<!--                                <div class="col-lg-3">-->
-<!--                                    <article class="single_product">-->
-<!--                                        <figure>-->
-<!--                                            <div class="product_thumb">-->
-<!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
-<!--                                                        src="assets/img/product/product5.jpg" alt=""></a>-->
-<!--                                                <div class="label_product">-->
-<!--                                                    <span class="label_sale">Sale</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="action_links">-->
-<!--                                                    <ul>-->
-<!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
-<!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
-<!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
-<!--                                                        </li>-->
-<!--                                                        <li class="wishlist"><a href="wishlist.html"-->
-<!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
-<!--                                                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <figcaption class="product_content">-->
-<!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Primis In-->
-<!--                                                    Faucibus</a></h4>-->
-<!--                                                <div class="product_rating">-->
-<!--                                                    <ul>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                                <div class="price_box">-->
-<!--                                                    <span class="old_price">$73.00</span>-->
-<!--                                                    <span class="current_price">$67.00</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="add_to_cart">-->
-<!--                                                    <a href="cart.html" title="Add to cart"><i-->
-<!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-<!--                                                        to cart</a>-->
-<!--                                                </div>-->
-<!--                                            </figcaption>-->
-<!--                                        </figure>-->
-<!--                                    </article>-->
-<!--                                </div>-->
-<!--                                <div class="col-lg-3">-->
-<!--                                    <article class="single_product">-->
-<!--                                        <figure>-->
-<!--                                            <div class="product_thumb">-->
-<!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
-<!--                                                        src="assets/img/product/product6.jpg" alt=""></a>-->
-<!--                                            </div>-->
-<!--                                            <figcaption class="product_content">-->
-<!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Fusce-->
-<!--                                                    Aliquam</a></h4>-->
-<!--                                                <div class="product_rating">-->
-<!--                                                    <ul>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                        <li><a href="#"><i class="fa fa-star"-->
-<!--                                                                           aria-hidden="true"></i></a></li>-->
-<!--                                                    </ul>-->
-<!--                                                </div>-->
-<!--                                                <div class="price_box">-->
-<!--                                                    <span class="old_price">$88.00</span>-->
-<!--                                                    <span class="current_price">$78.00</span>-->
-<!--                                                </div>-->
-<!--                                                <div class="add_to_cart">-->
-<!--                                                    <a href="cart.html" title="Add to cart"><i-->
-<!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
-<!--                                                        to cart</a>-->
-<!--                                                </div>-->
-<!--                                            </figcaption>-->
-<!--                                        </figure>-->
-<!--                                    </article>-->
-<!--                                </div>-->
+                                <!--                                <div class="col-lg-3">-->
+                                <!--                                    <article class="single_product">-->
+                                <!--                                        <figure>-->
+                                <!--                                            <div class="product_thumb">-->
+                                <!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
+                                <!--                                                        src="assets/img/product/product3.jpg" alt=""></a>-->
+                                <!--                                                <div class="label_product">-->
+                                <!--                                                    <span class="label_sale">Sale</span>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="action_links">-->
+                                <!--                                                    <ul>-->
+                                <!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
+                                <!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
+                                <!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
+                                <!--                                                        </li>-->
+                                <!--                                                        <li class="wishlist"><a href="wishlist.html"-->
+                                <!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
+                                <!--                                                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                    </ul>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                            <figcaption class="product_content">-->
+                                <!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Consequences-->
+                                <!--                                                    are</a></h4>-->
+                                <!--                                                <div class="product_rating">-->
+                                <!--                                                    <ul>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                    </ul>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="price_box">-->
+                                <!--                                                    <span class="old_price">$92.00</span>-->
+                                <!--                                                    <span class="current_price">$88.00</span>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="add_to_cart">-->
+                                <!--                                                    <a href="cart.html" title="Add to cart"><i-->
+                                <!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
+                                <!--                                                        to cart</a>-->
+                                <!--                                                </div>-->
+                                <!--                                            </figcaption>-->
+                                <!--                                        </figure>-->
+                                <!--                                    </article>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="col-lg-3">-->
+                                <!--                                    <article class="single_product">-->
+                                <!--                                        <figure>-->
+                                <!--                                            <div class="product_thumb">-->
+                                <!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
+                                <!--                                                        src="assets/img/product/product4.jpg" alt=""></a>-->
+                                <!--                                                <div class="action_links">-->
+                                <!--                                                    <ul>-->
+                                <!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
+                                <!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
+                                <!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
+                                <!--                                                        </li>-->
+                                <!--                                                        <li class="wishlist"><a href="wishlist.html"-->
+                                <!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
+                                <!--                                                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                    </ul>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                            <figcaption class="product_content">-->
+                                <!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Voluptas-->
+                                <!--                                                    Nulla</a></h4>-->
+                                <!--                                                <div class="product_rating">-->
+                                <!--                                                    <ul>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                    </ul>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="price_box">-->
+                                <!--                                                    <span class="old_price">$68.00</span>-->
+                                <!--                                                    <span class="current_price">$62.00</span>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="add_to_cart">-->
+                                <!--                                                    <a href="cart.html" title="Add to cart"><i-->
+                                <!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
+                                <!--                                                        to cart</a>-->
+                                <!--                                                </div>-->
+                                <!--                                            </figcaption>-->
+                                <!--                                        </figure>-->
+                                <!--                                    </article>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="col-lg-3">-->
+                                <!--                                    <article class="single_product">-->
+                                <!--                                        <figure>-->
+                                <!--                                            <div class="product_thumb">-->
+                                <!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
+                                <!--                                                        src="assets/img/product/product1.jpg" alt=""></a>-->
+                                <!--                                                <div class="label_product">-->
+                                <!--                                                    <span class="label_sale">Sale</span>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="action_links">-->
+                                <!--                                                    <ul>-->
+                                <!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
+                                <!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
+                                <!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
+                                <!--                                                        </li>-->
+                                <!--                                                        <li class="wishlist"><a href="wishlist.html"-->
+                                <!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
+                                <!--                                                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                    </ul>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                            <figcaption class="product_content">-->
+                                <!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Proin Lectus-->
+                                <!--                                                    Ipsum</a></h4>-->
+                                <!--                                                <div class="product_rating">-->
+                                <!--                                                    <ul>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                    </ul>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="price_box">-->
+                                <!--                                                    <span class="old_price">$86.00</span>-->
+                                <!--                                                    <span class="current_price">$82.00</span>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="add_to_cart">-->
+                                <!--                                                    <a href="cart.html" title="Add to cart"><i-->
+                                <!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
+                                <!--                                                        to cart</a>-->
+                                <!--                                                </div>-->
+                                <!--                                            </figcaption>-->
+                                <!--                                        </figure>-->
+                                <!--                                    </article>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="col-lg-3">-->
+                                <!--                                    <article class="single_product">-->
+                                <!--                                        <figure>-->
+                                <!--                                            <div class="product_thumb">-->
+                                <!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
+                                <!--                                                        src="assets/img/product/product2.jpg" alt=""></a>-->
+                                <!--                                                <div class="action_links">-->
+                                <!--                                                    <ul>-->
+                                <!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
+                                <!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
+                                <!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
+                                <!--                                                        </li>-->
+                                <!--                                                        <li class="wishlist"><a href="wishlist.html"-->
+                                <!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
+                                <!--                                                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                    </ul>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                            <figcaption class="product_content">-->
+                                <!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Occaecati-->
+                                <!--                                                    Cupiditate</a></h4>-->
+                                <!--                                                <div class="product_rating">-->
+                                <!--                                                    <ul>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                    </ul>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="price_box">-->
+                                <!--                                                    <span class="old_price">$78.00</span>-->
+                                <!--                                                    <span class="current_price">$72.00</span>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="add_to_cart">-->
+                                <!--                                                    <a href="cart.html" title="Add to cart"><i-->
+                                <!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
+                                <!--                                                        to cart</a>-->
+                                <!--                                                </div>-->
+                                <!--                                            </figcaption>-->
+                                <!--                                        </figure>-->
+                                <!--                                    </article>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="col-lg-3">-->
+                                <!--                                    <article class="single_product">-->
+                                <!--                                        <figure>-->
+                                <!--                                            <div class="product_thumb">-->
+                                <!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
+                                <!--                                                        src="assets/img/product/product5.jpg" alt=""></a>-->
+                                <!--                                                <div class="label_product">-->
+                                <!--                                                    <span class="label_sale">Sale</span>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="action_links">-->
+                                <!--                                                    <ul>-->
+                                <!--                                                        <li class="quick_button"><a href="#" data-bs-toggle="modal"-->
+                                <!--                                                                                    data-bs-target="#modal_box" title="quick view"> <i-->
+                                <!--                                                                class="fa fa-eye" aria-hidden="true"></i></a>-->
+                                <!--                                                        </li>-->
+                                <!--                                                        <li class="wishlist"><a href="wishlist.html"-->
+                                <!--                                                                                title="Add to Wishlist"><i class="fa fa-heart-o"-->
+                                <!--                                                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                    </ul>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                            <figcaption class="product_content">-->
+                                <!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Primis In-->
+                                <!--                                                    Faucibus</a></h4>-->
+                                <!--                                                <div class="product_rating">-->
+                                <!--                                                    <ul>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                    </ul>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="price_box">-->
+                                <!--                                                    <span class="old_price">$73.00</span>-->
+                                <!--                                                    <span class="current_price">$67.00</span>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="add_to_cart">-->
+                                <!--                                                    <a href="cart.html" title="Add to cart"><i-->
+                                <!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
+                                <!--                                                        to cart</a>-->
+                                <!--                                                </div>-->
+                                <!--                                            </figcaption>-->
+                                <!--                                        </figure>-->
+                                <!--                                    </article>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="col-lg-3">-->
+                                <!--                                    <article class="single_product">-->
+                                <!--                                        <figure>-->
+                                <!--                                            <div class="product_thumb">-->
+                                <!--                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img-->
+                                <!--                                                        src="assets/img/product/product6.jpg" alt=""></a>-->
+                                <!--                                            </div>-->
+                                <!--                                            <figcaption class="product_content">-->
+                                <!--                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}">Fusce-->
+                                <!--                                                    Aliquam</a></h4>-->
+                                <!--                                                <div class="product_rating">-->
+                                <!--                                                    <ul>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                        <li><a href="#"><i class="fa fa-star"-->
+                                <!--                                                                           aria-hidden="true"></i></a></li>-->
+                                <!--                                                    </ul>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="price_box">-->
+                                <!--                                                    <span class="old_price">$88.00</span>-->
+                                <!--                                                    <span class="current_price">$78.00</span>-->
+                                <!--                                                </div>-->
+                                <!--                                                <div class="add_to_cart">-->
+                                <!--                                                    <a href="cart.html" title="Add to cart"><i-->
+                                <!--                                                            class="fa fa-shopping-cart" aria-hidden="true"></i> Add-->
+                                <!--                                                        to cart</a>-->
+                                <!--                                                </div>-->
+                                <!--                                            </figcaption>-->
+                                <!--                                        </figure>-->
+                                <!--                                    </article>-->
+                                <!--                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -1064,7 +1067,8 @@
                                     <article class="single_product">
                                         <figure>
                                             <div class="product_thumb">
-                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productShirt.productsId}}">
+                                                <a class="primary_img"
+                                                   th:href="@{'detail?productId=' + ${productShirt.productsId}}">
                                                     <img th:src="@{${'assets/img/product/' + productShirt.productImg}}"
                                                          alt=""></a>
                                                 <div class="label_product">
@@ -1074,8 +1078,9 @@
                                                 </div>
                                             </div>
                                             <figcaption class="product_content">
-                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productShirt.productsId}}"
-                                                                            th:text="${productShirt.productTitle}"></a>
+                                                <h4 class="product_name"><a
+                                                        th:href="@{'detail?productId=' + ${productShirt.productsId}}"
+                                                        th:text="${productShirt.productTitle}"></a>
                                                 </h4>
                                                 <div class="product_rating">
                                                     <ul>
@@ -1107,7 +1112,9 @@
                                                             class="custom-price"></span>đ</span>
                                                 </div>
                                                 <div class="add_to_cart">
-                                                    <a th:href="@{'/create-cart?productId=' + ${productShirt.productsId}}" title="Add to cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Thêm giỏ hàng</a>
+                                                    <a th:href="@{'/create-cart?productId=' + ${productShirt.productsId}}"
+                                                       title="Add to cart"><i class="fa fa-shopping-cart"
+                                                                              aria-hidden="true"></i> Thêm giỏ hàng</a>
                                                 </div>
                                             </figcaption>
                                         </figure>
@@ -1128,7 +1135,8 @@
                                     <article class="single_product">
                                         <figure>
                                             <div class="product_thumb">
-                                                <a class="primary_img" th:href="@{'detail?productId=' + ${productHat.productsId}}"><img
+                                                <a class="primary_img"
+                                                   th:href="@{'detail?productId=' + ${productHat.productsId}}"><img
                                                         th:src="@{${'assets/img/product/' + productHat.productImg}}"
                                                         alt=""></a>
                                                 <div class="label_product">
@@ -1139,8 +1147,9 @@
 
                                             </div>
                                             <figcaption class="product_content">
-                                                <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productHat.productsId}}"
-                                                                            th:text="${productHat.productTitle}"></a>
+                                                <h4 class="product_name"><a
+                                                        th:href="@{'detail?productId=' + ${productHat.productsId}}"
+                                                        th:text="${productHat.productTitle}"></a>
                                                 </h4>
                                                 <div class="product_rating">
                                                     <ul>
@@ -1172,7 +1181,9 @@
                                                             class="custom-price"></span>đ</span>
                                                 </div>
                                                 <div class="add_to_cart">
-                                                    <a th:href="@{'/create-cart?productId=' + ${productHat.productsId}}" title="Add to cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Thêm giỏ hàng</a>
+                                                    <a th:href="@{'/create-cart?productId=' + ${productHat.productsId}}"
+                                                       title="Add to cart"><i class="fa fa-shopping-cart"
+                                                                              aria-hidden="true"></i> Thêm giỏ hàng</a>
                                                 </div>
                                             </figcaption>
                                         </figure>
@@ -1203,7 +1214,8 @@
                         <article class="single_product">
                             <figure>
                                 <div class="product_thumb">
-                                    <a class="primary_img" th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img
+                                    <a class="primary_img"
+                                       th:href="@{'detail?productId=' + ${productJacket.productsId}}"><img
                                             th:src="@{${'assets/img/product/' + productJacket.productImg}}"
                                             alt=""></a>
                                     <div class="label_product">
@@ -1213,8 +1225,9 @@
                                     </div>
                                 </div>
                                 <figcaption class="product_content">
-                                    <h4 class="product_name"><a th:href="@{'detail?productId=' + ${productJacket.productsId}}"
-                                                                th:text="${productJacket.productTitle}"></a></h4>
+                                    <h4 class="product_name"><a
+                                            th:href="@{'detail?productId=' + ${productJacket.productsId}}"
+                                            th:text="${productJacket.productTitle}"></a></h4>
                                     <div class="product_rating">
                                         <ul>
                                             <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
@@ -1240,7 +1253,9 @@
                                                 class="custom-price"></span>đ</span>
                                     </div>
                                     <div class="add_to_cart">
-                                        <a th:href="@{'/create-cart?productId=' + ${productJacket.productsId}}" title="Add to cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Thêm giỏ hàng</a>
+                                        <a th:href="@{'/create-cart?productId=' + ${productJacket.productsId}}"
+                                           title="Add to cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            Thêm giỏ hàng</a>
                                     </div>
                                 </figcaption>
                             </figure>
@@ -1481,7 +1496,7 @@
                         <div class="subscribe_form">
                             <form id="mc-form" class="mc-form footer-newsletter">
                                 <input id="mc-email" type="email" autocomplete="off"
-                                       placeholder="Enter your e-mail" />
+                                       placeholder="Enter your e-mail"/>
                                 <button id="mc-submit">Subscribe</button>
                             </form>
                             <!-- mailchimp-alerts Start -->
@@ -1571,7 +1586,7 @@
                 <div class="col-lg-6 col-md-7">
                     <div class="copyright_area">
                         <p>Copyright © 2022 <a th:href="@{/}">Clothing shop</a>. <a href="https://hasthemes.com/"
-                                                                                  target="_blank">All rights
+                                                                                    target="_blank">All rights
                             reserved.</a></p>
                     </div>
                 </div>

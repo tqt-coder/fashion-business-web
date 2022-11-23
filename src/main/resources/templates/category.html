@@ -181,10 +181,10 @@
                     <div class="col-lg-4 col-md-4 col-sm-5 col-4">
                         <div class="cart_wishlist_area">
                             <div class="header_wishlist">
-                                <a th:href="@{/login}"><i class="fa fa-user"></i>
-                                    <span style="font-size:13px;text-transform: uppercase;" class="cartitems"> Đăng nhập</span>
-
-                                    <!--                                    <span class="item_count">Đăng nhập</span>-->
+                                <a th:if="${isLogined == false}" th:href="@{/login}">
+                                    <span style="font-size:13px !important; text-transform: uppercase">Đăng nhập</span>
+                                </a>
+                                <a th:if="${isLogined == true}" th:href="@{/login}"><i class="fa fa-user"></i>
                                 </a>
                             </div>
                             <div class="mini_cart_wrapper">

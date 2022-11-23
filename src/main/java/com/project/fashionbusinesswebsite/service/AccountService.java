@@ -1,6 +1,7 @@
 package com.project.fashionbusinesswebsite.service;
 
 import com.project.fashionbusinesswebsite.domain.CustomerEntity;
+import com.project.fashionbusinesswebsite.model.user.AccountResponse;
 import com.project.fashionbusinesswebsite.model.user.LoginRequest;
 import com.project.fashionbusinesswebsite.model.user.RegisterRequest;
 import com.project.fashionbusinesswebsite.repository.AccountRepo;
@@ -11,9 +12,12 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -43,6 +47,13 @@ public class AccountService {
         return accountRepo.save(entity);
     }
 
+    public CustomerEntity updateCustomer(RegisterRequest request) {
+        String encodedPassword = new BCryptPasswordEncoder().encode(request.getCustomerPass().trim());
+        request.setCustomerPass(encodedPassword);
+        CustomerEntity entity = mapper.map(request, CustomerEntity.class);
+        return accountRepo.save(entity);
+    }
+
     public boolean login(LoginRequest request) {
         CustomerEntity customerEntity = finderUtil.findCustomerByEmail(request.getCustomerEmail());
         if (ObjectUtils.isEmpty(customerEntity))
@@ -68,5 +79,15 @@ public class AccountService {
         if (ObjectUtils.isNotEmpty(customerEntityByUserName)) {
             throw new ServiceException("User name " + userName + " đã tồn tại. Vui lòng chọn lại");
         }
+    }
+
+    public AccountResponse getInformaionOfCustomer(Principal principal) {
+        if (ObjectUtils.isEmpty(principal)) {
+            throw new ServiceException("Vui lòng đăng nhập để tiếp tục");
+        }
+        User user = (User) ((Authentication) principal).getPrincipal();
+        CustomerEntity customerEntity = finderUtil.findCustomerByUserName(user.getUsername());
+        AccountResponse response = mapper.map(customerEntity, AccountResponse.class);
+        return response;
     }
 }

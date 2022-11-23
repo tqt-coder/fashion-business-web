@@ -10,6 +10,7 @@ import com.project.fashionbusinesswebsite.model.cart.ListCartsRequest;
 import com.project.fashionbusinesswebsite.model.payment.PaymentRequest;
 import com.project.fashionbusinesswebsite.model.payment.PaymentResponse;
 import com.project.fashionbusinesswebsite.model.product.*;
+import com.project.fashionbusinesswebsite.model.user.AccountResponse;
 import com.project.fashionbusinesswebsite.model.user.RegisterRequest;
 import com.project.fashionbusinesswebsite.service.*;
 import com.project.fashionbusinesswebsite.utils.FinderUtil;
@@ -62,7 +63,7 @@ public class MainController {
     private String API_PUBLIC_KEY;
 
     @GetMapping("/")
-    public String homePage(ProductRequest request, Model model) {
+    public String homePage(ProductRequest request, Model model, Principal principal) {
         // category with shirt
         int categoryIdShirt = ProductConstantUtil.SHIRT;
         ProductCategoryRequest productCategoryRequest = new ProductCategoryRequest();
@@ -80,12 +81,17 @@ public class MainController {
         model.addAttribute("listProducts", productService.getAllProduct(request));
         CartRequest cartRequest = new CartRequest();
         model.addAttribute("cartForm", cartRequest);
+        if (ObjectUtils.isNotEmpty(principal)) {
+            model.addAttribute("isLogined", true);
+        } else {
+            model.addAttribute("isLogined", false);
+        }
         return "index";
     }
 
     @GetMapping("/search")
     public String searchPage(@RequestParam(name = "keySearch") String keySearch,
-                             @RequestParam(name = "page") int currentPage, Model model) {
+                             @RequestParam(name = "page") int currentPage, Model model, Principal principal) {
         SearchProductRequest request = new SearchProductRequest();
         request.setKeySearch(keySearch);
         request.setPage(currentPage);
@@ -99,11 +105,16 @@ public class MainController {
         model.addAttribute("keySearch", keySearch);
         model.addAttribute("currentPage", request.getPage());
         model.addAttribute("listProducts", productService.findProductsByProductName(request));
+        if (ObjectUtils.isNotEmpty(principal)) {
+            model.addAttribute("isLogined", true);
+        } else {
+            model.addAttribute("isLogined", false);
+        }
         return "category";
     }
 
     @GetMapping("/detail")
-    public String detailPage(@RequestParam(name = "productId") int productId, Model model) {
+    public String detailPage(@RequestParam(name = "productId") int productId, Model model, Principal principal) {
         ProductViewResponse product = productService.getProductById(productId);
         ProductCategoryRequest productCategoryRequest = new ProductCategoryRequest();
         productCategoryRequest.setCategoryId(product.getProductCategoryId());
@@ -115,6 +126,11 @@ public class MainController {
         product.setProductCategoryName(productCategoryEntity.getPCategoryTitle());
         product.setCurrentProductQuantity(1);
         model.addAttribute("product", product);
+        if (ObjectUtils.isNotEmpty(principal)) {
+            model.addAttribute("isLogined", true);
+        } else {
+            model.addAttribute("isLogined", false);
+        }
         return "productDetail";
     }
 
@@ -161,6 +177,11 @@ public class MainController {
         if (ObjectUtils.isEmpty(principal)) {
             return "login";
         }
+        if (ObjectUtils.isNotEmpty(principal)) {
+            model.addAttribute("isLogined", true);
+        } else {
+            model.addAttribute("isLogined", false);
+        }
         ListCartsRequest requests = new ListCartsRequest();
         List<CartResponse> listCartResponses = cartService.getAllCartByCustomerName(principal);
         if (CollectionUtils.isNotEmpty(listCartResponses)) {
@@ -168,11 +189,12 @@ public class MainController {
                 requests.addCart(cart);
             }
             model.addAttribute("cartForm", requests);
+
             return "cart";
         } else {
             return "cartEmpty";
-
         }
+
     }
 
     @GetMapping("/delete-cart")
@@ -257,10 +279,6 @@ public class MainController {
 
     @RequestMapping("/checkout")
     public String checkout(Model model, Principal principal) {
-//        ChargeRequest chargeRequest = new ChargeRequest();
-//        model.addAttribute("chargeForm", chargeRequest);
-//        PaymentResponse response = paymentService.findPayment(principal);
-//        model.addAttribute("money", response.getMoney());
         PaymentResponse response = paymentService.findPayment(principal);
         double cost = response.getMoney();
         double dollar = 24848;
@@ -291,6 +309,22 @@ public class MainController {
         model.addAttribute("chargeId", charge.getId());
         model.addAttribute("balance_transaction", charge.getBalanceTransaction());
         return "paymentSuccess";
+    }
+
+    @GetMapping("/get-customer-page")
+    public String getCustomerPage(Principal principal, Model model) {
+        if (ObjectUtils.isEmpty(principal)) {
+            return "login";
+        }
+        model.addAttribute("customerForm", accountService.getInformaionOfCustomer(principal));
+        return "updateCustomer";
+    }
+
+    @PostMapping("/update-customer")
+    public Object updateCustomer(@ModelAttribute("customerForm") AccountResponse accountResponse) {
+        RegisterRequest registerRequest = mapper.map(accountResponse, RegisterRequest.class);
+        accountService.updateCustomer(registerRequest);
+        return new ModelAndView("redirect:/");
     }
 
     @ExceptionHandler(StripeException.class)
