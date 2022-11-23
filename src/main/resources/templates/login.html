@@ -67,6 +67,10 @@
                     <span class="login100-form-title p-b-26">
                         Welcome
                     </span>
+                <div th:if="${#request.getParameter('error') == 'true'}"
+                     style="color:red;margin:10px 0px;">
+                   email và password không đúng<br />
+                </div>
                 <span class="login100-form-title p-b-48">
                     </span>
                 <div class="wrap-input100 validate-input">
