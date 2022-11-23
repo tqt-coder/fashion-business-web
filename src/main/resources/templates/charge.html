@@ -4,42 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-    <link rel="stylesheet" href="./assets/css/check.css">
+    <title>Thanh toán</title>
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
+    <!--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">-->
+    <link rel="stylesheet" th:href="@{assets/css/checkout.css}">
 
 </head>
 
 <body>
-<form action='/charge-test' method='POST' id='checkout-form'>
-    <input type='hidden' th:value='${amount}' name='amount' />
-    <label>Price:<span th:text='${amount/100}' /></label>
-    <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
-    <script
-            src='https://checkout.stripe.com/checkout.js'
-            class='stripe-button'
-            th:attr='data-key=${stripePublicKey},
+<div class="container-check">
+    <a th:href="@{/}">
+        <img th:src="@{/assets/img/bg/homePage.jpg}" alt="home" class="bg-home">
+    </a>
+    <img th:src="@{/assets/img/bg/payment2.png}" alt="payment" class="bg-payment">
+    <form action='/charge-test' method='POST' id='checkout-form'>
+        <input type='hidden' th:value='${amount}' name='amount'/>
+        <!--    <label>Price:<span th:text='${amount/100}' /></label>-->
+        <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+        <script
+                src='https://checkout.stripe.com/checkout.js'
+                class='stripe-button'
+                th:attr='data-key=${stripePublicKey},
          data-amount=${amount},
          data-currency=${currency}'
-            data-name='Thanh toán'
-            data-description='Thanh toán qua thẻ Visa'
-            data-image
-                    ='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpxWl6-m68cNYYnR1cnt0OZIhAwZvKsVlm_A&usqp=CAU'
-            data-locale='auto'
-            data-zip-code='false'>
-    </script>
-</form>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-    const moneyJs = document.querySelector(".money-js")
-    var x = Number(moneyJs.textContent);
-    x = x.toLocaleString('vi', {style: 'currency', currency: 'VND'});
-    moneyJs.textContent = x;
-    console.log(x);
-
-</script>
+                data-name='Thanh toán'
+                data-description='Thanh toán qua thẻ Visa'
+                data-image
+                        ='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpxWl6-m68cNYYnR1cnt0OZIhAwZvKsVlm_A&usqp=CAU'
+                data-locale='auto'
+                data-zip-code='false'>
+        </script>
+    </form>
+</div>
 
 </body>
 </html>
