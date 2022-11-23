@@ -251,6 +251,7 @@ public class MainController {
     public String errorPage() {
         return "<h1>Bug</h1>";
     }
+
     @Value("${stripe.keys.public}")
     private String stripePublicKey;
 
@@ -263,9 +264,9 @@ public class MainController {
         PaymentResponse response = paymentService.findPayment(principal);
         double cost = response.getMoney();
         double dollar = 24848;
-        double money = cost/ dollar;
+        double money = cost / dollar;
 
-        model.addAttribute("amount",  money * 100); // in cents
+        model.addAttribute("amount", money * 100); // in cents
         model.addAttribute("stripePublicKey", stripePublicKey);
         model.addAttribute("currency", ChargeRequest.Currency.USD);
         return "charge";
@@ -277,12 +278,14 @@ public class MainController {
         PaymentResponse response = paymentService.findPayment(principal);
         double cost = response.getMoney();
         double dollar = 24848;
-        double money = cost/ dollar;
+        double money = cost / dollar;
 
         chargeRequest.setAmount(money * 100);
         chargeRequest.setDescription("Thanh toán hóa đơn");
         chargeRequest.setCurrency(ChargeRequest.Currency.USD);
         Charge charge = stripeService.charge(chargeRequest);
+        cartService.updateCartAfterPayment(principal);
+        paymentService.updatePayment(new PaymentRequest().builder().active(PaymentConstantUtil.PAYMENT_PAIRED).build(), principal);
         model.addAttribute("id", charge.getId());
         model.addAttribute("status", charge.getStatus());
         model.addAttribute("chargeId", charge.getId());

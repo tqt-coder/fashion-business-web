@@ -55,6 +55,24 @@ public class CartService {
         return true;
     }
 
+    public boolean updateCartAfterPayment(Principal principal) {
+        if (ObjectUtils.isEmpty(principal)) {
+            throw new ServiceException("Vui lòng đăng nhập để tiếp tục");
+        }
+        User user = (User) ((Authentication) principal).getPrincipal();
+        CustomerEntity customerEntity = finderUtil.findCustomerByUserName(user.getUsername());
+        List<CartEntity> listCartEntities = cartRepo.findAllCartsByCustomerWithStatusActive(customerEntity.getCustomerId(), CartConstantUtil.CART_EXPIRE);
+        if (CollectionUtils.isNotEmpty(listCartEntities)) {
+            listCartEntities.stream().filter(ObjectUtils::isNotEmpty).forEach(y -> {
+                CartEntity cartEntity = this.findCartById(y.getCartId());
+                cartEntity.setStatus(CartConstantUtil.CART_EXPIRE);
+
+                cartRepo.save(cartEntity);
+            });
+        }
+        return true;
+    }
+
     public List<CartResponse> getAllCartByCustomerName(Principal principal) {
         if (ObjectUtils.isEmpty(principal)) {
             throw new ServiceException("Vui lòng đăng nhập để tiếp tục");
