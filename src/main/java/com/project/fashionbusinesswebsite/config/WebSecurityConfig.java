@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         // The pages does not require login
-        http.authorizeRequests().antMatchers( "/user/login", "/logout").permitAll();
+        http.authorizeRequests().antMatchers( "/login", "/logout","/").permitAll();
 
 //
 
@@ -49,13 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().and().formLogin()//
                 // Submit URL of login page.
                 .loginProcessingUrl("/userLogin") // Submit URL
-                .loginPage("/user/login")//
+                .loginPage("/login")//
                 .defaultSuccessUrl("/")//
                 .failureUrl("/login?error=true")//
                 .usernameParameter("customerEmail")//
-                .passwordParameter("customerPass");
-                // Config for Logout Page
-//                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
+                .passwordParameter("customerPass")
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login");
 
     }
 

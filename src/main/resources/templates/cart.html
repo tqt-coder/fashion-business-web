@@ -181,12 +181,17 @@
                                 <a th:if="${isLogined == false}" th:href="@{/login}">
                                     <span style="font-size:13px !important; text-transform: uppercase">Đăng nhập</span>
                                 </a>
-                                <a th:if="${isLogined == true}" th:href="@{/login}"><i class="fa fa-user"></i>
+                                <a th:if="${isLogined == true}" th:href="@{/get-customer-page}"><i class="fa fa-user"></i>
                                 </a>
                             </div>
                             <div class="mini_cart_wrapper">
                                 <a th:href="@{/cart}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     <span class="cartitems"> Giỏ hàng</span>
+                                </a>
+                            </div>
+                            <div th:if="${isLogined == true}" style="margin-left: 20px" class="header_wishlist">
+                                <a  th:href="@{/logout}">
+                                    <span style="font-size:13px !important; text-transform: uppercase">Đăng xuất</span>
                                 </a>
                             </div>
                         </div>

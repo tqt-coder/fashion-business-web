@@ -187,6 +187,11 @@
                                     <span class="cartitems"> Giỏ hàng</span>
                                 </a>
                             </div>
+                            <div th:if="${isLogined == true}" style="margin-left: 20px" class="header_wishlist">
+                                <a  th:href="@{/logout}">
+                                    <span style="font-size:13px !important; text-transform: uppercase">Đăng xuất</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
