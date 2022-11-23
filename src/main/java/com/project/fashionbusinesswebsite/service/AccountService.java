@@ -50,7 +50,7 @@ public class AccountService {
         return true;
     }
 
-    public Set<String> getAllRoleNamesByUserId(int userId) {
+    public Set<String> getAllRoleNamesByUserId(String userId) {
         List<Integer> listRoleIds = roleUserRepo.findAllRoleIdByUserId(userId);
         Set<String> roleNames = new HashSet<>();
         if (CollectionUtils.isNotEmpty(listRoleIds)) {

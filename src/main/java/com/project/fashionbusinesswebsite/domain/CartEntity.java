@@ -19,7 +19,7 @@ public class CartEntity {
     private double money;
     private int quantity;
     private Date date;
-    private int customerId;
+    private String customerId;
     private int status;
     private int productsId;
 }

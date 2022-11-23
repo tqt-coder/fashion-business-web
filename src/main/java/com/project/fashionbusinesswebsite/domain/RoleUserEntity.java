@@ -15,6 +15,6 @@ public class RoleUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int userId;
+    private String userId;
     private int roleId;
 }

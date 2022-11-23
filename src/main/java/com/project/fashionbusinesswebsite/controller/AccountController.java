@@ -32,15 +32,21 @@ public class AccountController {
         String customerId = "cus_MqfRoc3UDdPcYY";
         Map<String, Object> params = new HashMap<>();
         try {
-            params.put("name", request.getUserName());
-            params.put("email", request.getCustomerEmail());
-            Customer customer = Customer.create(params);
-            request.setCustomerId(customer.getId());
+//            params.put("name", request.getUserName());
+//            params.put("email", request.getCustomerEmail());
+//            Customer customer = Customer.create(params);
+//            request.setCustomerId(customer.getId());
 
+            Customer cu = Customer.retrieve(customerId);
+            params.put("amount", "100");
+            params.put("currency", "usd");
+            params.put("customer", customerId);
+//            Charge.create(cu);
+            return ResponseEntity.ok(cu);
         } catch (Exception e) {
             throw new ServiceException(e.getMessage());
         }
-        return ResponseEntity.ok(request);
+
     }
 
     @PostMapping("/login")

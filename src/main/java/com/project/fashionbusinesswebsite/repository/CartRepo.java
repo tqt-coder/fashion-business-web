@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface CartRepo extends JpaRepository<CartEntity, Integer> {
     @Query("select c from CartEntity c where c.customerId = :customerId and c.status <> :status")
-    List<CartEntity> findAllCartsByCustomerWithStatusActive(int customerId, int status);
+    List<CartEntity> findAllCartsByCustomerWithStatusActive(String customerId, int status);
 }

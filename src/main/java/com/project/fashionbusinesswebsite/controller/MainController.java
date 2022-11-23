@@ -1,20 +1,22 @@
 package com.project.fashionbusinesswebsite.controller;
 
 import com.project.fashionbusinesswebsite.domain.ProductCategoryEntity;
+import com.project.fashionbusinesswebsite.model.ChargeRequest;
 import com.project.fashionbusinesswebsite.model.cart.CartDTO;
 import com.project.fashionbusinesswebsite.model.cart.CartRequest;
 import com.project.fashionbusinesswebsite.model.cart.CartResponse;
 import com.project.fashionbusinesswebsite.model.cart.ListCartsRequest;
 import com.project.fashionbusinesswebsite.model.product.*;
 import com.project.fashionbusinesswebsite.model.user.RegisterRequest;
-import com.project.fashionbusinesswebsite.service.AccountService;
-import com.project.fashionbusinesswebsite.service.CartService;
-import com.project.fashionbusinesswebsite.service.ProductService;
-import com.project.fashionbusinesswebsite.service.ServiceException;
+import com.project.fashionbusinesswebsite.service.*;
 import com.project.fashionbusinesswebsite.utils.FinderUtil;
 import com.project.fashionbusinesswebsite.utils.ProductConstantUtil;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
+import com.stripe.model.Customer;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.eclipse.jetty.client.api.Response;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -28,7 +30,12 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.stripe.model.Coupon;
+import org.springframework.beans.factory.annotation.Value;
 
 @Controller
 public class MainController {
@@ -42,6 +49,11 @@ public class MainController {
     private ModelMapper mapper;
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private StripeService stripeService;
+
+    @Value("${stripe.keys.public}")
+    private String API_PUBLIC_KEY;
 
     @GetMapping("/")
     public String homePage(ProductRequest request, Model model) {
@@ -145,10 +157,10 @@ public class MainController {
 
     @GetMapping("/delete-cart")
     public Object removeCartByCartId(@RequestParam(name = "cartId") int cartId, Principal principal) {
-        boolean isRemoved = cartService.removeCart(cartId, principal);
         if (ObjectUtils.isEmpty(principal)) {
             return "login";
         }
+        boolean isRemoved = cartService.removeCart(cartId, principal);
         if (Boolean.TRUE.equals(isRemoved)) {
             return new ModelAndView("redirect:/cart");
         }
@@ -172,6 +184,20 @@ public class MainController {
 
     }
 
+    @GetMapping("/payment")
+    public String paymentPage() {
+        return "checkout";
+    }
+
+    @PostMapping("/create-checkout-session")
+    public String createPayment(Principal principal) {
+        if (ObjectUtils.isEmpty(principal)) {
+            return "login";
+        }
+
+        return "paymentSuccess";
+    }
+
     @GetMapping("/login")
     public String loginPage() {
         return "login";
@@ -186,6 +212,15 @@ public class MainController {
 
     @PostMapping("/user/register")
     public Object register(@ModelAttribute("registerForm") RegisterRequest request) {
+        Map<String, Object> params = new HashMap<>();
+        try {
+            params.put("name", request.getUserName());
+            params.put("email", request.getCustomerEmail());
+            Customer customer = Customer.create(params);
+            request.setCustomerId(customer.getId());
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
+        }
         accountService.register(request);
         return "/login";
     }
@@ -202,11 +237,30 @@ public class MainController {
         return "<h1>Bug</h1>";
     }
 
-    @GetMapping("/test")
-    @ResponseBody
-    public String test(Principal principal) {
-        User user = (User) ((Authentication) principal).getPrincipal();
-
-        return "hello";
+    @RequestMapping("/checkout")
+    public String checkout(Model model) {
+        double money = 100;
+        model.addAttribute("money", 50 * 100); // in cents
+        return "charge";
     }
+
+    @PostMapping("/charge-test")
+    public String charge(ChargeRequest chargeRequest, Model model)
+            throws StripeException {
+        chargeRequest.setDescription("Example charge");
+        chargeRequest.setCurrency(ChargeRequest.Currency.USD);
+        Charge charge = stripeService.charge(chargeRequest);
+        model.addAttribute("id", charge.getId());
+        model.addAttribute("status", charge.getStatus());
+        model.addAttribute("chargeId", charge.getId());
+        model.addAttribute("balance_transaction", charge.getBalanceTransaction());
+        return "result";
+    }
+
+    @ExceptionHandler(StripeException.class)
+    public String handleError(Model model, StripeException ex) {
+        model.addAttribute("error", ex.getMessage());
+        return "result";
+    }
+
 }

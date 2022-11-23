@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 
-public interface AccountRepo extends JpaRepository<CustomerEntity, Integer> {
+public interface AccountRepo extends JpaRepository<CustomerEntity, String> {
     Optional<CustomerEntity> findCustomerEntityByCustomerEmail(String email);
 
     Optional<CustomerEntity> findCustomerEntityByUserName(String userName);

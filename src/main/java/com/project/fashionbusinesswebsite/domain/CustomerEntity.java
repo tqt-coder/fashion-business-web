@@ -13,8 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class CustomerEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int customerId;
+    private String customerId;
     private String userName;
     private String customerName;
     private String customerEmail;

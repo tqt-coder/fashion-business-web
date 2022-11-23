@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface RoleUserRepo extends JpaRepository<RoleUserEntity, Integer> {
     @Query("select roleId from RoleUserEntity where userId = :userId")
-    List<Integer> findAllRoleIdByUserId(int userId);
+    List<Integer> findAllRoleIdByUserId(String userId);
 }

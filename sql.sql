@@ -2,15 +2,14 @@ create database clothing_store;
 use clothing_store;
 
 DROP TABLE IF EXISTS `cart`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `cart` (
                         `cart_id` int NOT NULL AUTO_INCREMENT,
                         `products_id` int NOT NULL,
                         `money` double NOT NULL,
                         `quantity` int NOT NULL,
                         `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                        `customer_id` int NOT NULL,
+                        `customer_id` varchar(255) NOT NULL,
                         `status` int DEFAULT NULL,
                         PRIMARY KEY (`cart_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -58,31 +57,16 @@ DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
-                            `customer_id` int NOT NULL AUTO_INCREMENT,
+                            `customer_id` varchar(255) primary key ,
                             `customer_name` varchar(255) NOT NULL,
                             `customer_email` varchar(255) NOT NULL,
                             `customer_pass` varchar(200) NOT NULL,
                             `customer_address` varchar(400) NOT NULL,
                             `customer_contact` text NOT NULL,
                             `customer_image` text,
-                            `user_name` varchar(255) DEFAULT NULL,
-                            PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+                            `user_name` varchar(255) DEFAULT NULL
 
---
--- Dumping data for table `customer`
---
-
-LOCK TABLES `customer` WRITE;
-/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (8,'tuấn tuần','tuan@gmail.com','$2a$10$atG5JQ5ODOR.pUFS/Zab0O.vxnP2gqTmdXdU.cS0SGpvRPTMbbWIa','HCM','0943020243',NULL,'tuan'),(9,'tuấn tuần','tuan1@gmail.com','$2a$10$P8ZrognZW9GPJeV4B8IIOOMFDjgtAK52mHGI2dZSC4EhHI3tGBDWi','HCM','0943020243',NULL,'tuan3'),(10,'tuấn tuần','123@gmail.com','$2a$10$qeH44V6LEIa4Wl/8CX4nr.nuufxvMLe50RtEU1PMI9yFrTS6DVjeW','HCM','0943020243',NULL,'tuan34'),(11,'tuấn tuần','1235@gmail.com','$2a$10$jn6c4rd/uEXdeZaI3.K4muqinMFPGJ9k.VqbXnYI1qVCPORcOpS/W','HCM','0943020243',NULL,'tuan345'),(12,'tuấn tuần','12356@gmail.com','$2a$10$EJwWK7AQMqg8eI/EH2sqUOLdj.ZiDq3BA0gKICCRKx3fFxyYh4gDi','HCM','0943020243',NULL,'tuan3456'),(13,'admin','admin@gmail.com','$2a$10$nCd2Uezefso.z3UWPj9fTeVUxZdL4ol5s3QfCjxu74FFk876NKyIu','Đạt Lạt, Lâm Đồng','0943020243',NULL,'admin'),(31,'Yousaf','yo@gmail.com','123','Karachi','03002291527','2.jpeg',NULL);
-/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `discount`
---
+);
 
 DROP TABLE IF EXISTS `discount`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -109,31 +93,14 @@ UNLOCK TABLES;
 -- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `orders` (
-                          `order_id` int NOT NULL AUTO_INCREMENT,
-                          `order_quantity` int NOT NULL,
-                          `order_price` int NOT NULL,
-                          `c_id` int NOT NULL,
-                          `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                          PRIMARY KEY (`order_id`)
+
+CREATE TABLE `payment` (
+                          `payment_id` int AUTO_INCREMENT primary key,
+                           `price` int NOT NULL,
+                          `cart_id` int NOT NULL,
+                          `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `orders`
---
-
-LOCK TABLES `orders` WRITE;
-/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `product_categories`
---
 
 DROP TABLE IF EXISTS `product_categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -240,51 +207,16 @@ UNLOCK TABLES;
 -- Table structure for table `slider`
 --
 
-DROP TABLE IF EXISTS `slider`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `slider` (
-                          `slide_id` int NOT NULL AUTO_INCREMENT,
-                          `slide_name` varchar(255) NOT NULL,
-                          `slide_image` text NOT NULL,
-                          `slide_heading` varchar(100) NOT NULL,
-                          `slide_text` varchar(100) NOT NULL,
-                          PRIMARY KEY (`slide_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `slider`
---
-
-LOCK TABLES `slider` WRITE;
-/*!40000 ALTER TABLE `slider` DISABLE KEYS */;
-INSERT INTO `slider` VALUES (1,'Slide 1','slide_1.jpg','Summer Sale','Walk in for the Fashion, Stay in for the Style.'),(2,'Slide 2','slide_2.jpg','Black friday','Simply Eveything You Want.');
-/*!40000 ALTER TABLE `slider` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user_role`
---
 
 DROP TABLE IF EXISTS `user_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_role` (
                              `id` int NOT NULL AUTO_INCREMENT,
-                             `user_id` int NOT NULL,
+                             `user_id` varchar(255) NOT NULL,
                              `role_id` int NOT NULL,
                              PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `user_role`
---
-
-LOCK TABLES `user_role` WRITE;
-/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,13,1),(2,13,2);
-/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
-UNLOCK TABLES;
 
