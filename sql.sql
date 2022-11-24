@@ -199,12 +199,6 @@ INSERT INTO `role` VALUES (1,'ROLE_ADMIN'),(2,'ROLE_USER');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `slider`
---
-
-
-
 DROP TABLE IF EXISTS `user_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -214,6 +208,15 @@ CREATE TABLE `user_role` (
                              `role_id` int NOT NULL,
                              PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+alter table cart add constraint fk_1 foreign key (products_id) references products(products_id);
+alter table cart add constraint fk_2 foreign key (customer_id) references customer(customer_id);
+alter table user_role add constraint fk_3 foreign key (user_id) references customer(customer_id);
+alter table user_role add constraint fk_4 foreign key (role_id) references role(role_id);
+alter table products add constraint fk_5 foreign key (product_category_id) references product_categories(p_category_id);
+alter table products add constraint fk_6 foreign key (category_id) references category(category_id);
+alter table payment add constraint fk_7 foreign key (customer_id) references customer(customer_id);
+alter table discount add constraint fk_8 foreign key (product_id) references products(products_id);
 
 
 
